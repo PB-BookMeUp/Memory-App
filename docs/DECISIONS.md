@@ -16,3 +16,6 @@
 | 2026-10-18 | Audio first. The coach speaks every screen. Reading is optional |
 | 2026-10-18 | Plain English only, no Hindi text (replaces the Hinglish decision) |
 | 2026-10-18 | Voice is the phone's built-in voice for now, because it is free |
+| 2026-10-18 | The coach is a named character (placeholder name Asha) with a face and a speech bubble that follows her voice one sentence at a time |
+| 2026-10-18 | Quiz is a game: tap the items in story order, then 3 quick questions |
+| 2026-10-18 | Open item: a human recorded voice instead of the phone voice, once there is a way to record it for free |
