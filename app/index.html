@@ -1,0 +1,204 @@
+<title>Yaad Rakho</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Noto+Sans:wght@400;600&display=swap">
+<style>
+  /* Layout: one card per screen, centred, phone first. Big type, big buttons, nothing hidden behind a scroll. */
+  :root {
+    --bg: #f6f3ec;
+    --card: #ffffff;
+    --fg: #1d1a2f;
+    --muted: #5e5a72;
+    --accent: #2e2a8f;      /* deep indigo, the coach's colour */
+    --accent-fg: #ffffff;
+    --warm: #e8a317;        /* marigold, for the score and small highlights */
+    --good: #1e8f5a;
+    --bad: #c3412b;
+    --line: #dcd7cb;
+    --display: "Baloo 2", "Noto Sans", system-ui, sans-serif;
+    --body: "Noto Sans", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #15132a; --card: #1f1c3a; --fg: #f3f0ff; --muted: #b7b2cf;
+      --accent: #8f8bff; --accent-fg: #15132a; --warm: #ffc247;
+      --good: #4fd08f; --bad: #ff7a63; --line: #3a3660; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #15132a; --card: #1f1c3a; --fg: #f3f0ff; --muted: #b7b2cf;
+    --accent: #8f8bff; --accent-fg: #15132a; --warm: #ffc247;
+    --good: #4fd08f; --bad: #ff7a63; --line: #3a3660; color-scheme: dark;
+  }
+  html, body { height: 100%; }
+  body {
+    background: var(--bg); color: var(--fg); font-family: var(--body);
+    font-size: 20px; line-height: 1.5;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 16px;
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .app { width: 100%; max-width: 480px; display: flex; flex-direction: column; gap: 16px; flex: 1; }
+  .top { display: flex; justify-content: space-between; align-items: center; font-family: var(--display); font-weight: 700; font-size: 22px; color: var(--accent); }
+  .dots { display: flex; gap: 6px; }
+  .dots i { width: 10px; height: 10px; border-radius: 50%; background: var(--line); display: block; }
+  .dots i.on { background: var(--accent); }
+  .screen { background: var(--card); border-radius: 20px; padding: 24px 20px; display: flex; flex-direction: column; gap: 18px; flex: 1; }
+  .eyebrow { font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  h1, h2 { font-family: var(--display); font-weight: 700; line-height: 1.15; margin: 0; text-wrap: balance; }
+  h1 { font-size: 34px; } h2 { font-size: 28px; }
+  p { margin: 0; }
+  .lead { font-size: 22px; }
+  .hi { color: var(--accent); font-weight: 600; }
+  .list { display: grid; gap: 10px; padding: 0; margin: 0; list-style: none; counter-reset: n; }
+  .list li { display: flex; gap: 14px; align-items: center; padding: 12px 14px; border: 2px solid var(--line); border-radius: 14px; font-size: 22px; font-weight: 600; }
+  .list li::before { counter-increment: n; content: counter(n); font-family: var(--display); font-size: 20px; color: var(--accent-fg); background: var(--accent); width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; flex-shrink: 0; }
+  .story { display: grid; gap: 12px; }
+  .story p { padding: 14px 16px; border-left: 5px solid var(--warm); background: color-mix(in srgb, var(--warm) 10%, var(--card)); border-radius: 0 12px 12px 0; }
+  .story b { color: var(--accent); }
+  .spacer { flex: 1; }
+  .btn { font: inherit; font-family: var(--display); font-weight: 700; font-size: 22px; border: 0; border-radius: 16px; padding: 18px 20px; min-height: 64px; cursor: pointer; width: 100%; background: var(--accent); color: var(--accent-fg); }
+  .btn.ghost { background: transparent; color: var(--accent); border: 2px solid var(--accent); }
+  .btn:focus-visible, .opt:focus-visible { outline: 3px solid var(--warm); outline-offset: 3px; }
+  .opts { display: grid; gap: 12px; }
+  .opt { font: inherit; font-size: 21px; font-weight: 600; text-align: left; border: 2px solid var(--line); background: var(--card); color: var(--fg); border-radius: 14px; padding: 16px 18px; min-height: 64px; cursor: pointer; }
+  .opt.right { border-color: var(--good); background: color-mix(in srgb, var(--good) 14%, var(--card)); }
+  .opt.wrong { border-color: var(--bad); background: color-mix(in srgb, var(--bad) 12%, var(--card)); }
+  .opt:disabled { cursor: default; }
+  .feedback { font-size: 20px; font-weight: 600; min-height: 1.5em; }
+  .feedback.good { color: var(--good); } .feedback.bad { color: var(--bad); }
+  .score { text-align: center; display: grid; gap: 6px; padding: 10px 0; }
+  .score .num { font-family: var(--display); font-weight: 700; font-size: 84px; line-height: 1; color: var(--warm); font-variant-numeric: tabular-nums; }
+  .score .lbl { font-size: 17px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  .muted { color: var(--muted); font-size: 17px; }
+  @media (prefers-reduced-motion: no-preference) {
+    .screen { animation: in 220ms ease-out; }
+    @keyframes in { from { opacity: .4; transform: translateY(6px); } }
+  }
+</style>
+
+<div class="app">
+  <div class="top"><span>Yaad Rakho</span><span class="dots" id="dots"></span></div>
+  <div class="screen" id="screen"></div>
+</div>
+
+<script>
+// ---------- Day 1 content. Everything the coach says lives here, so it can be edited without touching the app. ----------
+const DAY1 = {
+  title: "The Story Chain",
+  items: ["Doodh", "Bread", "Kela", "Sabun", "Chai patti", "Ande"],
+  lesson: [
+    { eyebrow: "Day 1", h: "Namaste! Let's make your memory stronger.", body: "Today aap ek simple trick seekhenge. Shopping list yaad rakhne ke liye. Sirf 3 minute.", lead: true },
+    { eyebrow: "The trick", h: "Our brain forgets lists. But it never forgets a story.", body: "Try to remember 6 words? Hard. But a silly little story with those 6 things? Aap kal bhi yaad rakhenge. This is called the Story Chain." },
+    { eyebrow: "How it works", h: "Join each item to the next one. The sillier, the better.", body: "Item 1 does something to item 2. Item 2 does something to item 3. Funny or strange pictures stick. Boring ones don't." },
+  ],
+  storyIntro: "Here is today's list. Read the story once, slowly. Picture each thing in your mind.",
+  story: [
+    "You are drinking a big glass of <b>doodh</b>.",
+    "From the doodh, a slice of <b>bread</b> pops out, like a boat!",
+    "On the bread sits a <b>kela</b>, smiling.",
+    "The kela is bathing with a pink <b>sabun</b>.",
+    "Sabun ke bubbles mein <b>chai patti</b> is flying around.",
+    "The chai patti falls and lands on six <b>ande</b>. Crack!",
+  ],
+  quizIntro: "Now the list is hidden. Story yaad kijiye, aur answer dijiye. Galat hone par koi baat nahi.",
+  quiz: [
+    { q: "What was the first thing in the story?", opts: ["Bread", "Doodh", "Ande", "Kela"], a: 1, why: "Aap doodh pee rahe the. That's where the story started." },
+    { q: "What popped out of the doodh?", opts: ["A kela", "A slice of bread", "Sabun", "Chai patti"], a: 1, why: "The bread came out like a boat. Picture it again." },
+    { q: "What was the kela doing?", opts: ["Sleeping", "Flying", "Bathing with sabun", "Eating bread"], a: 2, why: "The kela was bathing with a pink sabun." },
+    { q: "Which one was NOT on the list?", opts: ["Chawal", "Ande", "Chai patti", "Doodh"], a: 0, why: "Chawal was never in the story. Everything else was." },
+    { q: "How many ande were there at the end?", opts: ["Two", "Four", "Six", "Twelve"], a: 2, why: "Six ande, and the chai patti landed on them. Crack!" },
+  ],
+};
+
+// ---------- App ----------
+const screenEl = document.getElementById("screen");
+const dotsEl = document.getElementById("dots");
+const TOTAL = DAY1.lesson.length + 1 + DAY1.quiz.length + 1; // lessons, story, quiz, score
+let step = 0, correct = 0, answered = false;
+
+function save(score) { try { localStorage.setItem("yaad.day1", JSON.stringify({ score, when: Date.now() })); } catch (e) {} }
+
+function dots() {
+  dotsEl.innerHTML = "";
+  for (let i = 0; i < TOTAL; i++) { const d = document.createElement("i"); if (i <= step) d.className = "on"; dotsEl.appendChild(d); }
+}
+
+function render() {
+  dots();
+  const L = DAY1.lesson.length;
+  if (step === 0) return lesson(DAY1.lesson[0], "Start");
+  if (step < L - 1) return lesson(DAY1.lesson[step], "Next");
+  if (step === L - 1) return lesson(DAY1.lesson[step], "Show me the list");
+  if (step === L) return story();
+  const qi = step - (L + 1);
+  if (qi < DAY1.quiz.length) return question(qi);
+  return score();
+}
+
+function lesson(c, btn) {
+  screenEl.innerHTML = `
+    <div class="eyebrow">${c.eyebrow}</div>
+    <h1>${c.h}</h1>
+    <p class="${c.lead ? "lead" : ""}">${c.body}</p>
+    <div class="spacer"></div>
+    <button class="btn" id="next">${btn}</button>`;
+  document.getElementById("next").onclick = () => { step++; render(); };
+}
+
+function story() {
+  screenEl.innerHTML = `
+    <div class="eyebrow">Today's list</div>
+    <p>${DAY1.storyIntro}</p>
+    <ol class="list">${DAY1.items.map(i => `<li>${i}</li>`).join("")}</ol>
+    <h2>The story</h2>
+    <div class="story">${DAY1.story.map(s => `<p>${s}</p>`).join("")}</div>
+    <p class="muted">Read it one more time. Then tap below.</p>
+    <div class="spacer"></div>
+    <button class="btn" id="next">I remember it. Quiz time!</button>`;
+  document.getElementById("next").onclick = () => { step++; render(); };
+}
+
+function question(qi) {
+  const q = DAY1.quiz[qi]; answered = false;
+  screenEl.innerHTML = `
+    <div class="eyebrow">Question ${qi + 1} of ${DAY1.quiz.length}</div>
+    ${qi === 0 ? `<p class="muted">${DAY1.quizIntro}</p>` : ""}
+    <h2>${q.q}</h2>
+    <div class="opts" id="opts">${q.opts.map((o, i) => `<button class="opt" data-i="${i}">${o}</button>`).join("")}</div>
+    <p class="feedback" id="fb"></p>
+    <div class="spacer"></div>
+    <button class="btn" id="next" hidden>${qi + 1 === DAY1.quiz.length ? "See my score" : "Next question"}</button>`;
+  const fb = document.getElementById("fb"), next = document.getElementById("next");
+  document.querySelectorAll(".opt").forEach(b => b.onclick = () => {
+    if (answered) return; answered = true;
+    const i = +b.dataset.i, ok = i === q.a;
+    if (ok) correct++;
+    document.querySelectorAll(".opt").forEach(x => { x.disabled = true; if (+x.dataset.i === q.a) x.classList.add("right"); });
+    if (!ok) b.classList.add("wrong");
+    fb.textContent = ok ? "Shabash! Correct." : "Not this one. " + q.why;
+    fb.className = "feedback " + (ok ? "good" : "bad");
+    next.hidden = false;
+  });
+  next.onclick = () => { step++; render(); };
+}
+
+function score() {
+  const pts = 40 + correct * 12; // finishing earns 40, each correct answer 12, so a perfect day is 100
+  save(pts);
+  const line = correct === 5 ? "Perfect! Aapka dimaag bilkul sharp hai."
+    : correct >= 3 ? "Very good. The story worked, didn't it?"
+    : "Good start. Kal story aur silly banayenge, aur score upar jayega.";
+  screenEl.innerHTML = `
+    <div class="eyebrow">Day 1 done</div>
+    <div class="score"><div class="lbl">Your brain score</div><div class="num">${pts}</div><div class="muted">${correct} of 5 correct</div></div>
+    <h2>${line}</h2>
+    <p>Try this tonight: make a Story Chain for tomorrow's sabzi list. No writing. Just the story.</p>
+    <p class="muted">Come back tomorrow for Day 2. Your score grows every day you practise.</p>
+    <div class="spacer"></div>
+    <button class="btn ghost" id="again">Do Day 1 again</button>`;
+  document.getElementById("again").onclick = () => { step = 0; correct = 0; render(); };
+}
+
+render();
+</script>

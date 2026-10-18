@@ -6,5 +6,7 @@ A daily memory and brain-fitness app for Indian adults aged 40 to 60. Bite-sized
 
 - `docs/VISION.md`: what we're building and the decisions made so far
 - `docs/DECISIONS.md`: running log of choices, newest at the bottom
+- `docs/CONTENT_GUIDE.md`: how lessons and quizzes are written
+- `app/index.html`: the app itself, one file, open it in any browser
 
 More folders (app code, lesson content) get added as we reach those steps.
