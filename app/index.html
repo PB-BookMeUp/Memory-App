@@ -2,15 +2,15 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Noto+Sans:wght@400;600&display=swap">
 <style>
-  /* Layout: one card per screen, centred, phone first. Big type, big buttons, nothing hidden behind a scroll. */
+  /* Layout: one card per screen, audio first. The coach speaks; the screen shows only a headline and the buttons. */
   :root {
     --bg: #f6f3ec;
     --card: #ffffff;
     --fg: #1d1a2f;
     --muted: #5e5a72;
-    --accent: #2e2a8f;      /* deep indigo, the coach's colour */
+    --accent: #2e2a8f;
     --accent-fg: #ffffff;
-    --warm: #e8a317;        /* marigold, for the score and small highlights */
+    --warm: #e8a317;
     --good: #1e8f5a;
     --bad: #c3412b;
     --line: #dcd7cb;
@@ -46,22 +46,29 @@
   .screen { background: var(--card); border-radius: 20px; padding: 24px 20px; display: flex; flex-direction: column; gap: 18px; flex: 1; }
   .eyebrow { font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
   h1, h2 { font-family: var(--display); font-weight: 700; line-height: 1.15; margin: 0; text-wrap: balance; }
-  h1 { font-size: 34px; } h2 { font-size: 28px; }
+  h1 { font-size: 36px; } h2 { font-size: 28px; }
   p { margin: 0; }
-  .lead { font-size: 22px; }
-  .hi { color: var(--accent); font-weight: 600; }
   .list { display: grid; gap: 10px; padding: 0; margin: 0; list-style: none; counter-reset: n; }
   .list li { display: flex; gap: 14px; align-items: center; padding: 12px 14px; border: 2px solid var(--line); border-radius: 14px; font-size: 22px; font-weight: 600; }
   .list li::before { counter-increment: n; content: counter(n); font-family: var(--display); font-size: 20px; color: var(--accent-fg); background: var(--accent); width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; flex-shrink: 0; }
-  .story { display: grid; gap: 12px; }
-  .story p { padding: 14px 16px; border-left: 5px solid var(--warm); background: color-mix(in srgb, var(--warm) 10%, var(--card)); border-radius: 0 12px 12px 0; }
-  .story b { color: var(--accent); }
+  .list li.now { border-color: var(--warm); background: color-mix(in srgb, var(--warm) 12%, var(--card)); }
   .spacer { flex: 1; }
   .btn { font: inherit; font-family: var(--display); font-weight: 700; font-size: 22px; border: 0; border-radius: 16px; padding: 18px 20px; min-height: 64px; cursor: pointer; width: 100%; background: var(--accent); color: var(--accent-fg); }
   .btn.ghost { background: transparent; color: var(--accent); border: 2px solid var(--accent); }
-  .btn:focus-visible, .opt:focus-visible { outline: 3px solid var(--warm); outline-offset: 3px; }
+  .btn:focus-visible, .opt:focus-visible, .replay:focus-visible { outline: 3px solid var(--warm); outline-offset: 3px; }
+  /* The speaker. Pulses while the coach is talking. Tap to hear the screen again. */
+  .voice { display: flex; align-items: center; gap: 14px; }
+  .replay { width: 64px; height: 64px; border-radius: 50%; border: 0; background: var(--accent); color: var(--accent-fg); cursor: pointer; display: grid; place-items: center; flex-shrink: 0; }
+  .replay svg { width: 30px; height: 30px; fill: currentColor; }
+  .voice .lbl { font-size: 17px; color: var(--muted); font-weight: 600; }
+  @media (prefers-reduced-motion: no-preference) {
+    .speaking .replay { animation: pulse 1.1s ease-in-out infinite; }
+    @keyframes pulse { 50% { box-shadow: 0 0 0 12px color-mix(in srgb, var(--accent) 22%, transparent); } }
+    .screen { animation: in 220ms ease-out; }
+    @keyframes in { from { opacity: .4; transform: translateY(6px); } }
+  }
   .opts { display: grid; gap: 12px; }
-  .opt { font: inherit; font-size: 21px; font-weight: 600; text-align: left; border: 2px solid var(--line); background: var(--card); color: var(--fg); border-radius: 14px; padding: 16px 18px; min-height: 64px; cursor: pointer; }
+  .opt { font: inherit; font-size: 22px; font-weight: 600; text-align: left; border: 2px solid var(--line); background: var(--card); color: var(--fg); border-radius: 14px; padding: 16px 18px; min-height: 64px; cursor: pointer; }
   .opt.right { border-color: var(--good); background: color-mix(in srgb, var(--good) 14%, var(--card)); }
   .opt.wrong { border-color: var(--bad); background: color-mix(in srgb, var(--bad) 12%, var(--card)); }
   .opt:disabled { cursor: default; }
@@ -71,10 +78,6 @@
   .score .num { font-family: var(--display); font-weight: 700; font-size: 84px; line-height: 1; color: var(--warm); font-variant-numeric: tabular-nums; }
   .score .lbl { font-size: 17px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
   .muted { color: var(--muted); font-size: 17px; }
-  @media (prefers-reduced-motion: no-preference) {
-    .screen { animation: in 220ms ease-out; }
-    @keyframes in { from { opacity: .4; transform: translateY(6px); } }
-  }
 </style>
 
 <div class="app">
@@ -83,92 +86,136 @@
 </div>
 
 <script>
-// ---------- Day 1 content. Everything the coach says lives here, so it can be edited without touching the app. ----------
+// ---------- Day 1 content. "show" is the headline on screen. "say" is what the coach speaks. ----------
 const DAY1 = {
-  title: "The Story Chain",
-  items: ["Doodh", "Bread", "Kela", "Sabun", "Chai patti", "Ande"],
+  items: ["Milk", "Bread", "Bananas", "Soap", "Tea", "Eggs"],
   lesson: [
-    { eyebrow: "Day 1", h: "Namaste! Let's make your memory stronger.", body: "Today aap ek simple trick seekhenge. Shopping list yaad rakhne ke liye. Sirf 3 minute.", lead: true },
-    { eyebrow: "The trick", h: "Our brain forgets lists. But it never forgets a story.", body: "Try to remember 6 words? Hard. But a silly little story with those 6 things? Aap kal bhi yaad rakhenge. This is called the Story Chain." },
-    { eyebrow: "How it works", h: "Join each item to the next one. The sillier, the better.", body: "Item 1 does something to item 2. Item 2 does something to item 3. Funny or strange pictures stick. Boring ones don't." },
+    { eyebrow: "Day 1", show: "Let's make your memory stronger.",
+      say: "Hello, and welcome. I'm your memory coach. Today you'll learn one simple trick for remembering a shopping list. It takes three minutes. You don't need to read anything. Just listen, and tap the button when you're ready." },
+    { eyebrow: "The trick", show: "Your brain forgets lists. It never forgets a story.",
+      say: "Here's the secret. Our brain is bad at remembering lists. Six words? Hard. But a silly little story with those six things in it? That, you'll remember tomorrow. We call this the Story Chain." },
+    { eyebrow: "How it works", show: "Join each item to the next. The sillier, the better.",
+      say: "It works like this. The first item does something to the second. The second does something to the third. And so on. Make the pictures funny or strange. Funny pictures stick. Boring ones don't. Let's try it with a real list." },
   ],
-  storyIntro: "Here is today's list. Read the story once, slowly. Picture each thing in your mind.",
-  story: [
-    "You are drinking a big glass of <b>doodh</b>.",
-    "From the doodh, a slice of <b>bread</b> pops out, like a boat!",
-    "On the bread sits a <b>kela</b>, smiling.",
-    "The kela is bathing with a pink <b>sabun</b>.",
-    "Sabun ke bubbles mein <b>chai patti</b> is flying around.",
-    "The chai patti falls and lands on six <b>ande</b>. Crack!",
-  ],
-  quizIntro: "Now the list is hidden. Story yaad kijiye, aur answer dijiye. Galat hone par koi baat nahi.",
+  storySay: "Here is today's list. Milk. Bread. Bananas. Soap. Tea. Eggs. Now close your eyes if you like, and picture this story. You are drinking a big glass of milk. Suddenly, a slice of bread pops out of the milk, floating like a boat. On the bread sits a banana, smiling at you. The banana is having a bath, with a pink bar of soap. The soap makes bubbles, and inside the bubbles, tea leaves are flying around. The tea leaves fall down, and land on six eggs. Crack! Milk, bread, banana, soap, tea, eggs. If you want to hear it again, tap the speaker.",
+  storySteps: 6,
+  quizIntroSay: "Now the list is hidden. Think of the story, and tap your answer. It's fine to get one wrong.",
   quiz: [
-    { q: "What was the first thing in the story?", opts: ["Bread", "Doodh", "Ande", "Kela"], a: 1, why: "Aap doodh pee rahe the. That's where the story started." },
-    { q: "What popped out of the doodh?", opts: ["A kela", "A slice of bread", "Sabun", "Chai patti"], a: 1, why: "The bread came out like a boat. Picture it again." },
-    { q: "What was the kela doing?", opts: ["Sleeping", "Flying", "Bathing with sabun", "Eating bread"], a: 2, why: "The kela was bathing with a pink sabun." },
-    { q: "Which one was NOT on the list?", opts: ["Chawal", "Ande", "Chai patti", "Doodh"], a: 0, why: "Chawal was never in the story. Everything else was." },
-    { q: "How many ande were there at the end?", opts: ["Two", "Four", "Six", "Twelve"], a: 2, why: "Six ande, and the chai patti landed on them. Crack!" },
+    { q: "What was the first thing in the story?", opts: ["Bread", "Milk", "Eggs", "Bananas"], a: 1, why: "You were drinking milk. That's where the story began." },
+    { q: "What popped out of the milk?", opts: ["A banana", "A slice of bread", "Soap", "Tea leaves"], a: 1, why: "The bread floated out like a boat." },
+    { q: "What was the banana doing?", opts: ["Sleeping", "Flying", "Having a bath", "Eating bread"], a: 2, why: "The banana was having a bath with pink soap." },
+    { q: "Which one was NOT on the list?", opts: ["Rice", "Eggs", "Tea", "Milk"], a: 0, why: "Rice was never in the story. Everything else was." },
+    { q: "How many eggs were there at the end?", opts: ["Two", "Four", "Six", "Twelve"], a: 2, why: "Six eggs, and the tea leaves landed on them. Crack!" },
   ],
+  scoreSay: (c) => c === 5 ? "Perfect score. Your memory is sharp. Tonight, try making a story for tomorrow's vegetable list. No writing. Just the story. See you tomorrow for day two."
+    : c >= 3 ? "Very good. The story worked, didn't it? Tonight, try making a story for tomorrow's vegetable list. No writing. Just the story. See you tomorrow for day two."
+    : "A good start. Tomorrow we'll make the story even sillier, and your score will climb. Tonight, try making a story for tomorrow's vegetable list. See you tomorrow for day two.",
 };
+
+// ---------- Voice. Uses the phone's own built-in voice, so it costs nothing and works offline. ----------
+const synth = window.speechSynthesis;
+let voice = null;
+function pickVoice() {
+  if (!synth) return;
+  const vs = synth.getVoices();
+  // Prefer an Indian English voice, then any English voice.
+  voice = vs.find(v => /en[-_]IN/i.test(v.lang)) || vs.find(v => /^en/i.test(v.lang)) || vs[0] || null;
+}
+pickVoice();
+if (synth) synth.onvoiceschanged = pickVoice;
+
+function say(text, onEnd) {
+  if (!synth) { onEnd && onEnd(); return; }
+  synth.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  if (voice) u.voice = voice;
+  u.lang = voice ? voice.lang : "en-IN";
+  u.rate = 0.9; u.pitch = 1;
+  u.onstart = () => screenEl.classList.add("speaking");
+  u.onend = u.onerror = () => { screenEl.classList.remove("speaking"); onEnd && onEnd(); };
+  synth.speak(u);
+}
+function hush() { if (synth) synth.cancel(); screenEl.classList.remove("speaking"); }
+
+const SPEAKER = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg>`;
+function voiceBar(text) {
+  return `<div class="voice"><button class="replay" id="replay" aria-label="Hear it again">${SPEAKER}</button><span class="lbl">Tap to hear again</span></div>`;
+}
 
 // ---------- App ----------
 const screenEl = document.getElementById("screen");
 const dotsEl = document.getElementById("dots");
-const TOTAL = DAY1.lesson.length + 1 + DAY1.quiz.length + 1; // lessons, story, quiz, score
-let step = 0, correct = 0, answered = false;
+const L = DAY1.lesson.length;
+const TOTAL = L + 1 + DAY1.quiz.length + 1; // lessons, story, quiz, score
+let step = -1, correct = 0, answered = false;
 
 function save(score) { try { localStorage.setItem("yaad.day1", JSON.stringify({ score, when: Date.now() })); } catch (e) {} }
-
 function dots() {
   dotsEl.innerHTML = "";
   for (let i = 0; i < TOTAL; i++) { const d = document.createElement("i"); if (i <= step) d.className = "on"; dotsEl.appendChild(d); }
 }
+function go(n) { hush(); step = n; render(); }
+function wire(spoken) {
+  const r = document.getElementById("replay"); if (r) r.onclick = () => say(spoken);
+  const n = document.getElementById("next"); if (n) n.onclick = () => go(step + 1);
+}
 
 function render() {
   dots();
-  const L = DAY1.lesson.length;
-  if (step === 0) return lesson(DAY1.lesson[0], "Start");
-  if (step < L - 1) return lesson(DAY1.lesson[step], "Next");
-  if (step === L - 1) return lesson(DAY1.lesson[step], "Show me the list");
+  if (step < 0) return welcome();
+  if (step < L) return lesson(DAY1.lesson[step], step === L - 1 ? "Hear today's story" : "Next");
   if (step === L) return story();
   const qi = step - (L + 1);
   if (qi < DAY1.quiz.length) return question(qi);
   return score();
 }
 
+// The phone only allows sound after a tap, so the first screen is just one big button.
+function welcome() {
+  screenEl.innerHTML = `
+    <div class="eyebrow">Day 1</div>
+    <h1>Your coach will talk you through it.</h1>
+    <p class="muted">Turn your sound on. Nothing to read.</p>
+    <div class="spacer"></div>
+    <button class="btn" id="next">Tap to start</button>`;
+  wire();
+}
+
 function lesson(c, btn) {
   screenEl.innerHTML = `
     <div class="eyebrow">${c.eyebrow}</div>
-    <h1>${c.h}</h1>
-    <p class="${c.lead ? "lead" : ""}">${c.body}</p>
+    <h1>${c.show}</h1>
+    ${voiceBar()}
     <div class="spacer"></div>
     <button class="btn" id="next">${btn}</button>`;
-  document.getElementById("next").onclick = () => { step++; render(); };
+  wire(c.say);
+  say(c.say);
 }
 
 function story() {
   screenEl.innerHTML = `
     <div class="eyebrow">Today's list</div>
-    <p>${DAY1.storyIntro}</p>
-    <ol class="list">${DAY1.items.map(i => `<li>${i}</li>`).join("")}</ol>
-    <h2>The story</h2>
-    <div class="story">${DAY1.story.map(s => `<p>${s}</p>`).join("")}</div>
-    <p class="muted">Read it one more time. Then tap below.</p>
+    <ol class="list" id="list">${DAY1.items.map(i => `<li>${i}</li>`).join("")}</ol>
+    ${voiceBar()}
     <div class="spacer"></div>
-    <button class="btn" id="next">I remember it. Quiz time!</button>`;
-  document.getElementById("next").onclick = () => { step++; render(); };
+    <button class="btn" id="next">I remember it. Quiz me!</button>`;
+  wire(DAY1.storySay);
+  say(DAY1.storySay);
 }
 
 function question(qi) {
   const q = DAY1.quiz[qi]; answered = false;
+  const spoken = (qi === 0 ? DAY1.quizIntroSay + " " : "") + q.q + " " + q.opts.map((o, i) => `Option ${i + 1}: ${o}.`).join(" ");
   screenEl.innerHTML = `
     <div class="eyebrow">Question ${qi + 1} of ${DAY1.quiz.length}</div>
-    ${qi === 0 ? `<p class="muted">${DAY1.quizIntro}</p>` : ""}
     <h2>${q.q}</h2>
     <div class="opts" id="opts">${q.opts.map((o, i) => `<button class="opt" data-i="${i}">${o}</button>`).join("")}</div>
     <p class="feedback" id="fb"></p>
+    ${voiceBar()}
     <div class="spacer"></div>
     <button class="btn" id="next" hidden>${qi + 1 === DAY1.quiz.length ? "See my score" : "Next question"}</button>`;
+  wire(spoken);
+  say(spoken);
   const fb = document.getElementById("fb"), next = document.getElementById("next");
   document.querySelectorAll(".opt").forEach(b => b.onclick = () => {
     if (answered) return; answered = true;
@@ -176,28 +223,27 @@ function question(qi) {
     if (ok) correct++;
     document.querySelectorAll(".opt").forEach(x => { x.disabled = true; if (+x.dataset.i === q.a) x.classList.add("right"); });
     if (!ok) b.classList.add("wrong");
-    fb.textContent = ok ? "Shabash! Correct." : "Not this one. " + q.why;
-    fb.className = "feedback " + (ok ? "good" : "bad");
+    const msg = ok ? "Well done. Correct." : "Not this one. " + q.why;
+    fb.textContent = msg; fb.className = "feedback " + (ok ? "good" : "bad");
+    say(msg);
     next.hidden = false;
   });
-  next.onclick = () => { step++; render(); };
 }
 
 function score() {
   const pts = 40 + correct * 12; // finishing earns 40, each correct answer 12, so a perfect day is 100
   save(pts);
-  const line = correct === 5 ? "Perfect! Aapka dimaag bilkul sharp hai."
-    : correct >= 3 ? "Very good. The story worked, didn't it?"
-    : "Good start. Kal story aur silly banayenge, aur score upar jayega.";
+  const spoken = `Day one done. Your brain score today is ${pts}. ` + DAY1.scoreSay(correct);
   screenEl.innerHTML = `
     <div class="eyebrow">Day 1 done</div>
     <div class="score"><div class="lbl">Your brain score</div><div class="num">${pts}</div><div class="muted">${correct} of 5 correct</div></div>
-    <h2>${line}</h2>
-    <p>Try this tonight: make a Story Chain for tomorrow's sabzi list. No writing. Just the story.</p>
-    <p class="muted">Come back tomorrow for Day 2. Your score grows every day you practise.</p>
+    <h2>Tonight, make a story for tomorrow's vegetable list.</h2>
+    ${voiceBar()}
     <div class="spacer"></div>
     <button class="btn ghost" id="again">Do Day 1 again</button>`;
-  document.getElementById("again").onclick = () => { step = 0; correct = 0; render(); };
+  wire(spoken);
+  say(spoken);
+  document.getElementById("again").onclick = () => { correct = 0; go(-1); };
 }
 
 render();

@@ -13,3 +13,6 @@
 | 2026-10-18 | Voice is a friendly coach, uses "aap" |
 | 2026-10-18 | Day 1 technique is the Story Chain, applied to a shopping list |
 | 2026-10-18 | App is a single web page, no login, free to host |
+| 2026-10-18 | Audio first. The coach speaks every screen. Reading is optional |
+| 2026-10-18 | Plain English only, no Hindi text (replaces the Hinglish decision) |
+| 2026-10-18 | Voice is the phone's built-in voice for now, because it is free |

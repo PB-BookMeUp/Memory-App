@@ -6,9 +6,15 @@ How every lesson and quiz is written. Keep to this so Day 30 sounds like Day 1.
 
 A friendly coach. Warm, encouraging, never talks down. Uses "aap". Think of a kind family doctor who is pleased to see you.
 
+## Audio first
+
+The coach speaks every screen. The screen shows only a headline, the list or the answer buttons, and a speaker button to hear it again. Nothing on screen needs reading to follow along.
+
+Each screen has two texts: `show` (the headline, under 10 words) and `say` (what the coach speaks, written the way a person talks, not the way they write).
+
 ## Language
 
-Simple English with Hindi words where they feel natural (doodh, sabzi, shabash, yaad). Short sentences. No jargon. If a word would confuse someone with basic English, use the Hindi word or a simpler English one.
+Plain English only. Short spoken sentences. No Hindi words. No jargon. If a word would confuse someone with basic English, use a simpler one.
 
 ## Shape of a day
 
@@ -29,4 +35,4 @@ Under 5 minutes total.
 
 ## Where content lives
 
-Each day's text is in the `DAY1` block at the top of the script in `app/index.html`. Edit the words there, nothing else.
+Each day's text, spoken and shown, is in the `DAY1` block at the top of the script in `app/index.html`. Edit the words there, nothing else.
