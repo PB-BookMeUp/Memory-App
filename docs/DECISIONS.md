@@ -19,3 +19,5 @@
 | 2026-10-18 | The coach is a named character (placeholder name Asha) with a face and a speech bubble that follows her voice one sentence at a time |
 | 2026-10-18 | Quiz is a game: tap the items in story order, then 3 quick questions |
 | 2026-10-18 | Open item: a human recorded voice instead of the phone voice, once there is a way to record it for free |
+| 2026-10-18 | The phone's built-in voice doesn't work in the viewer. Audio is now pre-made MP3 files shipped with the app, generated with the free Piper voice "lessac" |
+| 2026-10-18 | Content and audio live outside the app code, so wording can change without touching screens |

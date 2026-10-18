@@ -1,0 +1,74 @@
+{
+  "day": 1,
+  "title": "The Story Chain",
+  "coach": "Asha",
+  "items": [
+    { "name": "Milk", "pic": "🥛" },
+    { "name": "Bread", "pic": "🍞" },
+    { "name": "Banana", "pic": "🍌" },
+    { "name": "Soap", "pic": "🧼" },
+    { "name": "Tea", "pic": "🍵" },
+    { "name": "Eggs", "pic": "🥚" }
+  ],
+  "decoys": [
+    { "name": "Rice", "pic": "🍚" },
+    { "name": "Onion", "pic": "🧅" }
+  ],
+  "lines": {
+    "intro_0": "Hello. I'm Asha, your memory coach.",
+    "intro_1": "Today I'll teach you one trick that makes a shopping list impossible to forget.",
+    "intro_2": "It takes three minutes. Let's go.",
+
+    "lesson_0": "Here's the secret.",
+    "lesson_1": "Our brain is bad at lists. But it is brilliant at stories.",
+    "lesson_2": "Six words on a list? Gone by evening.",
+    "lesson_3": "Six things in a silly story? You'll still remember them next week.",
+    "lesson_4": "The trick is called the Story Chain.",
+    "lesson_5": "The first thing does something to the second. The second does something to the third. And so on.",
+    "lesson_6": "The sillier the picture, the better it sticks.",
+    "lesson_7": "Let me show you with today's list.",
+
+    "story_0": "You are drinking a big glass of milk.",
+    "story_1": "Suddenly, a slice of bread pops out of the milk, floating like a boat.",
+    "story_2": "On the bread sits a banana, smiling at you.",
+    "story_3": "The banana is having a bath, with a pink bar of soap.",
+    "story_4": "The soap makes bubbles, and inside the bubbles, tea leaves are flying around.",
+    "story_5": "The tea leaves fall down and land on six eggs. Crack!",
+    "story_6": "Once more, fast. Milk. Bread. Banana. Soap. Tea. Eggs.",
+    "story_7": "Picture it one more time. Then tap the button.",
+
+    "order_0": "Now the list is hidden.",
+    "order_1": "Tap the things in the order of the story. Start from the milk.",
+    "nudge_first": "Not that one. The story started with you drinking something.",
+    "nudge_1": "Not yet. Think. What came out of the milk?",
+    "nudge_2": "Not yet. Think. What was sitting on the bread?",
+    "nudge_3": "Not yet. Think. What was the banana bathing with?",
+    "nudge_4": "Not yet. Think. What was flying in the soap bubbles?",
+    "nudge_5": "Not yet. Think. What did the tea leaves land on?",
+    "cheer_0": "Yes.",
+    "cheer_1": "Good.",
+    "cheer_2": "That's it.",
+    "cheer_3": "Keep going.",
+    "cheer_4": "Nearly there.",
+    "cheer_5": "You've got the whole chain!",
+
+    "q0": "What was the banana doing?",
+    "q0_no": "Not this one. The banana was having a bath with pink soap.",
+    "q1": "Which one was not in the story?",
+    "q1_no": "Not this one. Rice was never in the story.",
+    "q2": "How many eggs were there at the end?",
+    "q2_no": "Not this one. Six eggs. The tea leaves landed on them. Crack!",
+    "correct": "Correct.",
+
+    "score_intro": "Day one done. Here is your brain score.",
+    "score_hi": "That's a sharp memory. You turned six words into a story, and the story stayed.",
+    "score_mid": "Good work. The story did most of the remembering for you.",
+    "score_lo": "A good start. Tomorrow the story gets sillier, and the score climbs.",
+    "homework": "Tonight, try it for real. Make a silly story for tomorrow's vegetable list. See you tomorrow."
+  },
+  "quiz": [
+    { "id": "q0", "opts": ["Sleeping", "Flying", "Having a bath", "Eating bread"], "a": 2 },
+    { "id": "q1", "opts": ["Rice", "Eggs", "Tea", "Milk"], "a": 0 },
+    { "id": "q2", "opts": ["Two", "Four", "Six", "Twelve"], "a": 2 }
+  ]
+}

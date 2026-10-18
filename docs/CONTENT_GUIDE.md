@@ -35,4 +35,4 @@ Under 5 minutes total.
 
 ## Where content lives
 
-Each day's text, spoken and shown, is in the `DAY1` block at the top of the script in `app/index.html`. Edit the words there, nothing else.
+Each day's words are in `app/content/dayN.json`. Edit the words there, then run `python3 tools/make_audio.py N` to remake the audio. Don't edit `app/index.html` for wording changes.

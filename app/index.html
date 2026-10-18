@@ -30,24 +30,31 @@
   .top { display: flex; justify-content: space-between; align-items: center; font-family: var(--display); font-weight: 700; font-size: 20px; color: var(--accent); }
   .top small { font-family: var(--body); font-weight: 600; font-size: 15px; color: var(--muted); }
   .screen { background: var(--card); border-radius: 22px; padding: 20px; display: flex; flex-direction: column; gap: 16px; flex: 1; min-height: 0; }
-  h1 { font-family: var(--display); font-weight: 700; font-size: 32px; line-height: 1.15; margin: 0; text-wrap: balance; }
+  h1 { font-family: var(--display); font-weight: 700; font-size: 34px; line-height: 1.1; margin: 0; text-wrap: balance; }
   p { margin: 0; }
   .muted { color: var(--muted); font-size: 17px; }
   .spacer { flex: 1; }
+
+  /* Opening screen */
+  .open { text-align: center; display: grid; gap: 12px; justify-items: center; }
+  .open .face { width: 110px; height: 110px; }
+  .open .face svg { width: 76px; height: 76px; }
+  .open .day { display: inline-block; background: var(--warm); color: #1d1a2f; font-family: var(--display); font-weight: 700; font-size: 16px; padding: 4px 14px; border-radius: 999px; letter-spacing: .04em; }
+  .open .steps { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; font-size: 15px; color: var(--muted); font-weight: 600; }
+  .open .steps span { background: var(--tile); border-radius: 999px; padding: 6px 12px; }
 
   /* The coach: a face that pulses while talking, and one caption that follows her voice sentence by sentence. */
   .coach { display: flex; gap: 14px; align-items: flex-start; }
   .face { width: 64px; height: 64px; border-radius: 50%; flex-shrink: 0; background: var(--accent); color: var(--accent-fg); display: grid; place-items: center; cursor: pointer; border: 0; }
   .face svg { width: 44px; height: 44px; }
   .bubble { flex: 1; min-width: 0; background: var(--tile); border-radius: 4px 18px 18px 18px; padding: 14px 16px; font-size: 22px; font-weight: 600; line-height: 1.35; min-height: 3.6em; display: flex; align-items: center; }
-  .bubble.done { font-weight: 400; color: var(--muted); font-size: 18px; }
   .hint { font-size: 15px; color: var(--muted); padding-left: 78px; margin-top: -8px; }
 
   /* Item tiles for the story and the ordering game. */
   .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
   .tiles.four { grid-template-columns: repeat(4, 1fr); }
   .tile { background: var(--tile); border: 2px solid var(--line); border-radius: 16px; padding: 10px 6px; text-align: center; display: grid; gap: 4px; font-weight: 600; font-size: 16px; color: var(--fg); font-family: var(--body); cursor: default; transition: transform .15s; }
-  .tile .pic { font-size: 36px; line-height: 1; }
+  .tile .pic { font-size: 38px; line-height: 1; }
   .tile.hidden-tile { opacity: 0; transform: scale(.6); }
   .tile.pop { animation: pop .35s ease-out; }
   .tile.on { border-color: var(--warm); background: color-mix(in srgb, var(--warm) 14%, var(--card)); }
@@ -92,212 +99,159 @@
   <div class="top"><span>Yaad Rakho</span><small id="where">Day 1</small></div>
   <div class="screen" id="screen"></div>
 </div>
+<audio id="player" preload="auto"></audio>
 
 <script>
-// ============ DAY 1 CONTENT. Every word the coach says is here. Edit words here, nothing else. ============
-const COACH = "Asha";
-const DAY1 = {
-  items: [
-    { name: "Milk", pic: "🥛" }, { name: "Bread", pic: "🍞" }, { name: "Banana", pic: "🍌" },
-    { name: "Soap", pic: "🧼" }, { name: "Tea", pic: "🍵" }, { name: "Eggs", pic: "🥚" },
-  ],
-  decoys: [{ name: "Rice", pic: "🍚" }, { name: "Onion", pic: "🧅" }],
-  intro: [
-    `Hello. I'm ${COACH}, your memory coach.`,
-    "Today I'll teach you one trick that makes a shopping list impossible to forget.",
-    "It takes three minutes. Let's go.",
-  ],
-  lesson: [
-    "Here's the secret.",
-    "Our brain is bad at lists. But it is brilliant at stories.",
-    "Six words on a list? Gone by evening.",
-    "Six things in a silly story? You'll still remember them next week.",
-    "The trick is called the Story Chain.",
-    "The first thing does something to the second. The second does something to the third. And so on.",
-    "The sillier the picture, the better it sticks.",
-    "Let me show you with today's list.",
-  ],
-  // Each story line reveals one tile as it is spoken.
-  story: [
-    { say: "You are drinking a big glass of milk.", item: 0 },
-    { say: "Suddenly, a slice of bread pops out of the milk, floating like a boat.", item: 1 },
-    { say: "On the bread sits a banana, smiling at you.", item: 2 },
-    { say: "The banana is having a bath, with a pink bar of soap.", item: 3 },
-    { say: "The soap makes bubbles, and inside the bubbles, tea leaves are flying around.", item: 4 },
-    { say: "The tea leaves fall down and land on six eggs. Crack!", item: 5 },
-    { say: "Once more, fast. Milk. Bread. Banana. Soap. Tea. Eggs." },
-    { say: "Picture it one more time. Then tap the button." },
-  ],
-  orderIntro: ["Now the list is hidden.", "Tap the things in the order of the story. Start from the milk."],
-  orderNudge: (prev) => `Not yet. Think. What came out of the ${prev}?`,
-  orderNudgeFirst: "Not that one. The story started with you drinking something.",
-  orderCheer: ["Yes.", "Good.", "That's it.", "Keep going.", "Nearly there.", "You've got the whole chain!"],
-  quiz: [
-    { q: "What was the banana doing?", opts: ["Sleeping", "Flying", "Having a bath", "Eating bread"], a: 2, why: "The banana was having a bath with pink soap." },
-    { q: "Which one was NOT in the story?", opts: ["Rice", "Eggs", "Tea", "Milk"], a: 0, why: "Rice was never in the story." },
-    { q: "How many eggs were there at the end?", opts: ["Two", "Four", "Six", "Twelve"], a: 2, why: "Six eggs. The tea leaves landed on them. Crack!" },
-  ],
-  score: (pts) => pts >= 90 ? [`Your brain score today is ${pts}.`, "That's a sharp memory. You turned six words into a story, and the story stayed."]
-    : pts >= 60 ? [`Your brain score today is ${pts}.`, "Good work. The story did most of the remembering for you."]
-    : [`Your brain score today is ${pts}.`, "A good start. Tomorrow the story gets sillier, and the score climbs."],
-  homework: "Tonight, try it for real. Make a silly story for tomorrow's vegetable list. See you tomorrow.",
-};
+// Content (words, items, quiz) lives in content/day1.json. Audio for every line lives in audio/day1/<id>.mp3.
+// This file only decides what happens on screen.
+let C = null;
+const screenEl = document.getElementById("screen"), whereEl = document.getElementById("where"), player = document.getElementById("player");
+let orderScore = 0, quizScore = 0;
 
-// ============ VOICE. The phone's own voice, free. Speaks one sentence at a time so the caption can follow. ============
-const synth = window.speechSynthesis;
-let voice = null, queue = [], speaking = false, watchdog = null;
-function pickVoice() {
-  if (!synth) return;
-  const vs = synth.getVoices();
-  voice = vs.find(v => /en[-_]IN/i.test(v.lang)) || vs.find(v => /^en/i.test(v.lang) && /female|woman|Veena|Samantha|Google UK English Female/i.test(v.name)) || vs.find(v => /^en/i.test(v.lang)) || null;
-}
-pickVoice(); if (synth) synth.onvoiceschanged = pickVoice;
-
-// narrate(sentences, onSentence, onDone): shows each sentence as the voice reaches it. If the voice never starts, captions advance on a timer instead.
-function narrate(lines, onSentence, onDone) {
+// ---------- Voice. One <audio> element reused for every line, because phones only unlock sound on the element the user first tapped. ----------
+let seq = 0, watchdog = null;
+function hush() { seq++; clearTimeout(watchdog); player.pause(); player.onended = player.onerror = null; setTalking(false); }
+function setTalking(on) { screenEl.classList.toggle("talking", on); }
+// narrate(ids, onLine, onDone): plays each line's audio in turn and shows its caption. If a clip can't play, the caption stays for a reading-length pause.
+function narrate(ids, onLine, onDone) {
   hush();
-  let i = 0;
+  const my = seq; let i = 0;
   const next = () => {
-    if (i >= lines.length) { setTalking(false); onDone && onDone(); return; }
-    const line = lines[i++];
-    onSentence(line, i - 1);
-    const ms = 900 + line.split(" ").length * 380;
-    if (!synth) { setTalking(true); watchdog = setTimeout(next, ms); return; }
-    const u = new SpeechSynthesisUtterance(line);
-    if (voice) u.voice = voice;
-    u.lang = voice ? voice.lang : "en-IN"; u.rate = 0.92;
-    let started = false;
-    u.onstart = () => { started = true; clearTimeout(watchdog); setTalking(true); };
-    u.onend = () => { clearTimeout(watchdog); next(); };
-    u.onerror = () => { clearTimeout(watchdog); watchdog = setTimeout(next, ms); };
-    queue.push(u); // keep a reference, or Android drops it mid-sentence
-    synth.speak(u);
-    watchdog = setTimeout(() => { if (!started) { setTalking(true); watchdog = setTimeout(next, ms); } }, 1500);
+    if (my !== seq) return;
+    if (i >= ids.length) { setTalking(false); onDone && onDone(); return; }
+    const id = ids[i++], text = C.lines[id];
+    onLine && onLine(text, i - 1, id);
+    const ms = 900 + text.split(" ").length * 380;
+    const fallback = () => { if (my !== seq) return; setTalking(true); watchdog = setTimeout(next, ms); };
+    player.onended = () => { if (my === seq) next(); };
+    player.onerror = fallback;
+    player.src = `audio/day${C.day}/${id}.mp3`;
+    setTalking(true);
+    const p = player.play();
+    if (p && p.catch) p.catch(fallback);
   };
   next();
 }
-function hush() { clearTimeout(watchdog); if (synth) synth.cancel(); queue = []; setTalking(false); }
-function setTalking(on) { screenEl.classList.toggle("talking", on); }
 
-// ============ APP ============
-const screenEl = document.getElementById("screen");
-const whereEl = document.getElementById("where");
-let orderScore = 0, quizScore = 0;
-
+// ---------- Screen helpers ----------
 const FACE = `<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="currentColor" opacity=".15"/><circle cx="17" cy="20" r="2.6" fill="currentColor"/><circle cx="31" cy="20" r="2.6" fill="currentColor"/><path d="M15 29c3 4.5 15 4.5 18 0" stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none"/></svg>`;
 function coachHTML(hint) {
-  return `<div class="coach"><button class="face" id="face" aria-label="Hear ${COACH} again">${FACE}</button><div class="bubble" id="bubble"></div></div><p class="hint">${hint || `Tap ${COACH}'s face to hear it again`}</p>`;
+  return `<div class="coach"><button class="face" id="face" aria-label="Hear ${C.coach} again">${FACE}</button><div class="bubble" id="bubble"></div></div><p class="hint">${hint || `Tap ${C.coach}'s face to hear it again`}</p>`;
 }
 function set(html) { screenEl.innerHTML = html; }
-function caption(t) { const b = document.getElementById("bubble"); if (b) { b.textContent = t; b.classList.remove("done"); } }
+function caption(t) { const b = document.getElementById("bubble"); if (b) b.textContent = t; }
 function onFace(fn) { const f = document.getElementById("face"); if (f) f.onclick = fn; }
 function onNext(fn) { const n = document.getElementById("next"); if (n) n.onclick = () => { hush(); fn(); }; }
-function tileHTML(it, cls = "", attrs = "") { return `<${attrs ? "button" : "div"} class="tile ${cls}" ${attrs}><span class="pic">${it.pic}</span><span>${it.name}</span></${attrs ? "button" : "div"}>`; }
+function enableNext() { const n = document.getElementById("next"); if (n) n.disabled = false; }
+function tileHTML(it, cls = "", attrs = "") { const tag = attrs ? "button" : "div"; return `<${tag} class="tile ${cls}" ${attrs}><span class="pic">${it.pic}</span><span>${it.name}</span></${tag}>`; }
 function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function ids(prefix, n) { return Array.from({ length: n }, (_, i) => `${prefix}_${i}`); }
 
-// 1. Welcome. The phone only lets sound start after a tap, so this screen is one big button and nothing else.
+// 1. Opening. Says what this is, what today is, and how long it takes. One button. The first tap also unlocks sound on the phone.
 function welcome() {
-  whereEl.textContent = "Day 1";
+  whereEl.textContent = `Day ${C.day}`;
   set(`<div class="spacer"></div>
-    <div style="text-align:center;display:grid;gap:10px;justify-items:center">
-      <div class="face" style="width:96px;height:96px" aria-hidden="true">${FACE.replace('viewBox', 'style="width:66px;height:66px" viewBox')}</div>
-      <h1>Meet ${COACH}</h1>
-      <p class="muted">Your memory coach. Sound on.</p>
+    <div class="open">
+      <div class="face" aria-hidden="true">${FACE}</div>
+      <span class="day">Day ${C.day} · ${C.title}</span>
+      <h1>Three minutes a day for a sharper memory.</h1>
+      <p class="muted">${C.coach} talks you through it. Turn your sound on.</p>
+      <div class="steps"><span>Learn the trick</span><span>Hear a story</span><span>Play 2 rounds</span></div>
     </div>
     <div class="spacer"></div>
-    <button class="btn" id="next">Begin Day 1</button>`);
-  onNext(() => { if (synth) synth.speak(new SpeechSynthesisUtterance("")); talk(DAY1.intro, "The trick", lesson); });
+    <button class="btn" id="next">Start Day ${C.day}</button>`);
+  onNext(() => talk(ids("intro", 3), "What's the trick?", lesson));
 }
 
-// 2. Coach talks. Caption follows her. The button appears when she is done.
-function talk(lines, btnLabel, then) {
+// 2. Coach talks. Caption follows her. The button lights up when she is done.
+function talk(lineIds, btnLabel, then) {
   set(`${coachHTML()}<div class="spacer"></div><button class="btn" id="next" disabled>${btnLabel}</button>`);
-  const run = () => narrate(lines, caption, () => { document.getElementById("next").disabled = false; });
+  const run = () => narrate(lineIds, caption, enableNext);
   onFace(run); onNext(then); run();
 }
-function lesson() { talk(DAY1.lesson, "Show me the list", story); }
+function lesson() { whereEl.textContent = "The trick"; talk(ids("lesson", 8), "Show me the list", story); }
 
 // 3. The story. Each item pops in as she says it.
 function story() {
   whereEl.textContent = "The story";
   set(`${coachHTML()}
-    <div class="tiles" id="tiles">${DAY1.items.map(it => tileHTML(it, "hidden-tile")).join("")}</div>
+    <div class="tiles" id="tiles">${C.items.map(it => tileHTML(it, "hidden-tile")).join("")}</div>
     <div class="spacer"></div><button class="btn" id="next" disabled>I can see it. Test me!</button>`);
   const tiles = [...document.querySelectorAll("#tiles .tile")];
   const run = () => {
     tiles.forEach(t => { t.classList.add("hidden-tile"); t.classList.remove("pop", "on"); });
-    narrate(DAY1.story.map(s => s.say), (line, i) => {
+    narrate(ids("story", 8), (line, i) => {
       caption(line);
-      const s = DAY1.story[i];
       tiles.forEach(t => t.classList.remove("on"));
-      if (s.item != null) { const t = tiles[s.item]; t.classList.remove("hidden-tile"); t.classList.add("pop", "on"); }
+      if (i < 6) { tiles[i].classList.remove("hidden-tile"); tiles[i].classList.add("pop", "on"); }
       if (i === 6) tiles.forEach(t => t.classList.remove("hidden-tile"));
-    }, () => { document.getElementById("next").disabled = false; });
+    }, enableNext);
   };
   onFace(run); onNext(order); run();
 }
 
-// 4. Game: tap the items in story order. Two decoys mixed in. First-try correct taps earn points.
+// 4. Round 1: tap the items in story order. Two decoys mixed in. First-try correct taps earn points.
 function order() {
-  whereEl.textContent = "Round 1";
-  const pool = shuffle([...DAY1.items, ...DAY1.decoys]);
+  whereEl.textContent = "Round 1 of 2";
+  const pool = shuffle([...C.items, ...C.decoys]);
   let pos = 0, firstTry = true; orderScore = 0;
   set(`${coachHTML("Tap in the order of the story")}
-    <div class="chain" id="chain">${DAY1.items.map((_, i) => `<div class="slot" id="slot${i}"></div>${i < 5 ? '<span class="arrow">▶</span>' : ""}`).join("")}</div>
+    <div class="chain" id="chain">${C.items.map((_, i) => `<div class="slot" id="slot${i}"></div>${i < 5 ? '<span class="arrow">▶</span>' : ""}`).join("")}</div>
     <div class="tiles four" id="pool">${pool.map((it, i) => tileHTML(it, "", `data-i="${i}"`)).join("")}</div>
-    <div class="spacer"></div><button class="btn" id="next" disabled>Next round</button>`);
-  onFace(() => narrate(DAY1.orderIntro, caption));
-  onNext(quiz);
-  narrate(DAY1.orderIntro, caption);
+    <div class="spacer"></div><button class="btn" id="next" disabled>Round 2</button>`);
+  onFace(() => narrate(ids("order", 2), caption));
+  onNext(() => quiz(0));
+  narrate(ids("order", 2), caption);
   document.querySelectorAll("#pool .tile").forEach(b => b.onclick = () => {
     const it = pool[+b.dataset.i];
-    if (it.name === DAY1.items[pos].name) {
+    if (it.name === C.items[pos].name) {
       if (firstTry) orderScore++;
       b.disabled = true; b.classList.add("good");
       const slot = document.getElementById("slot" + pos); slot.textContent = it.pic; slot.classList.add("filled");
-      const cheer = DAY1.orderCheer[pos]; pos++; firstTry = true;
-      narrate([cheer], caption, () => { if (pos === 6) document.getElementById("next").disabled = false; });
+      const cheer = `cheer_${pos}`; pos++; firstTry = true;
+      narrate([cheer], caption, () => { if (pos === 6) enableNext(); });
+      if (pos === 6) enableNext();
     } else {
       firstTry = false;
       b.classList.remove("shake"); void b.offsetWidth; b.classList.add("shake");
-      narrate([pos === 0 ? DAY1.orderNudgeFirst : DAY1.orderNudge(DAY1.items[pos - 1].name.toLowerCase())], caption);
+      narrate([pos === 0 ? "nudge_first" : `nudge_${pos}`], caption);
     }
   });
 }
 
-// 5. Three quick questions about the story.
-function quiz(qi = 0) {
+// 5. Round 2: three quick questions about the story.
+function quiz(qi) {
   if (qi === 0) quizScore = 0;
-  if (qi >= DAY1.quiz.length) return score();
-  whereEl.textContent = `Round 2 · ${qi + 1} of ${DAY1.quiz.length}`;
-  const q = DAY1.quiz[qi]; let answered = false;
+  if (qi >= C.quiz.length) return score();
+  whereEl.textContent = `Round 2 · Question ${qi + 1} of ${C.quiz.length}`;
+  const q = C.quiz[qi]; let answered = false;
   set(`${coachHTML()}
     <div class="opts">${q.opts.map((o, i) => `<button class="opt" data-i="${i}">${o}</button>`).join("")}</div>
-    <div class="spacer"></div><button class="btn" id="next" disabled>${qi + 1 === DAY1.quiz.length ? "See my score" : "Next question"}</button>`);
-  onFace(() => narrate([q.q], caption)); onNext(() => quiz(qi + 1));
-  narrate([q.q], caption);
+    <div class="spacer"></div><button class="btn" id="next" disabled>${qi + 1 === C.quiz.length ? "See my score" : "Next question"}</button>`);
+  onFace(() => narrate([q.id], caption)); onNext(() => quiz(qi + 1));
+  narrate([q.id], caption);
   document.querySelectorAll(".opt").forEach(b => b.onclick = () => {
     if (answered) return; answered = true;
     const ok = +b.dataset.i === q.a; if (ok) quizScore++;
     document.querySelectorAll(".opt").forEach(x => { x.disabled = true; if (+x.dataset.i === q.a) x.classList.add("right"); });
     if (!ok) b.classList.add("wrong");
-    narrate([ok ? "Correct." : "Not this one. " + q.why], caption);
-    document.getElementById("next").disabled = false;
+    narrate([ok ? "correct" : `${q.id}_no`], caption);
+    enableNext();
   });
 }
 
-// 6. Score. 10 for finishing, 10 per item placed first try, 10 per question. Perfect day is 100.
+// 6. Score. 10 for finishing, 10 per item placed first try, 10 per question right. A perfect day is 100.
 function score() {
-  whereEl.textContent = "Day 1 done";
+  whereEl.textContent = `Day ${C.day} done`;
   const pts = 10 + orderScore * 10 + quizScore * 10;
-  try { localStorage.setItem("yaad.day1", JSON.stringify({ pts, when: Date.now() })); } catch (e) {}
+  try { localStorage.setItem(`yaad.day${C.day}`, JSON.stringify({ pts, when: Date.now() })); } catch (e) {}
   set(`${coachHTML()}
     <div class="ring"><svg viewBox="0 0 180 180"><circle class="track" cx="90" cy="90" r="80"/><circle class="bar" id="bar" cx="90" cy="90" r="80"/></svg>
       <div class="in"><span class="lbl">Brain score</span><span class="num" id="num">0</span></div></div>
     <p class="muted" style="text-align:center">${orderScore} of 6 in order · ${quizScore} of 3 questions</p>
-    <div class="spacer"></div><button class="btn ghost" id="next">Play Day 1 again</button>`);
-  const lines = [...DAY1.score(pts), DAY1.homework];
-  const run = () => narrate(lines, caption);
+    <div class="spacer"></div><button class="btn ghost" id="next">Play Day ${C.day} again</button>`);
+  const tier = pts >= 90 ? "score_hi" : pts >= 60 ? "score_mid" : "score_lo";
+  const run = () => narrate(["score_intro", tier, "homework"], caption);
   onFace(run); onNext(welcome); run();
   requestAnimationFrame(() => {
     document.getElementById("bar").style.strokeDashoffset = 502 - 502 * pts / 100;
@@ -305,5 +259,6 @@ function score() {
   });
 }
 
-welcome();
+fetch("content/day1.json").then(r => r.json()).then(c => { C = c; welcome(); })
+  .catch(() => set(`<h1>Couldn't load today's lesson.</h1><p class="muted">Check your connection and open the link again.</p>`));
 </script>
