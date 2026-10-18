@@ -29,3 +29,11 @@ What this means for the build:
 - Opens from a link shared on WhatsApp, can be added to the home screen
 - Simple English with Hinglish flavour, no jargon
 - Lessons under 3 minutes
+
+## Daily loop
+
+One 2 minute technique lesson, then a 5 question quiz that uses it. Under 5 minutes total.
+
+First topic pack: daily life (shopping lists, phone numbers, where she kept things).
+
+What brings her back: a brain score that goes up over weeks, like a fitness score.
