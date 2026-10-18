@@ -25,3 +25,4 @@
 | 2026-10-18 | Visual direction is Calm clinic: off-white, deep indigo, marigold |
 | 2026-10-18 | Blueprint not yet approved, under discussion |
 | 2026-10-18 | Coach name: founder will choose |
+| 2026-10-18 | Add a daily reminder at a time she picks, and a family leaderboard joined by a six-letter code |

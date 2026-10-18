@@ -38,8 +38,19 @@ Old lists come back after 1, 3 and 7 days. One minute. This is what makes the me
 - Techniques learned, as badges
 - Lists remembered, as a count that keeps growing
 
-### 6. Reminders
-A daily reminder at a chosen time. A web app can't send phone notifications reliably without an install step, so for the first test the founder sends the link on WhatsApp each morning. A real app store app fixes this later.
+### 6. Daily reminder
+- She picks a time on first open ("When do you have three quiet minutes?" morning, afternoon, evening)
+- The coach's voice says the reminder line once so it feels like her, not the phone
+- On Android, a reminder works once the app is added to the home screen (one tap, we show how). On iPhone it also needs that step. Reminders need a small free server to send them, which comes with the leaderboard below
+- Until that server exists, the founder sends the link on WhatsApp at her chosen time
+- Missed two days: the reminder softens ("No pressure. Two minutes when you're ready.") instead of nagging
+
+### 7. Family leaderboard
+- A family is a six-letter code. The founder makes one, shares it on WhatsApp, each person types it in once. No accounts, no passwords
+- The board shows each family member's first name, brain score, and streak. One screen, ranked, with a crown on the leader
+- Weekly reset of a "this week" column so a newcomer can still win a week. Lifetime score stays alongside
+- A nudge card: "Rohan did his session today. Your turn." This is the single stickiest thing in Duolingo's design and it works harder with family than with strangers
+- Shared scores need a small free database. Options at zero cost: Supabase or Firebase free tier. Decision in DECISIONS.md once chosen
 
 ## The course, 30 days
 
