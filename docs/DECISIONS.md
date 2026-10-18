@@ -28,3 +28,6 @@
 | 2026-10-18 | Add a daily reminder at a time she picks, and a family leaderboard joined by a six-letter code |
 | 2026-10-18 | Coach is named Priya |
 | 2026-10-18 | Priya speaks Indian English and Hinglish (replaces the plain-English-only decision). On-screen captions match what she says |
+| 2026-10-18 | First full version built: first-open memory test, Day 1 with before-and-after test, home, review, progress, reminder time, family board |
+| 2026-10-18 | Family scores use the artifact's shared database for the prototype. A free database (Supabase or Firebase) replaces it when the app moves to its own site |
+| 2026-10-18 | Priya's voice is Kokoro "hf_alpha" (Indian, Hindi-trained) until the founder picks between the samples |

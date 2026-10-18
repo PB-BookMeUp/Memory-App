@@ -1,2 +1,1 @@
-tools/voice/*.onnx
-tools/voice/*.onnx.json
+tools/voice/*

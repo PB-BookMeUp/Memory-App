@@ -1,0 +1,45 @@
+{
+  "coach": "Priya",
+  "testItems": [
+    { "name": "Chaabi", "pic": "🔑" }, { "name": "Phone", "pic": "📱" }, { "name": "Chhata", "pic": "☂️" },
+    { "name": "Chammach", "pic": "🥄" }, { "name": "Kitaab", "pic": "📖" }, { "name": "Mombatti", "pic": "🕯️" }
+  ],
+  "testDecoys": [
+    { "name": "Ghadi", "pic": "⌚" }, { "name": "Chashma", "pic": "👓" }, { "name": "Topi", "pic": "🧢" },
+    { "name": "Bottle", "pic": "🍼" }, { "name": "Pen", "pic": "🖊️" }, { "name": "Taala", "pic": "🔒" }
+  ],
+  "forgets": [
+    { "id": "names", "pic": "🙋", "label": "Logon ke naam" },
+    { "id": "things", "pic": "🔑", "label": "Cheezein kahan rakhi" },
+    { "id": "lists", "pic": "🛒", "label": "Shopping list" },
+    { "id": "why", "pic": "🚪", "label": "Kamre mein kyun aayi thi" }
+  ],
+  "ages": ["40 se kam", "40 se 50", "50 se 60", "60 se zyada"],
+  "slots": [
+    { "id": "morning", "pic": "🌅", "label": "Subah", "time": "8 baje" },
+    { "id": "afternoon", "pic": "☀️", "label": "Dopahar", "time": "2 baje" },
+    { "id": "evening", "pic": "🌆", "label": "Shaam", "time": "7 baje" }
+  ],
+  "lines": {
+    "ob_hello": "Namaste! Main Priya hoon, aapki memory coach. Roz sirf teen minute, aur aapki yaaddasht pehle se tez. Chaliye, shuru karte hain.",
+    "ob_name": "Pehle bataiye, main aapko kya bulaun?",
+    "ob_forget": "Sabse zyada kya bhool jaate hain aap?",
+    "ob_age": "Aur aapki age kitni hai? Isse main aapke liye sahi examples chunungi.",
+    "ob_time": "Din mein kab teen minute shanti se milte hain aapko? Us waqt main yaad dila dungi.",
+    "ob_test_intro": "Ab ek chhota sa test. Main chhe cheezein dikhaungi, pandrah second ke liye. Jitni yaad rahein, utni. Koi tension nahi.",
+    "ob_test_go": "Dekhiye. Yaad rakhne ki koshish kijiye.",
+    "ob_recall": "Ab bataiye. Kaun si cheezein thi? Jo yaad hain, un par tap kijiye.",
+    "ob_result_lo": "Theek hai. Yeh bilkul normal hai. Bina trick ke sab ka yahi haal hota hai. Ab dekhiye, trick ke baad kya hota hai.",
+    "ob_result_mid": "Achha! Aadhi se zyada yaad rahin. Ab dekhiye, trick ke baad kya hota hai.",
+    "ob_result_hi": "Wah! Aapki memory already achhi hai. Ab trick ke saath aur bhi tez hogi.",
+    "home_today": "Namaste! Aaj ka session tayyar hai. Sirf teen minute.",
+    "home_done": "Aaj ka kaam ho gaya. Shabash! Kal phir milenge.",
+    "home_review": "Ek minute ka review hai. Dekhte hain, purani list abhi bhi yaad hai ya nahi.",
+    "review_intro": "Yaad hai woh kahani? Doodh, aur phir? Jo cheezein yaad hain, un par tap kijiye.",
+    "review_good": "Shabash! Kahani abhi bhi dimaag mein hai. Yahi toh trick ki taakat hai.",
+    "review_ok": "Kuch yaad rahin, kuch nahi. Koi baat nahi. Kahani ek baar phir sun lijiye, aur pakki ho jayegi.",
+    "remind_line": "Namaste, main Priya hoon. Teen minute nikaliye. Dimaag ko bhi kasrat chahiye.",
+    "fam_intro": "Family ke saath muqabla kijiye. Ek code banaiye, WhatsApp par bhejiye, aur sab ek hi board par.",
+    "progress_intro": "Yeh raha aapka safar. Har din score thoda upar."
+  }
+}
