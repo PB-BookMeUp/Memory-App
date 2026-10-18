@@ -17,3 +17,15 @@ An app like MemoryOS, built for Indian adults in the 40 to 60 age range. It has 
 - Lesson and quiz structure
 - Streaks, rewards, and reminders
 - Name and look
+
+## First user
+
+The founder's mum. Uses WhatsApp, not app savvy, knows basic English.
+
+What this means for the build:
+
+- Big text, big buttons, one thing per screen
+- No account or password to start
+- Opens from a link shared on WhatsApp, can be added to the home screen
+- Simple English with Hinglish flavour, no jargon
+- Lessons under 3 minutes
