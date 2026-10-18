@@ -21,3 +21,7 @@
 | 2026-10-18 | Open item: a human recorded voice instead of the phone voice, once there is a way to record it for free |
 | 2026-10-18 | The phone's built-in voice doesn't work in the viewer. Audio is now pre-made MP3 files shipped with the app, generated with the free Piper voice "lessac" |
 | 2026-10-18 | Content and audio live outside the app code, so wording can change without touching screens |
+| 2026-10-18 | Voice is Kokoro "Bella" (free, open source), replacing the Piper voice |
+| 2026-10-18 | Visual direction is Calm clinic: off-white, deep indigo, marigold |
+| 2026-10-18 | Blueprint not yet approved, under discussion |
+| 2026-10-18 | Coach name: founder will choose |
