@@ -6,7 +6,7 @@ An app like MemoryOS, built for Indian adults in the 40 to 60 age range. It has 
 
 - Content: memory techniques as the core, with topic packs to apply them to.
 - Daily hooks: staying mentally sharp, and family and culture.
-- Language: plain English only, no Hindi text.
+- Language: Priya speaks Indian English and Hinglish. Captions match her words. No long Hindi text to read.
 - Audio first: the coach speaks every screen, like MemoryOS. Reading is optional.
 - Format: bite-sized lessons and quizzes.
 - Budget: none, so the first version must use free tools only.

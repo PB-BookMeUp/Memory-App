@@ -4,7 +4,7 @@ How every lesson and quiz is written. Keep to this so Day 30 sounds like Day 1.
 
 ## Voice
 
-A friendly coach. Warm, encouraging, never talks down. Uses "aap". Think of a kind family doctor who is pleased to see you.
+Priya. A friendly coach. Warm, encouraging, never talks down. Uses "aap". Think of a kind family doctor who is pleased to see you.
 
 ## Audio first
 
@@ -14,7 +14,7 @@ Each screen has two texts: `show` (the headline, under 10 words) and `say` (what
 
 ## Language
 
-Plain English only. Short spoken sentences. No Hindi words. No jargon. If a word would confuse someone with basic English, use a simpler one.
+Indian English with natural Hinglish, the way a Mumbai or Delhi doctor talks to a patient's mother. Short spoken sentences. Hindi words where they come naturally (namaste, aap, theek hai, shabash, sabzi), English for anything technical. Never a full Hindi sentence that needs reading. Captions are exactly what Priya says.
 
 ## Shape of a day
 

@@ -26,3 +26,5 @@
 | 2026-10-18 | Blueprint not yet approved, under discussion |
 | 2026-10-18 | Coach name: founder will choose |
 | 2026-10-18 | Add a daily reminder at a time she picks, and a family leaderboard joined by a six-letter code |
+| 2026-10-18 | Coach is named Priya |
+| 2026-10-18 | Priya speaks Indian English and Hinglish (replaces the plain-English-only decision). On-screen captions match what she says |
