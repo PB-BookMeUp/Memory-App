@@ -10,8 +10,7 @@ A daily memory and brain-fitness app for Indian adults aged 40 to 60. Bite-sized
 - `app/index.html`: the app screens and games
 - `app/content/app.json`: Priya's lines for onboarding, home, review, family, progress
 - `app/content/day1.json`: Day 1 words, list, story and quiz
-- `app/audio/`: one MP3 per line, made from the content files
-- `tools/make_audio.py`: turns a content file into Priya's voice (`python3 tools/make_audio.py day1`)
+- `tools/make_audio.py`: makes audio from a content file, parked until there is a voice worth using
 - `docs/APP_BLUEPRINT.md`: the full app, screen by screen
 
 More folders (app code, lesson content) get added as we reach those steps.

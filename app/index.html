@@ -1,421 +1,419 @@
 <title>Yaad Rakho</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Noto+Sans:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Noto+Sans:wght@400;600;700&display=swap">
 <style>
-  /* Calm clinic. One card per screen, Priya at the top, a bottom bar with three big tabs. No scrolling inside a session. */
+  /* Layout: a chat with Priya. Header, scrolling messages, quick-reply chips at the bottom. Two skins share one layout: "yaad" (our indigo and marigold) and "wa" (a WhatsApp-like look). */
   :root {
-    --bg: #f4f1ea; --card: #ffffff; --fg: #1d1a2f; --muted: #605c74;
-    --accent: #2e2a8f; --accent-soft: #e9e8f7; --accent-fg: #ffffff; --warm: #e8a317; --warm-soft: #fbf0d4;
-    --good: #1e8f5a; --bad: #c3412b; --line: #ddd8cc; --tile: #f3f0e8;
-    --display: "Baloo 2", "Noto Sans", system-ui, sans-serif; --body: "Noto Sans", system-ui, sans-serif;
+    --bg: #f4f1ea; --chat: #efece3; --card: #ffffff; --fg: #1d1a2f; --muted: #605c74;
+    --head: #2e2a8f; --head-fg: #ffffff; --in: #ffffff; --out: #e9e8f7; --out-fg: #1d1a2f;
+    --accent: #2e2a8f; --accent-fg: #ffffff; --warm: #e8a317; --warm-soft: #fbf0d4;
+    --good: #1e8f5a; --bad: #c3412b; --line: #ddd8cc; --tile: #f3f0e8; --chip: #ffffff; --chip-fg: #2e2a8f; --chip-line: #2e2a8f;
+    --display: "Baloo 2", "Noto Sans", system-ui, sans-serif; --body: "Noto Sans", system-ui, sans-serif; --radius: 18px;
   }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-    --bg: #14122a; --card: #1e1b3a; --fg: #f3f0ff; --muted: #b5b0cc; --accent: #9d99ff; --accent-soft: #2a2752; --accent-fg: #14122a;
-    --warm: #ffc247; --warm-soft: #3b3220; --good: #4fd08f; --bad: #ff7a63; --line: #39355e; --tile: #27244a; color-scheme: dark; } }
-  :root[data-theme="dark"] {
-    --bg: #14122a; --card: #1e1b3a; --fg: #f3f0ff; --muted: #b5b0cc; --accent: #9d99ff; --accent-soft: #2a2752; --accent-fg: #14122a;
-    --warm: #ffc247; --warm-soft: #3b3220; --good: #4fd08f; --bad: #ff7a63; --line: #39355e; --tile: #27244a; color-scheme: dark; }
+  :root[data-skin="wa"] {
+    --bg: #e5ddd5; --chat: #e5ddd5; --card: #ffffff; --fg: #111b21; --muted: #667781;
+    --head: #008069; --head-fg: #ffffff; --in: #ffffff; --out: #d9fdd3; --out-fg: #111b21;
+    --accent: #00a884; --accent-fg: #ffffff; --warm: #ffb02e; --warm-soft: #fff4dc;
+    --good: #1fa855; --bad: #d93025; --line: #d1d7db; --tile: #f0f2f5; --chip: #ffffff; --chip-fg: #008069; --chip-line: #c5d6d2;
+    --display: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; --body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; --radius: 10px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --bg: #14122a; --chat: #1a1833; --card: #1e1b3a; --fg: #f3f0ff; --muted: #b5b0cc; --head: #1e1b3a; --head-fg: #f3f0ff; --in: #26234a; --out: #2e2a8f; --out-fg: #ffffff; --accent: #9d99ff; --accent-fg: #14122a; --warm: #ffc247; --warm-soft: #3b3220; --good: #4fd08f; --bad: #ff7a63; --line: #39355e; --tile: #27244a; --chip: #26234a; --chip-fg: #c8c6ff; --chip-line: #5a56a8; color-scheme: dark; }
+    :root:not([data-theme="light"])[data-skin="wa"] { --bg: #0b141a; --chat: #0b141a; --card: #202c33; --fg: #e9edef; --muted: #8696a0; --head: #202c33; --head-fg: #e9edef; --in: #202c33; --out: #005c4b; --out-fg: #e9edef; --accent: #00a884; --accent-fg: #0b141a; --warm: #ffb02e; --warm-soft: #3a2f14; --good: #25d366; --bad: #f15c6d; --line: #2a3942; --tile: #111b21; --chip: #202c33; --chip-fg: #00a884; --chip-line: #2a3942; }
+  }
+  :root[data-theme="dark"] { --bg: #14122a; --chat: #1a1833; --card: #1e1b3a; --fg: #f3f0ff; --muted: #b5b0cc; --head: #1e1b3a; --head-fg: #f3f0ff; --in: #26234a; --out: #2e2a8f; --out-fg: #ffffff; --accent: #9d99ff; --accent-fg: #14122a; --warm: #ffc247; --warm-soft: #3b3220; --good: #4fd08f; --bad: #ff7a63; --line: #39355e; --tile: #27244a; --chip: #26234a; --chip-fg: #c8c6ff; --chip-line: #5a56a8; color-scheme: dark; }
+  :root[data-theme="dark"][data-skin="wa"] { --bg: #0b141a; --chat: #0b141a; --card: #202c33; --fg: #e9edef; --muted: #8696a0; --head: #202c33; --head-fg: #e9edef; --in: #202c33; --out: #005c4b; --out-fg: #e9edef; --accent: #00a884; --accent-fg: #0b141a; --warm: #ffb02e; --warm-soft: #3a2f14; --good: #25d366; --bad: #f15c6d; --line: #2a3942; --tile: #111b21; --chip: #202c33; --chip-fg: #00a884; --chip-line: #2a3942; }
 
   html, body { height: 100%; }
-  body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 19px; line-height: 1.4;
-    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 10px;
+  body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 18px; line-height: 1.4; margin: 0;
+    padding-left: max(0px, env(safe-area-inset-left, 0px)); padding-right: max(0px, env(safe-area-inset-right, 0px)); padding-block: 0;
     display: flex; flex-direction: column; align-items: center; }
-  .app { width: 100%; max-width: 480px; display: flex; flex-direction: column; gap: 10px; flex: 1; min-height: 0; }
-  .top { display: flex; justify-content: space-between; align-items: center; font-family: var(--display); font-weight: 800; font-size: 20px; color: var(--accent); min-height: 28px; }
-  .top small { font-family: var(--body); font-weight: 600; font-size: 14px; color: var(--muted); }
-  .screen { background: var(--card); border-radius: 22px; padding: 18px; display: flex; flex-direction: column; gap: 14px; flex: 1; min-height: 0; overflow-y: auto; }
-  h1 { font-family: var(--display); font-weight: 800; font-size: 32px; line-height: 1.1; margin: 0; text-wrap: balance; }
-  h2 { font-family: var(--display); font-weight: 700; font-size: 22px; line-height: 1.15; margin: 0; }
-  p { margin: 0; } .muted { color: var(--muted); font-size: 16px; } .center { text-align: center; }
-  .spacer { flex: 1; } .row { display: flex; gap: 10px; align-items: center; }
+  .app { width: 100%; max-width: 480px; height: 100%; display: flex; flex-direction: column; min-height: 0; background: var(--chat); }
 
-  /* Priya */
-  .coach { display: flex; gap: 12px; align-items: flex-start; }
-  .face { width: 60px; height: 60px; border-radius: 50%; flex-shrink: 0; background: var(--accent); color: var(--accent-fg); display: grid; place-items: center; cursor: pointer; border: 0; padding: 0; }
-  .face svg { width: 42px; height: 42px; }
-  .face.big { width: 112px; height: 112px; } .face.big svg { width: 78px; height: 78px; }
-  .bubble { flex: 1; min-width: 0; background: var(--accent-soft); border-radius: 4px 18px 18px 18px; padding: 12px 15px; font-size: 20px; font-weight: 600; line-height: 1.35; min-height: 3.5em; display: flex; align-items: center; }
-  .hint { font-size: 14px; color: var(--muted); padding-left: 72px; margin-top: -6px; }
-  @media (prefers-reduced-motion: no-preference) {
-    .talking .face { animation: pulse 1s ease-in-out infinite; }
-    @keyframes pulse { 50% { box-shadow: 0 0 0 10px color-mix(in srgb, var(--accent) 25%, transparent); } }
-    @keyframes pop { 0% { transform: scale(.6); opacity: 0; } 70% { transform: scale(1.08); } 100% { transform: scale(1); opacity: 1; } }
-    @keyframes shake { 20%,60% { transform: translateX(-6px); } 40%,80% { transform: translateX(6px); } }
-    .screen { animation: in .2s ease-out; } @keyframes in { from { opacity: .5; transform: translateY(6px); } }
-  }
+  /* Header: Priya's name, like a chat header. Skin switch on the right. */
+  .head { background: var(--head); color: var(--head-fg); padding: 10px max(16px, env(safe-area-inset-right, 0px)) 10px max(16px, env(safe-area-inset-left, 0px)); display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+  .head .face { width: 42px; height: 42px; }
+  .head .who { flex: 1; min-width: 0; line-height: 1.15; }
+  .head .who b { font-family: var(--display); font-size: 19px; display: block; }
+  .head .who small { font-size: 13px; opacity: .85; }
+  .skin { display: flex; background: rgba(255,255,255,.18); border-radius: 999px; padding: 3px; gap: 2px; }
+  .skin button { border: 0; background: transparent; color: inherit; font: inherit; font-size: 12px; font-weight: 700; padding: 5px 10px; border-radius: 999px; cursor: pointer; opacity: .8; }
+  .skin button.on { background: var(--head-fg); color: var(--head); opacity: 1; }
+  .face { border-radius: 50%; background: var(--accent); color: var(--accent-fg); display: grid; place-items: center; flex-shrink: 0; }
+  .face svg { width: 70%; height: 70%; }
 
-  /* Buttons and inputs */
-  .btn { font: inherit; font-family: var(--display); font-weight: 700; font-size: 21px; border: 0; border-radius: 16px; padding: 14px 18px; min-height: 60px; cursor: pointer; width: 100%; background: var(--accent); color: var(--accent-fg); }
-  .btn.ghost { background: transparent; color: var(--accent); border: 2px solid var(--accent); }
-  .btn.warm { background: var(--warm); color: #1d1a2f; }
-  .btn:disabled { opacity: .4; cursor: default; }
-  .btn:focus-visible, .opt:focus-visible, .face:focus-visible, button.tile:focus-visible, .tab:focus-visible, input:focus-visible { outline: 3px solid var(--warm); outline-offset: 3px; }
-  input[type=text] { font: inherit; font-size: 22px; font-weight: 600; padding: 14px 16px; border: 2px solid var(--line); border-radius: 14px; background: var(--card); color: var(--fg); width: 100%; box-sizing: border-box; text-align: center; }
-  .opts { display: grid; gap: 10px; }
-  .opt { font: inherit; font-size: 20px; font-weight: 600; text-align: left; border: 2px solid var(--line); background: var(--card); color: var(--fg); border-radius: 14px; padding: 13px 16px; min-height: 58px; cursor: pointer; display: flex; gap: 12px; align-items: center; }
-  .opt .pic { font-size: 28px; }
-  .opt.right { border-color: var(--good); background: color-mix(in srgb, var(--good) 14%, var(--card)); }
-  .opt.wrong { border-color: var(--bad); background: color-mix(in srgb, var(--bad) 12%, var(--card)); }
-  .opt.sel { border-color: var(--accent); background: var(--accent-soft); }
-  .opt:disabled { cursor: default; }
+  /* Messages */
+  .chat { flex: 1; min-height: 0; overflow-y: auto; padding: 14px max(14px, env(safe-area-inset-right, 0px)) 14px max(14px, env(safe-area-inset-left, 0px)); display: flex; flex-direction: column; gap: 6px; scroll-behavior: smooth; }
+  .msg { max-width: 86%; padding: 10px 14px; border-radius: var(--radius); font-size: 19px; line-height: 1.35; box-shadow: 0 1px 1px rgba(0,0,0,.06); animation: in .18s ease-out; word-wrap: break-word; }
+  .msg.in { background: var(--in); align-self: flex-start; border-top-left-radius: 4px; }
+  .msg.out { background: var(--out); color: var(--out-fg); align-self: flex-end; border-top-right-radius: 4px; }
+  .msg.big { font-size: 21px; font-weight: 600; }
+  .msg .pic { font-size: 56px; line-height: 1.1; display: block; text-align: center; padding: 4px 0 6px; }
+  .msg .scene { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 6px 0 8px; font-size: 44px; line-height: 1; }
+  .msg .scene .small { font-size: 26px; opacity: .55; }
+  .msg .scene .arrow { font-size: 18px; color: var(--muted); }
+  .typing { align-self: flex-start; background: var(--in); border-radius: var(--radius); border-top-left-radius: 4px; padding: 12px 16px; display: flex; gap: 5px; }
+  .typing i { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); display: block; animation: blink 1s infinite; }
+  .typing i:nth-child(2) { animation-delay: .2s; } .typing i:nth-child(3) { animation-delay: .4s; }
+  .day-chip { align-self: center; background: var(--tile); color: var(--muted); font-size: 13px; font-weight: 700; padding: 5px 12px; border-radius: 999px; margin: 6px 0; }
+  .card { align-self: stretch; background: var(--card); border-radius: var(--radius); padding: 14px; display: grid; gap: 10px; box-shadow: 0 1px 1px rgba(0,0,0,.06); animation: in .18s ease-out; }
+  .card h3 { margin: 0; font-family: var(--display); font-size: 18px; }
 
-  /* Tiles */
-  .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  /* Reply area: quick-reply chips, or a text box for her name */
+  .reply { flex-shrink: 0; padding: 10px max(14px, env(safe-area-inset-right, 0px)) max(12px, env(safe-area-inset-bottom, 0px)) max(14px, env(safe-area-inset-left, 0px)); display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; min-height: 64px; background: var(--chat); }
+  .chip { font: inherit; font-size: 18px; font-weight: 700; border: 2px solid var(--chip-line); background: var(--chip); color: var(--chip-fg); border-radius: 999px; padding: 11px 18px; min-height: 50px; cursor: pointer; animation: in .18s ease-out; }
+  .chip.primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+  .chip.wide { flex: 1; text-align: center; }
+  .composer { display: flex; gap: 8px; width: 100%; }
+  .composer input { flex: 1; font: inherit; font-size: 19px; padding: 12px 16px; border-radius: 999px; border: 2px solid var(--line); background: var(--card); color: var(--fg); min-width: 0; }
+  .composer button { font: inherit; font-weight: 700; border: 0; border-radius: 50%; width: 52px; height: 52px; background: var(--accent); color: var(--accent-fg); cursor: pointer; font-size: 22px; }
+  .chip:focus-visible, .composer input:focus-visible, .composer button:focus-visible, button.tile:focus-visible, .tab:focus-visible, .skin button:focus-visible { outline: 3px solid var(--warm); outline-offset: 2px; }
+
+  /* Tiles inside cards */
+  .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
   .tiles.four { grid-template-columns: repeat(4, 1fr); }
-  .tile { background: var(--tile); border: 2px solid var(--line); border-radius: 16px; padding: 9px 4px; text-align: center; display: grid; gap: 3px; font-weight: 600; font-size: 15px; color: var(--fg); font-family: var(--body); cursor: default; }
-  .tile .pic { font-size: 34px; line-height: 1; }
-  .tile.hidden-tile { opacity: 0; transform: scale(.6); }
-  .tile.pop { animation: pop .35s ease-out; }
-  .tile.on { border-color: var(--warm); background: var(--warm-soft); }
+  .tile { background: var(--tile); border: 2px solid var(--line); border-radius: 14px; padding: 8px 4px; text-align: center; display: grid; gap: 2px; font-weight: 600; font-size: 14px; color: var(--fg); font-family: var(--body); cursor: default; }
+  .tile .pic { font-size: 32px; line-height: 1; }
   button.tile { cursor: pointer; } button.tile:disabled { opacity: .35; cursor: default; }
-  .tile.sel { border-color: var(--accent); background: var(--accent-soft); }
+  .tile.sel { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 14%, var(--card)); }
   .tile.good { border-color: var(--good); background: color-mix(in srgb, var(--good) 14%, var(--card)); }
   .tile.miss { border-color: var(--bad); background: color-mix(in srgb, var(--bad) 12%, var(--card)); }
   .tile.shake { animation: shake .4s; border-color: var(--bad); }
-  .chain { display: flex; gap: 5px; align-items: center; flex-wrap: wrap; min-height: 42px; }
-  .chain .slot { width: 42px; height: 42px; border-radius: 12px; border: 2px dashed var(--line); display: grid; place-items: center; font-size: 24px; }
+  .chain { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
+  .chain .slot { width: 40px; height: 40px; border-radius: 11px; border: 2px dashed var(--line); display: grid; place-items: center; font-size: 22px; }
   .chain .slot.filled { border-style: solid; border-color: var(--good); background: color-mix(in srgb, var(--good) 14%, var(--card)); }
-  .chain .arrow { color: var(--muted); font-size: 12px; }
+  .chain .arrow { color: var(--muted); font-size: 11px; }
   .timer { height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; }
   .timer i { display: block; height: 100%; background: var(--warm); width: 100%; transition: width 1s linear; }
+  .compare { display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; align-items: center; text-align: center; }
+  .compare .box { background: var(--tile); border-radius: 14px; padding: 12px 6px; display: grid; gap: 2px; }
+  .compare b { font-family: var(--display); font-weight: 800; font-size: 40px; line-height: 1; font-variant-numeric: tabular-nums; }
+  .compare .box.after { background: var(--warm-soft); } .compare .box.after b { color: var(--warm); }
+  .compare span { font-size: 12px; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: .05em; }
+  .ring { display: grid; place-items: center; position: relative; margin: 0 auto; width: 150px; height: 150px; }
+  .ring svg { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+  .ring circle { fill: none; stroke-width: 13; } .ring .track { stroke: var(--line); }
+  .ring .bar { stroke: var(--warm); stroke-linecap: round; stroke-dasharray: 440; stroke-dashoffset: 440; transition: stroke-dashoffset 1.4s ease-out; }
+  .ring .num { font-family: var(--display); font-weight: 800; font-size: 50px; line-height: 1; color: var(--warm); font-variant-numeric: tabular-nums; }
+  .ring .lbl { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+  .ring .in { display: grid; place-items: center; gap: 2px; }
 
-  /* Home cards */
-  .hero { background: var(--accent); color: var(--accent-fg); border-radius: 20px; padding: 18px; display: grid; gap: 10px; }
-  .hero .eyebrow { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; font-weight: 700; opacity: .8; }
-  .hero h2 { font-size: 26px; color: inherit; }
-  .hero .btn { background: var(--warm); color: #1d1a2f; }
+  /* Home, progress, family: plain screens under the same header */
+  .screen { flex: 1; min-height: 0; overflow-y: auto; padding: 14px max(14px, env(safe-area-inset-right, 0px)) 14px max(14px, env(safe-area-inset-left, 0px)); display: flex; flex-direction: column; gap: 12px; }
+  h2 { font-family: var(--display); font-weight: 700; font-size: 22px; line-height: 1.15; margin: 0; }
+  p { margin: 0; } .muted { color: var(--muted); font-size: 15px; } .center { text-align: center; }
+  .hero { background: var(--head); color: var(--head-fg); border-radius: var(--radius); padding: 16px; display: grid; gap: 8px; }
+  .hero .eyebrow { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; font-weight: 700; opacity: .8; }
+  .btn { font: inherit; font-family: var(--display); font-weight: 700; font-size: 19px; border: 0; border-radius: 14px; padding: 12px 16px; min-height: 54px; cursor: pointer; width: 100%; background: var(--warm); color: #1d1a2f; }
+  .btn.ghost { background: transparent; color: var(--accent); border: 2px solid var(--accent); }
   .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-  .stat { background: var(--tile); border-radius: 14px; padding: 10px 8px; text-align: center; display: grid; gap: 2px; }
-  .stat b { font-family: var(--display); font-weight: 800; font-size: 28px; line-height: 1; color: var(--accent); font-variant-numeric: tabular-nums; }
-  .stat span { font-size: 12px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
-  .week { display: flex; justify-content: space-between; gap: 4px; }
-  .week div { flex: 1; text-align: center; display: grid; gap: 4px; font-size: 12px; color: var(--muted); font-weight: 600; }
-  .week i { display: block; height: 10px; border-radius: 5px; background: var(--line); margin: 0 auto; width: 100%; }
+  .stat { background: var(--card); border-radius: 14px; padding: 10px 8px; text-align: center; display: grid; gap: 2px; }
+  .stat b { font-family: var(--display); font-weight: 800; font-size: 26px; line-height: 1; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .stat span { font-size: 11px; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: .05em; }
+  .week { display: flex; gap: 4px; }
+  .week div { flex: 1; text-align: center; display: grid; gap: 4px; font-size: 11px; color: var(--muted); font-weight: 700; }
+  .week i { display: block; height: 9px; border-radius: 5px; background: var(--line); }
   .week i.on { background: var(--good); } .week i.today { outline: 2px solid var(--accent); outline-offset: 1px; }
-  .card { border: 2px solid var(--line); border-radius: 16px; padding: 14px; display: grid; gap: 8px; }
-  .card.warm { border-color: var(--warm); background: var(--warm-soft); }
-  .path { display: grid; gap: 8px; }
-  .path .day { display: flex; gap: 12px; align-items: center; padding: 10px 12px; border-radius: 14px; background: var(--tile); color: var(--fg); }
+  .path { display: grid; gap: 6px; }
+  .path .day { display: flex; gap: 10px; align-items: center; padding: 9px 12px; border-radius: 14px; background: var(--card); }
   .path .day.locked { opacity: .55; }
-  .path .day .n { width: 38px; height: 38px; border-radius: 50%; background: var(--card); border: 2px solid var(--line); display: grid; place-items: center; font-family: var(--display); font-weight: 800; flex-shrink: 0; }
+  .path .day .n { width: 34px; height: 34px; border-radius: 50%; background: var(--tile); border: 2px solid var(--line); display: grid; place-items: center; font-family: var(--display); font-weight: 800; flex-shrink: 0; }
   .path .day.done .n { background: var(--good); border-color: var(--good); color: #fff; }
   .path .day.next .n { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
-  .path .day small { display: block; color: var(--muted); font-size: 13px; }
-
-  /* Score ring and progress chart */
-  .ring { display: grid; place-items: center; position: relative; margin: 0 auto; width: 180px; height: 180px; }
-  .ring svg { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
-  .ring circle { fill: none; stroke-width: 14; } .ring .track { stroke: var(--line); }
-  .ring .bar { stroke: var(--warm); stroke-linecap: round; stroke-dasharray: 502; stroke-dashoffset: 502; transition: stroke-dashoffset 1.4s ease-out; }
-  .ring .num { font-family: var(--display); font-weight: 800; font-size: 60px; line-height: 1; color: var(--warm); font-variant-numeric: tabular-nums; }
-  .ring .lbl { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
-  .ring .in { display: grid; place-items: center; gap: 2px; }
-  .compare { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; align-items: center; text-align: center; }
-  .compare .box { background: var(--tile); border-radius: 16px; padding: 14px 8px; display: grid; gap: 2px; }
-  .compare b { font-family: var(--display); font-weight: 800; font-size: 44px; line-height: 1; font-variant-numeric: tabular-nums; }
-  .compare .box.after { background: var(--warm-soft); } .compare .box.after b { color: var(--warm); }
-  .compare span { font-size: 13px; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: .05em; }
+  .path .day small { display: block; color: var(--muted); font-size: 12px; }
   .chart { width: 100%; height: auto; aspect-ratio: 2 / 1; max-width: 100%; }
   .chart .axis { stroke: var(--line); stroke-width: 1; } .chart .line { fill: none; stroke: var(--accent); stroke-width: 3; stroke-linejoin: round; }
   .chart .dot { fill: var(--warm); stroke: var(--card); stroke-width: 2; } .chart text { fill: var(--muted); font-size: 11px; font-family: var(--body); }
   .badges { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-  .badge { background: var(--tile); border-radius: 14px; padding: 10px 6px; text-align: center; display: grid; gap: 4px; font-size: 12px; font-weight: 600; color: var(--muted); }
-  .badge .pic { font-size: 28px; } .badge.on { background: var(--warm-soft); color: var(--fg); } .badge:not(.on) .pic { filter: grayscale(1); opacity: .5; }
-
-  /* Family board */
-  .board { display: grid; gap: 8px; }
-  .member { display: grid; grid-template-columns: 32px 1fr auto auto; gap: 10px; align-items: center; padding: 10px 12px; border-radius: 14px; background: var(--tile); }
+  .badge { background: var(--card); border-radius: 14px; padding: 10px 6px; text-align: center; display: grid; gap: 4px; font-size: 12px; font-weight: 600; color: var(--muted); }
+  .badge .pic { font-size: 26px; } .badge.on { background: var(--warm-soft); color: var(--fg); } .badge:not(.on) .pic { filter: grayscale(1); opacity: .5; }
+  .member { display: grid; grid-template-columns: 30px 1fr auto auto; gap: 10px; align-items: center; padding: 10px 12px; border-radius: 14px; background: var(--card); }
   .member.me { outline: 2px solid var(--accent); }
-  .member .rank { font-family: var(--display); font-weight: 800; color: var(--muted); font-size: 18px; }
-  .member .name { font-weight: 700; font-size: 18px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .member .rank { font-family: var(--display); font-weight: 800; color: var(--muted); font-size: 17px; }
+  .member .name { font-weight: 700; font-size: 17px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .member .name small { display: block; font-size: 12px; color: var(--muted); font-weight: 600; }
-  .member .pts { font-family: var(--display); font-weight: 800; font-size: 22px; color: var(--accent); font-variant-numeric: tabular-nums; text-align: right; }
-  .member .pts small { display: block; font-size: 11px; color: var(--muted); font-weight: 600; font-family: var(--body); }
-  .code { font-family: var(--display); font-weight: 800; font-size: 34px; letter-spacing: .18em; color: var(--accent); text-align: center; background: var(--accent-soft); border-radius: 14px; padding: 10px; }
+  .member .pts { font-family: var(--display); font-weight: 800; font-size: 20px; color: var(--accent); font-variant-numeric: tabular-nums; text-align: right; }
+  .member .pts small { display: block; font-size: 10px; color: var(--muted); font-weight: 600; font-family: var(--body); }
+  .code { font-family: var(--display); font-weight: 800; font-size: 32px; letter-spacing: .18em; color: var(--accent); text-align: center; background: var(--card); border-radius: 14px; padding: 10px; }
+  input[type=text].plain { font: inherit; font-size: 20px; font-weight: 600; padding: 12px 14px; border: 2px solid var(--line); border-radius: 14px; background: var(--card); color: var(--fg); width: 100%; box-sizing: border-box; text-align: center; }
+  .tabs { display: flex; background: var(--card); border-top: 1px solid var(--line); padding: 6px max(10px, env(safe-area-inset-right, 0px)) max(8px, env(safe-area-inset-bottom, 0px)) max(10px, env(safe-area-inset-left, 0px)); flex-shrink: 0; }
+  .tab { flex: 1; border: 0; background: transparent; color: var(--muted); font: inherit; font-weight: 700; font-size: 12px; padding: 6px 4px; border-radius: 12px; display: grid; gap: 2px; justify-items: center; cursor: pointer; }
+  .tab .pic { font-size: 22px; line-height: 1; } .tab.on { color: var(--accent); }
 
-  /* Bottom tabs */
-  .tabs { display: flex; gap: 6px; background: var(--card); border-radius: 18px; padding: 6px; }
-  .tab { flex: 1; border: 0; background: transparent; color: var(--muted); font: inherit; font-weight: 700; font-size: 13px; padding: 8px 4px; border-radius: 14px; display: grid; gap: 2px; justify-items: center; cursor: pointer; }
-  .tab .pic { font-size: 24px; line-height: 1; }
-  .tab.on { background: var(--accent-soft); color: var(--accent); }
+  @media (prefers-reduced-motion: no-preference) {
+    @keyframes in { from { opacity: 0; transform: translateY(8px); } }
+    @keyframes blink { 50% { opacity: .3; } }
+    @keyframes shake { 20%,60% { transform: translateX(-6px); } 40%,80% { transform: translateX(6px); } }
+  }
 </style>
 
 <div class="app">
-  <div class="top"><span>Yaad Rakho</span><small id="where"></small></div>
-  <div class="screen" id="screen"></div>
+  <div class="head">
+    <div class="face" id="headface"></div>
+    <div class="who"><b id="headname">Priya</b><small id="headsub">Memory coach</small></div>
+    <div class="skin" role="group" aria-label="Look"><button data-skin="yaad">Yaad</button><button data-skin="wa">Chat</button></div>
+  </div>
+  <div class="chat" id="chat" hidden></div>
+  <div class="reply" id="reply" hidden></div>
+  <div class="screen" id="screen" hidden></div>
   <nav class="tabs" id="tabs" hidden>
     <button class="tab" data-go="home"><span class="pic">🏠</span>Aaj</button>
     <button class="tab" data-go="progress"><span class="pic">📈</span>Progress</button>
     <button class="tab" data-go="family"><span class="pic">👨‍👩‍👧</span>Family</button>
   </nav>
 </div>
-<audio id="player" preload="auto"></audio>
 
 <script>
 // ============================================================
-// Yaad Rakho. Words live in content/*.json, Priya's voice in audio/*/. This file is the screens.
+// Yaad Rakho. A chat with Priya. Words live in content/*.json. This file is the screens and the chat engine.
 // ============================================================
-let A = null, D = null;   // app content, today's day content
+let A = null, D = null;
 const $ = id => document.getElementById(id);
-const screenEl = $("screen"), whereEl = $("where"), player = $("player"), tabsEl = $("tabs");
+const chatEl = $("chat"), replyEl = $("reply"), screenEl = $("screen"), tabsEl = $("tabs");
+const FACE = `<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="currentColor" opacity=".15"/><circle cx="17" cy="20" r="2.6" fill="currentColor"/><circle cx="31" cy="20" r="2.6" fill="currentColor"/><path d="M15 29c3 4.5 15 4.5 18 0" stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none"/></svg>`;
+$("headface").innerHTML = FACE;
 
-// ---------- Her data. Lives on her phone. ----------
+// ---------- Skin switch (Yaad look or WhatsApp-like look). Remembered on this phone. ----------
+function setSkin(s) { document.documentElement.dataset.skin = s; try { localStorage.setItem("yaad.skin", s); } catch (e) {} document.querySelectorAll(".skin button").forEach(b => b.classList.toggle("on", b.dataset.skin === s)); }
+document.querySelectorAll(".skin button").forEach(b => b.onclick = () => setSkin(b.dataset.skin));
+let skin0 = "yaad"; try { skin0 = localStorage.getItem("yaad.skin") || "yaad"; } catch (e) {} setSkin(skin0);
+
+// ---------- Her data, on her phone ----------
 const S = load();
 function load() { try { return Object.assign({ name: "", forget: "", age: "", slot: "", before: null, days: {}, family: "", id: "", scoreLog: [] }, JSON.parse(localStorage.getItem("yaad") || "{}")); } catch (e) { return { name: "", days: {}, scoreLog: [] }; } }
 function save() { try { localStorage.setItem("yaad", JSON.stringify(S)); } catch (e) {} }
 if (!S.id) { S.id = Math.random().toString(36).slice(2, 10); save(); }
 const today = () => new Date().toISOString().slice(0, 10);
-const daysAgo = (iso) => Math.round((Date.parse(today()) - Date.parse(iso)) / 86400000);
+const daysAgo = iso => Math.round((Date.parse(today()) - Date.parse(iso)) / 86400000);
 function brainScore() { const v = Object.values(S.days); return v.length ? v[v.length - 1].pts : (S.before == null ? 0 : Math.round(S.before / 6 * 40)); }
 function streak() { let n = 0, d = new Date(); const done = new Set(Object.values(S.days).map(x => x.date)); if (!done.has(today())) d.setDate(d.getDate() - 1); while (done.has(d.toISOString().slice(0, 10))) { n++; d.setDate(d.getDate() - 1); } return n; }
-function weekId() { const d = new Date(); const onejan = new Date(d.getFullYear(), 0, 1); return d.getFullYear() + "-W" + Math.ceil(((d - onejan) / 86400000 + onejan.getDay() + 1) / 7); }
+function weekId() { const d = new Date(), j = new Date(d.getFullYear(), 0, 1); return d.getFullYear() + "-W" + Math.ceil(((d - j) / 86400000 + j.getDay() + 1) / 7); }
+function weekStart() { const d = new Date(); d.setDate(d.getDate() - d.getDay()); return d.toISOString().slice(0, 10); }
 
-// ---------- Priya's voice. One <audio>, reused, so phones keep sound unlocked after the first tap. ----------
-let seq = 0, watchdog = null;
-function hush() { seq++; clearTimeout(watchdog); player.pause(); player.onended = player.onerror = null; talking(false); }
-function talking(on) { screenEl.classList.toggle("talking", on); }
-// narrate(ids, onLine, onDone): plays each line and shows its caption. "day:intro_0" comes from today's content, plain ids from app content.
-function narrate(ids, onLine, onDone) {
-  hush(); const my = seq; let i = 0;
-  const next = () => {
-    if (my !== seq) return;
-    if (i >= ids.length) { talking(false); onDone && onDone(); return; }
-    const raw = ids[i++], isDay = raw.startsWith("day:"), id = isDay ? raw.slice(4) : raw;
-    const text = (isDay ? D.lines : A.lines)[id] || "";
-    onLine && onLine(text, i - 1, id);
-    const ms = 900 + text.split(" ").length * 420;
-    const fallback = () => { if (my !== seq) return; talking(true); watchdog = setTimeout(next, ms); };
-    player.onended = () => { if (my === seq) next(); };
-    player.onerror = fallback;
-    player.src = `audio/${isDay ? "day" + D.day : "app"}/${id}.mp3`;
-    talking(true);
-    const p = player.play(); if (p && p.catch) p.catch(fallback);
-  };
-  next();
+// ---------- Chat engine ----------
+const wait = ms => new Promise(r => setTimeout(r, ms));
+function mode(m) { chatEl.hidden = replyEl.hidden = m !== "chat"; screenEl.hidden = tabsEl.hidden = m !== "screen"; }
+function scroll() { chatEl.scrollTop = chatEl.scrollHeight; }
+function add(html, cls = "msg in") { const d = document.createElement("div"); d.className = cls; d.innerHTML = html; chatEl.appendChild(d); scroll(); return d; }
+// Priya sends a message. Typing dots first, timed by its length, so it reads like a person.
+async function say(text, opts = {}) {
+  const t = add(`<i></i><i></i><i></i>`, "typing"); await wait(Math.min(1800, 500 + text.split(" ").length * 70)); t.remove();
+  let html = text; if (opts.pic) html = `<span class="pic">${opts.pic}</span>${text}`;
+  if (opts.scene) html = `<span class="scene">${opts.scene}</span>${text}`;
+  const m = add(html, "msg in" + (opts.big ? " big" : "")); await wait(opts.pause ?? 350); return m;
 }
-
-// ---------- Screen helpers ----------
-const FACE = `<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="currentColor" opacity=".15"/><circle cx="17" cy="20" r="2.6" fill="currentColor"/><circle cx="31" cy="20" r="2.6" fill="currentColor"/><path d="M15 29c3 4.5 15 4.5 18 0" stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none"/></svg>`;
-function coach(hint) { return `<div class="coach"><button class="face" id="face" aria-label="Priya ko phir se suniye">${FACE}</button><div class="bubble" id="bubble"></div></div><p class="hint">${hint || "Priya ko phir se sunne ke liye uske face par tap kijiye"}</p>`; }
-function set(html, where) { screenEl.innerHTML = html; whereEl.textContent = where || ""; }
-function caption(t) { const b = $("bubble"); if (b) b.textContent = t; }
-function onFace(fn) { const f = $("face"); if (f) f.onclick = fn; }
-function onNext(fn, id = "next") { const n = $(id); if (n) n.onclick = () => { hush(); fn(); }; }
-function enable(id = "next") { const n = $(id); if (n) n.disabled = false; }
+async function burst(lines, opts) { for (const l of lines) await say(l, opts); }
+function mine(text) { add(text, "msg out"); }
+function card(html) { return add(html, "card"); }
+function stamp(text) { add(text, "day-chip"); }
+// Quick replies. Resolves with the chosen option, after echoing it as her message.
+function ask(options, opts = {}) {
+  return new Promise(res => {
+    replyEl.innerHTML = options.map((o, i) => `<button class="chip ${options.length === 1 ? "primary wide" : ""} ${o.primary ? "primary" : ""}" data-i="${i}">${o.label || o}</button>`).join("");
+    replyEl.querySelectorAll(".chip").forEach(b => b.onclick = () => { const o = options[+b.dataset.i]; replyEl.innerHTML = ""; if (!opts.silent) mine(o.label || o); res(o); });
+    scroll();
+  });
+}
+function askText(placeholder) {
+  return new Promise(res => {
+    replyEl.innerHTML = `<form class="composer" id="cf"><input type="text" id="ci" placeholder="${placeholder}" maxlength="20" autocomplete="given-name"><button type="submit" aria-label="Send">➤</button></form>`;
+    const f = $("cf"); $("ci").focus(); f.onsubmit = e => { e.preventDefault(); const v = $("ci").value.trim(); if (!v) return; replyEl.innerHTML = ""; mine(v); res(v); };
+  });
+}
 function tile(it, cls = "", attrs = "") { const t = attrs ? "button" : "div"; return `<${t} class="tile ${cls}" ${attrs}><span class="pic">${it.pic}</span><span>${it.name}</span></${t}>`; }
 function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
-const ids = (p, n, pre = "") => Array.from({ length: n }, (_, i) => `${pre}${p}_${i}`);
-function tabs(on) { tabsEl.hidden = !on; if (on) tabsEl.querySelectorAll(".tab").forEach(t => t.classList.toggle("on", t.dataset.go === on)); }
-tabsEl.querySelectorAll(".tab").forEach(t => t.onclick = () => { hush(); go(t.dataset.go); });
-function go(name) { ({ home, progress, family })[name](); }
 
-// A pick screen: Priya asks, big options, one tap continues.
-function pick(lineId, options, render, then, where) {
-  set(`${coach()}<div class="opts" id="opts">${options.map((o, i) => `<button class="opt" data-i="${i}">${render(o)}</button>`).join("")}</div><div class="spacer"></div>`, where);
-  onFace(() => narrate([lineId], caption)); narrate([lineId], caption);
-  screenEl.querySelectorAll(".opt").forEach(b => b.onclick = () => { b.classList.add("sel"); hush(); setTimeout(() => then(options[+b.dataset.i]), 250); });
+// Memory test as a card: items for 15 seconds, then a grid to tap what you remember. Resolves with how many were right.
+async function memoryTest(items, decoys) {
+  const c = card(`<div class="tiles">${items.map(it => tile(it)).join("")}</div><div class="timer"><i id="bar"></i></div>`);
+  const bar = c.querySelector("#bar"); bar.style.transitionDuration = "15s"; await wait(50); bar.style.width = "0%"; await wait(15000);
+  c.innerHTML = `<h3>Jo yaad hain, un par tap kijiye</h3><div class="tiles four" id="pool"></div>`;
+  const pool = shuffle([...items, ...decoys]); c.querySelector("#pool").innerHTML = pool.map((it, i) => tile(it, "", `data-i="${i}"`)).join(""); scroll();
+  const chosen = new Set();
+  return new Promise(res => {
+    c.querySelectorAll(".tile").forEach(b => b.onclick = () => { const i = +b.dataset.i; chosen.has(i) ? chosen.delete(i) : chosen.add(i); b.classList.toggle("sel", chosen.has(i)); if (chosen.size && !replyEl.innerHTML) ask([{ label: "Ho gaya", primary: true }], { silent: true }).then(check); });
+    function check() {
+      const names = new Set(items.map(x => x.name)); let right = 0;
+      c.querySelectorAll(".tile").forEach(b => { const it = pool[+b.dataset.i]; b.disabled = true; if (chosen.has(+b.dataset.i)) { b.classList.add(names.has(it.name) ? "good" : "miss"); if (names.has(it.name)) right++; } });
+      mine(`${right} of 6`); setTimeout(() => res(right), 900);
+    }
+  });
 }
 
-// Memory test: show items for 15 seconds, hide, then tap what you remember from a grid with decoys. Returns how many were right.
-function memoryTest(items, decoys, introIds, recallId, then, where) {
-  set(`${coach()}<div class="tiles" id="tiles">${items.map(it => tile(it)).join("")}</div><div class="timer"><i id="bar"></i></div><div class="spacer"></div>`, where);
-  onFace(() => {});
-  narrate(introIds, caption, () => {
-    let t = 15; const bar = $("bar"); bar.style.transitionDuration = "15s"; requestAnimationFrame(() => bar.style.width = "0%");
-    const tick = setInterval(() => { if (--t <= 0) { clearInterval(tick); recall(); } }, 1000);
-  });
-  function recall() {
-    const pool = shuffle([...items, ...decoys]); const chosen = new Set();
-    set(`${coach("Jo yaad hain, sab par tap kijiye")}<div class="tiles four" id="pool">${pool.map((it, i) => tile(it, "", `data-i="${i}"`)).join("")}</div><div class="spacer"></div><button class="btn" id="next" disabled>Ho gaya</button>`, where);
-    onFace(() => narrate([recallId], caption)); narrate([recallId], caption);
-    screenEl.querySelectorAll("#pool .tile").forEach(b => b.onclick = () => { const i = +b.dataset.i; chosen.has(i) ? chosen.delete(i) : chosen.add(i); b.classList.toggle("sel", chosen.has(i)); $("next").disabled = chosen.size === 0; });
-    onNext(() => {
-      const names = new Set(items.map(x => x.name)); let right = 0;
-      screenEl.querySelectorAll("#pool .tile").forEach(b => { const it = pool[+b.dataset.i]; b.disabled = true; if (chosen.has(+b.dataset.i)) b.classList.add(names.has(it.name) ? "good" : "miss"); if (chosen.has(+b.dataset.i) && names.has(it.name)) right++; });
-      setTimeout(() => then(right), 1200);
-    });
+// ============ FIRST OPEN, as a chat ============
+async function onboard() {
+  mode("chat"); chatEl.innerHTML = ""; stamp("Aaj");
+  await burst(A.chat.hello, { big: true });
+  await ask(["Namaste Priya 👋"]);
+  await say(A.chat.name);
+  S.name = (await askText("Aapka naam")) || "Aap"; save(); $("headsub").textContent = `${S.name} ki memory coach`;
+  await say(A.chat.nice.replace("{name}", S.name));
+  await say(A.chat.forget);
+  S.forget = (await ask(A.forgets.map(f => ({ label: `${f.pic} ${f.label}`, id: f.id })))).id; save();
+  await say(A.chat.forgetReply[S.forget]);
+  await say(A.chat.age);
+  S.age = (await ask(A.ages)); save();
+  await say(A.chat.time);
+  S.slot = (await ask(A.slots.map(s => ({ label: `${s.pic} ${s.label}, ${s.time}`, id: s.id })))).id; save();
+  await say(A.chat.timeReply);
+  await burst(A.chat.testIntro);
+  await ask(["Theek hai, dikhao"]);
+  await say(A.chat.testGo, { pause: 0 });
+  const right = await memoryTest(A.testItems, A.testDecoys);
+  S.before = right; S.scoreLog.push({ date: today(), pts: Math.round(right / 6 * 40), label: "Pehle" }); save();
+  await say(right <= 2 ? A.chat.resultLo : right <= 4 ? A.chat.resultMid : A.chat.resultHi);
+  await say(A.chat.resultNext);
+  await ask([{ label: "Chalo, Day 1 shuru karo", primary: true }]);
+  await session(true);
+}
+
+// ============ DAY 1, as a chat ============
+let orderScore = 0, quizScore = 0;
+async function session(fromOnboard) {
+  mode("chat"); if (!fromOnboard) { chatEl.innerHTML = ""; stamp(`Day 1 · ${D.title}`); } else stamp(`Day 1 · ${D.title}`);
+  await burst(D.chat.intro);
+  await ask(["Kya trick?"]);
+  await say(D.chat.lesson[0], { scene: `<span>📝</span><span class="arrow">▶</span><span>💨</span>` });
+  await say(D.chat.lesson[1], { scene: `<span>📖</span><span class="arrow">▶</span><span>🧠</span>` });
+  await say(D.chat.lesson[2], { big: true });
+  await ask(["Kaise?"]);
+  await burst(D.chat.lesson.slice(3));
+  await ask([{ label: "List dikhao", primary: true }]);
+  // The story, one picture message per line. The previous item shows small, so the chain is visible.
+  card(`<h3>Aaj ki list</h3><div class="tiles">${D.items.map(it => tile(it)).join("")}</div>`);
+  await say(D.chat.storyIntro);
+  for (let i = 0; i < 6; i++) {
+    const prev = i ? `<span class="small">${D.items[i - 1].pic}</span><span class="arrow">▶</span>` : "";
+    await say(D.chat.story[i], { scene: `${prev}<span>${D.items[i].pic}</span>`, pause: 700 });
+  }
+  await say(D.chat.story[6], { scene: D.items.map(it => `<span class="small" style="opacity:1">${it.pic}</span>`).join(`<span class="arrow">▶</span>`) });
+  await say(D.chat.story[7]);
+  await ask([{ label: "Dikh gaya. Test lo!", primary: true }]);
+  await orderGame();
+  await quiz();
+  await afterTest();
+}
+async function orderGame() {
+  await burst(D.chat.order);
+  const pool = shuffle([...D.items, ...D.decoys.slice(0, 2)]); let pos = 0, firstTry = true; orderScore = 0;
+  const c = card(`<div class="chain">${D.items.map((_, i) => `<div class="slot" id="slot${i}"></div>${i < 5 ? '<span class="arrow">▶</span>' : ""}`).join("")}</div><div class="tiles four">${pool.map((it, i) => tile(it, "", `data-i="${i}"`)).join("")}</div>`);
+  await new Promise(res => c.querySelectorAll("button.tile").forEach(b => b.onclick = async () => {
+    const it = pool[+b.dataset.i];
+    if (it.name === D.items[pos].name) {
+      if (firstTry) orderScore++; b.disabled = true; b.classList.add("good");
+      const s = c.querySelector("#slot" + pos); s.textContent = it.pic; s.classList.add("filled");
+      const cheer = D.chat.cheer[pos]; pos++; firstTry = true;
+      if (pos === 6) { await say(cheer); res(); } else if (pos % 2 === 0) say(cheer, { pause: 0 });
+    } else { firstTry = false; b.classList.remove("shake"); void b.offsetWidth; b.classList.add("shake"); say(pos === 0 ? D.chat.nudgeFirst : D.chat.nudge[pos - 1], { pause: 0 }); }
+  }));
+  mine(`${orderScore} of 6 pehli baar mein`);
+}
+async function quiz() {
+  quizScore = 0; await say(D.chat.quizIntro);
+  for (const q of D.quiz) {
+    await say(q.q, { big: true });
+    const o = await ask(q.opts.map((t, i) => ({ label: t, i })));
+    const ok = o.i === q.a; if (ok) quizScore++;
+    await say(ok ? D.chat.correct[Math.floor(Math.random() * D.chat.correct.length)] : q.no);
   }
 }
+async function afterTest() {
+  await burst(D.chat.afterIntro);
+  await ask(["Ready"]);
+  const right = await memoryTest(D.items, D.decoys);
+  const before = S.before == null ? 0 : S.before;
+  card(`<div class="compare"><div class="box"><b>${before}</b><span>bina trick</span></div><div class="muted">➜</div><div class="box after"><b>${right}</b><span>kahani ke saath</span></div></div>`);
+  await say(right > before ? D.chat.afterBetter : D.chat.afterSame);
+  const pts = 10 + orderScore * 10 + quizScore * 10;
+  S.days[1] = { pts, date: today(), after: right }; S.scoreLog.push({ date: today(), pts, label: "Day 1" }); save(); syncFamily();
+  await say(D.chat.scoreIntro);
+  const c = card(`<div class="ring"><svg viewBox="0 0 160 160"><circle class="track" cx="80" cy="80" r="70"/><circle class="bar" id="bar" cx="80" cy="80" r="70"/></svg><div class="in"><span class="lbl">Brain score</span><span class="num" id="num">0</span></div></div><p class="muted center">${orderScore} of 6 order mein · ${quizScore} of 3 sawaal</p>`);
+  await wait(60); c.querySelector("#bar").style.strokeDashoffset = 440 - 440 * pts / 100; let n = 0; const t = setInterval(() => { n = Math.min(pts, n + 3); c.querySelector("#num").textContent = n; if (n >= pts) clearInterval(t); }, 35);
+  await say(pts >= 90 ? D.chat.scoreHi : pts >= 60 ? D.chat.scoreMid : D.chat.scoreLo);
+  await say(D.chat.homework);
+  await ask([{ label: "Home", primary: true }], { silent: true });
+  home();
+}
 
-// ============ FIRST OPEN ============
-function onboard() {
-  tabs(false);
-  set(`<div class="spacer"></div><div class="center" style="display:grid;gap:10px;justify-items:center"><div class="face big" aria-hidden="true">${FACE}</div><h1>Teen minute roz. Yaaddasht tez.</h1><p class="muted">Priya aapki coach hai. Sound on kijiye.</p></div><div class="spacer"></div><button class="btn" id="next">Shuru karein</button>`, "Welcome");
-  onNext(() => {
-    set(`${coach()}<div class="spacer"></div><button class="btn" id="next" disabled>Aage</button>`, "Priya");
-    const run = () => narrate(["ob_hello"], caption, () => enable()); onFace(run); run();
-    onNext(askName);
-  });
-}
-function askName() {
-  set(`${coach()}<input type="text" id="nm" placeholder="Aapka naam" maxlength="20" autocomplete="given-name" value="${S.name}"><div class="spacer"></div><button class="btn" id="next">Aage</button>`, "Naam");
-  onFace(() => narrate(["ob_name"], caption)); narrate(["ob_name"], caption);
-  onNext(() => { S.name = $("nm").value.trim() || "Aap"; save(); askForget(); });
-}
-function askForget() { pick("ob_forget", A.forgets, o => `<span class="pic">${o.pic}</span>${o.label}`, o => { S.forget = o.id; save(); askAge(); }, "1 of 3"); }
-function askAge() { pick("ob_age", A.ages, o => o, o => { S.age = o; save(); askSlot(); }, "2 of 3"); }
-function askSlot() { pick("ob_time", A.slots, o => `<span class="pic">${o.pic}</span>${o.label}, ${o.time}`, o => { S.slot = o.id; save(); baseline(); }, "3 of 3"); }
-function baseline() {
-  memoryTest(A.testItems, A.testDecoys, ["ob_test_intro", "ob_test_go"], "ob_recall", right => {
-    S.before = right; S.scoreLog.push({ date: today(), pts: Math.round(right / 6 * 40), label: "Pehle" }); save();
-    set(`${coach()}<div class="compare"><div class="box"><b>${right}</b><span>of 6</span></div><div class="muted">bina trick</div><div class="box after"><b>?</b><span>trick ke baad</span></div></div><div class="spacer"></div><button class="btn warm" id="next" disabled>Day 1 shuru karein</button>`, "Aapka score");
-    const line = right <= 2 ? "ob_result_lo" : right <= 4 ? "ob_result_mid" : "ob_result_hi";
-    const run = () => narrate([line], caption, () => enable()); onFace(run); run(); onNext(session);
-  }, "Memory test");
+// ============ REVIEW, as a chat ============
+async function review() {
+  mode("chat"); chatEl.innerHTML = ""; stamp("Review · Day 1");
+  await burst(A.chat.review);
+  const c = card(`<h3>Jo yaad hain, un par tap kijiye</h3><div class="tiles four" id="pool"></div>`);
+  const pool = shuffle([...D.items, ...D.decoys]); c.querySelector("#pool").innerHTML = pool.map((it, i) => tile(it, "", `data-i="${i}"`)).join(""); scroll();
+  const chosen = new Set(); let right = 0;
+  await new Promise(res => c.querySelectorAll(".tile").forEach(b => b.onclick = () => { const i = +b.dataset.i; chosen.has(i) ? chosen.delete(i) : chosen.add(i); b.classList.toggle("sel", chosen.has(i)); if (chosen.size && !replyEl.innerHTML) ask([{ label: "Ho gaya", primary: true }], { silent: true }).then(() => {
+    const names = new Set(D.items.map(x => x.name)); c.querySelectorAll(".tile").forEach(x => { const it = pool[+x.dataset.i]; x.disabled = true; if (chosen.has(+x.dataset.i)) { x.classList.add(names.has(it.name) ? "good" : "miss"); if (names.has(it.name)) right++; } }); res(); }); }));
+  S.lastReview = today(); save(); mine(`${right} of 6`);
+  await say(right >= 5 ? A.chat.reviewGood : A.chat.reviewOk);
+  await ask([{ label: "Home", primary: true }], { silent: true }); home();
 }
 
 // ============ HOME ============
+tabsEl.querySelectorAll(".tab").forEach(t => t.onclick = () => ({ home, progress, family })[t.dataset.go]());
+function tabs(on) { tabsEl.querySelectorAll(".tab").forEach(t => t.classList.toggle("on", t.dataset.go === on)); }
 function home() {
-  tabs("home");
+  mode("screen"); tabs("home");
   const done = S.days[1] && S.days[1].date === today();
   const due = S.days[1] && !done && [1, 3, 7].includes(daysAgo(S.days[1].date)) && S.lastReview !== today();
   const wk = ["So", "Mo", "Tu", "We", "Th", "Fr", "Sa"], now = new Date(), doneSet = new Set(Object.values(S.days).map(x => x.date));
   const week = Array.from({ length: 7 }, (_, i) => { const d = new Date(now); d.setDate(now.getDate() - now.getDay() + i); const iso = d.toISOString().slice(0, 10); return `<div><i class="${doneSet.has(iso) ? "on" : ""} ${iso === today() ? "today" : ""}"></i>${wk[i]}</div>`; }).join("");
   const slot = A.slots.find(s => s.id === S.slot) || A.slots[2];
-  set(`
-    <div class="row"><div class="face" aria-hidden="true" style="width:46px;height:46px"><svg viewBox="0 0 48 48" style="width:32px;height:32px">${FACE.replace(/<\/?svg[^>]*>/g, "")}</svg></div><div><h2>Namaste, ${S.name}</h2><p class="muted" id="greet"></p></div></div>
-    <div class="hero"><div class="eyebrow">${done ? "Aaj ho gaya" : "Aaj ka session"}</div><h2>Day 1 · ${D.title}</h2><p>${done ? "Kal Day 2. Chahein toh aaj ka phir se kheliye." : "3 minute. Priya aapke saath."}</p><button class="btn" id="start">${done ? "Phir se kheliye" : "Shuru karein"}</button></div>
-    ${due ? `<div class="card warm"><b>1 minute ka review</b><p class="muted">Day 1 ki list abhi bhi yaad hai?</p><button class="btn ghost" id="rev">Review karein</button></div>` : ""}
+  screenEl.innerHTML = `
+    <h2>Namaste, ${S.name} 🙏</h2>
+    <div class="hero"><div class="eyebrow">${done ? "Aaj ho gaya ✓" : "Aaj ka session"}</div><h2>Day 1 · ${D.title}</h2><p>${done ? "Kal Day 2 khulega. Chahein toh aaj ka phir se kheliye." : "3 minute. Priya ke saath chat."}</p><button class="btn" id="start">${done ? "Phir se kheliye" : "Chat shuru karein"}</button></div>
+    ${due ? `<div class="hero" style="background:var(--warm);color:#1d1a2f"><b>1 minute ka review</b><p>Day 1 ki list abhi bhi yaad hai?</p><button class="btn" id="rev" style="background:#1d1a2f;color:#fff">Review karein</button></div>` : ""}
     <div class="stats"><div class="stat"><b>${brainScore()}</b><span>Brain score</span></div><div class="stat"><b>${streak()}</b><span>Din streak</span></div><div class="stat"><b>${Object.keys(S.days).length}</b><span>Din poore</span></div></div>
     <div class="week">${week}</div>
-    <div class="card"><div class="row" style="justify-content:space-between"><div><b>Reminder: ${slot.label}, ${slot.time}</b><p class="muted">Priya ki awaaz mein. Phone par reminder ke liye app ko home screen par add kijiye.</p></div><button class="btn ghost" id="remind" style="width:auto;min-height:48px;padding:8px 14px;font-size:16px">Suniye</button></div></div>
+    <div class="stat" style="text-align:left;display:block"><b style="font-size:17px;font-family:var(--body)">Reminder: ${slot.label}, ${slot.time}</b><p class="muted">Phone par reminder ke liye app ko home screen par add kijiye.</p></div>
     <div class="path">
       <div class="day ${S.days[1] ? "done" : "next"}"><span class="n">1</span><div>Story Chain<small>Shopping list</small></div></div>
       <div class="day locked"><span class="n">2</span><div>Story Chain, level 2<small>Kal khulega</small></div></div>
       <div class="day locked"><span class="n">3</span><div>Story Chain, level 3<small>Lambi list</small></div></div>
       <div class="day locked"><span class="n">6</span><div>Memory Palace<small>Apne ghar ke kamre</small></div></div>
-    </div>`, "Aaj");
-  $("greet").textContent = (done ? A.lines.home_done : A.lines.home_today);
-  onNext(session, "start"); if (due) onNext(review, "rev");
-  onNext(() => narrate(["remind_line"]), "remind");
-}
-
-// ============ A SESSION (Day 1) ============
-let orderScore = 0, quizScore = 0;
-function session() {
-  tabs(false);
-  set(`${coach()}<div class="spacer"></div><button class="btn" id="next" disabled>Trick kya hai?</button>`, "Day 1");
-  const run = () => narrate(["day:intro_0"], caption, () => enable()); onFace(run); run(); onNext(lesson);
-}
-function lesson() {
-  set(`${coach()}<div class="spacer"></div><button class="btn" id="next" disabled>List dikhao</button>`, "Day 1 · Trick");
-  const run = () => narrate(ids("lesson", 7, "day:"), caption, () => enable()); onFace(run); run(); onNext(story);
-}
-function story() {
-  set(`${coach()}<div class="tiles" id="tiles">${D.items.map(it => tile(it, "hidden-tile")).join("")}</div><div class="spacer"></div><button class="btn" id="next" disabled>Dikh gaya. Test lo!</button>`, "Day 1 · Kahani");
-  const tiles = [...screenEl.querySelectorAll("#tiles .tile")];
-  const run = () => { tiles.forEach(t => { t.classList.add("hidden-tile"); t.classList.remove("pop", "on"); });
-    narrate(ids("story", 8, "day:"), (line, i) => { caption(line); tiles.forEach(t => t.classList.remove("on")); if (i < 6) { tiles[i].classList.remove("hidden-tile"); tiles[i].classList.add("pop", "on"); } if (i === 6) tiles.forEach(t => t.classList.remove("hidden-tile")); }, () => enable()); };
-  onFace(run); run(); onNext(order);
-}
-function order() {
-  const pool = shuffle([...D.items, ...D.decoys.slice(0, 2)]); let pos = 0, firstTry = true; orderScore = 0;
-  set(`${coach("Kahani ke order mein tap kijiye")}<div class="chain">${D.items.map((_, i) => `<div class="slot" id="slot${i}"></div>${i < 5 ? '<span class="arrow">▶</span>' : ""}`).join("")}</div><div class="tiles four" id="pool">${pool.map((it, i) => tile(it, "", `data-i="${i}"`)).join("")}</div><div class="spacer"></div><button class="btn" id="next" disabled>Round 2</button>`, "Round 1 of 2");
-  onFace(() => narrate(ids("order", 2, "day:"), caption)); narrate(ids("order", 2, "day:"), caption); onNext(() => quiz(0));
-  screenEl.querySelectorAll("#pool .tile").forEach(b => b.onclick = () => {
-    const it = pool[+b.dataset.i];
-    if (it.name === D.items[pos].name) {
-      if (firstTry) orderScore++; b.disabled = true; b.classList.add("good");
-      const s = $("slot" + pos); s.textContent = it.pic; s.classList.add("filled");
-      narrate([`day:cheer_${pos}`], caption); pos++; firstTry = true; if (pos === 6) enable();
-    } else { firstTry = false; b.classList.remove("shake"); void b.offsetWidth; b.classList.add("shake"); narrate([pos === 0 ? "day:nudge_first" : `day:nudge_${pos}`], caption); }
-  });
-}
-function quiz(qi) {
-  if (qi === 0) quizScore = 0;
-  if (qi >= D.quiz.length) return afterTest();
-  const q = D.quiz[qi]; let answered = false;
-  set(`${coach()}<div class="opts">${q.opts.map((o, i) => `<button class="opt" data-i="${i}">${o}</button>`).join("")}</div><div class="spacer"></div><button class="btn" id="next" disabled>${qi + 1 === D.quiz.length ? "Aakhri test" : "Agla sawaal"}</button>`, `Round 2 · ${qi + 1} of ${D.quiz.length}`);
-  onFace(() => narrate([`day:${q.id}`], caption)); narrate([`day:${q.id}`], caption); onNext(() => quiz(qi + 1));
-  screenEl.querySelectorAll(".opt").forEach(b => b.onclick = () => {
-    if (answered) return; answered = true; const ok = +b.dataset.i === q.a; if (ok) quizScore++;
-    screenEl.querySelectorAll(".opt").forEach(x => { x.disabled = true; if (+x.dataset.i === q.a) x.classList.add("right"); }); if (!ok) b.classList.add("wrong");
-    narrate([ok ? "day:correct" : `day:${q.id}_no`], caption); enable();
-  });
-}
-// The moment that matters: the same test as the first open, now with the story behind it.
-function afterTest() {
-  memoryTest(D.items, D.decoys, ["day:after_intro"], "day:after_intro", right => {
-    const before = S.before == null ? 0 : S.before;
-    set(`${coach()}<div class="compare"><div class="box"><b>${before}</b><span>bina trick</span></div><div class="muted">➜</div><div class="box after"><b>${right}</b><span>kahani ke saath</span></div></div><div class="spacer"></div><button class="btn warm" id="next" disabled>Mera score</button>`, "Pehle aur baad");
-    const run = () => narrate([right > before ? "day:after_better" : "day:after_same"], caption, () => enable()); onFace(run); run(); onNext(() => score(right));
-  }, "Aakhri test");
-}
-function score(after) {
-  const pts = 10 + orderScore * 10 + quizScore * 10;
-  S.days[1] = { pts, date: today(), after }; S.scoreLog.push({ date: today(), pts, label: "Day 1" }); save(); syncFamily();
-  set(`${coach()}<div class="ring"><svg viewBox="0 0 180 180"><circle class="track" cx="90" cy="90" r="80"/><circle class="bar" id="bar" cx="90" cy="90" r="80"/></svg><div class="in"><span class="lbl">Brain score</span><span class="num" id="num">0</span></div></div><p class="muted center">${orderScore} of 6 order mein · ${quizScore} of 3 sawaal</p><div class="spacer"></div><button class="btn" id="next">Home</button>`, "Day 1 poora");
-  const tier = pts >= 90 ? "score_hi" : pts >= 60 ? "score_mid" : "score_lo";
-  const run = () => narrate(["day:score_intro", `day:${tier}`, "day:homework"], caption); onFace(run); run(); onNext(home);
-  requestAnimationFrame(() => { $("bar").style.strokeDashoffset = 502 - 502 * pts / 100; let n = 0; const t = setInterval(() => { n = Math.min(pts, n + 3); $("num").textContent = n; if (n >= pts) clearInterval(t); }, 35); });
-}
-
-// ============ REVIEW (1, 3, 7 days later) ============
-function review() {
-  tabs(false);
-  const pool = shuffle([...D.items, ...D.decoys]); const chosen = new Set();
-  set(`${coach("Jo yaad hain, sab par tap kijiye")}<div class="tiles four" id="pool">${pool.map((it, i) => tile(it, "", `data-i="${i}"`)).join("")}</div><div class="spacer"></div><button class="btn" id="next" disabled>Ho gaya</button>`, "Review · Day 1");
-  onFace(() => narrate(["review_intro"], caption)); narrate(["review_intro"], caption);
-  screenEl.querySelectorAll("#pool .tile").forEach(b => b.onclick = () => { const i = +b.dataset.i; chosen.has(i) ? chosen.delete(i) : chosen.add(i); b.classList.toggle("sel", chosen.has(i)); $("next").disabled = chosen.size === 0; });
-  onNext(() => {
-    const names = new Set(D.items.map(x => x.name)); let right = 0;
-    screenEl.querySelectorAll("#pool .tile").forEach(b => { const it = pool[+b.dataset.i]; b.disabled = true; if (chosen.has(+b.dataset.i)) { b.classList.add(names.has(it.name) ? "good" : "miss"); if (names.has(it.name)) right++; } });
-    S.lastReview = today(); save();
-    $("next").textContent = "Home"; onNext(home); narrate([right >= 5 ? "review_good" : "review_ok"], caption);
-  });
+    </div>`;
+  $("start").onclick = () => session(false); if (due) $("rev").onclick = review;
 }
 
 // ============ PROGRESS ============
 function progress() {
-  tabs("progress");
+  mode("screen"); tabs("progress");
   const log = S.scoreLog.slice(-10), W = 320, H = 160, px = i => 30 + i * ((W - 50) / Math.max(1, log.length - 1)), py = v => H - 20 - v / 100 * (H - 40);
   const chart = log.length ? `<svg class="chart" viewBox="0 0 ${W} ${H}"><line class="axis" x1="30" y1="${H - 20}" x2="${W - 10}" y2="${H - 20}"/><line class="axis" x1="30" y1="10" x2="30" y2="${H - 20}"/><text x="4" y="14">100</text><text x="12" y="${H - 16}">0</text>${log.length > 1 ? `<polyline class="line" points="${log.map((p, i) => `${px(i)},${py(p.pts)}`).join(" ")}"/>` : ""}${log.map((p, i) => `<circle class="dot" cx="${px(i)}" cy="${py(p.pts)}" r="5"/><text x="${px(i)}" y="${H - 6}" text-anchor="middle">${p.label}</text>`).join("")}</svg>` : `<p class="muted">Pehla session karne ke baad yahan graph dikhega.</p>`;
   const best = Math.max(0, ...S.scoreLog.map(p => p.pts));
-  set(`${coach()}
+  screenEl.innerHTML = `<h2>Aapka safar</h2>
     <div class="stats"><div class="stat"><b>${brainScore()}</b><span>Brain score</span></div><div class="stat"><b>${best}</b><span>Best</span></div><div class="stat"><b>${streak()}</b><span>Streak</span></div></div>
-    <h2>Score ka safar</h2>${chart}
+    <div class="stat" style="padding:12px">${chart}</div>
     <h2>Tricks seekhi</h2>
-    <div class="badges">
-      <div class="badge ${S.days[1] ? "on" : ""}"><span class="pic">🔗</span>Story Chain</div><div class="badge"><span class="pic">🏠</span>Memory Palace</div><div class="badge"><span class="pic">🙋</span>Naam aur chehre</div>
-      <div class="badge"><span class="pic">🔢</span>Numbers</div><div class="badge"><span class="pic">🔑</span>Kahan rakha</div><div class="badge"><span class="pic">📜</span>Lambi baatein</div>
-    </div>`, "Progress");
-  onFace(() => narrate(["progress_intro"], caption)); narrate(["progress_intro"], caption);
+    <div class="badges"><div class="badge ${S.days[1] ? "on" : ""}"><span class="pic">🔗</span>Story Chain</div><div class="badge"><span class="pic">🏠</span>Memory Palace</div><div class="badge"><span class="pic">🙋</span>Naam aur chehre</div><div class="badge"><span class="pic">🔢</span>Numbers</div><div class="badge"><span class="pic">🔑</span>Kahan rakha</div><div class="badge"><span class="pic">📜</span>Lambi baatein</div></div>`;
 }
 
 // ============ FAMILY ============
-// Scores are shared through the artifact's database when the viewer has it. Without it, the board shows only her.
 let db = null, dbTried = false, unsub = null;
 async function getDb() { if (!dbTried) { dbTried = true; try { db = await (window.claude && window.claude.use ? window.claude.use("db") : null); } catch (e) { db = null; } } return db; }
 function myRow() { return { name: S.name || "Aap", score: brainScore(), streak: streak(), days: Object.keys(S.days).length, week: weekId(), weekPts: Object.values(S.days).filter(d => d.date >= weekStart()).reduce((a, d) => a + d.pts, 0), at: Date.now() }; }
-function weekStart() { const d = new Date(); d.setDate(d.getDate() - d.getDay()); return d.toISOString().slice(0, 10); }
 async function syncFamily() { if (!S.family) return; const d = await getDb(); if (!d) return; try { await d.doc(`families/${S.family}/members/${S.id}`).set(myRow()); } catch (e) {} }
 function family() {
-  tabs("family");
-  if (unsub) { unsub(); unsub = null; }
+  mode("screen"); tabs("family"); if (unsub) { unsub(); unsub = null; }
   if (!S.family) {
-    set(`${coach()}<h2>Family board</h2><p class="muted">Ek code banaiye aur WhatsApp par bhejiye. Ya kisi ka code daaliye.</p><button class="btn" id="make">Naya family code banao</button><p class="center muted">ya</p><input type="text" id="jc" placeholder="6 akshar ka code" maxlength="6" style="text-transform:uppercase"><button class="btn ghost" id="join">Join karo</button><div class="spacer"></div>`, "Family");
-    onFace(() => narrate(["fam_intro"], caption)); narrate(["fam_intro"], caption);
-    onNext(() => { S.family = Array.from({ length: 6 }, () => "ABCDEFGHJKMNPQRSTUVWXYZ"[Math.floor(Math.random() * 23)]).join(""); save(); syncFamily(); family(); }, "make");
-    onNext(() => { const c = $("jc").value.trim().toUpperCase(); if (c.length === 6) { S.family = c; save(); syncFamily(); family(); } }, "join");
+    screenEl.innerHTML = `<h2>Family board</h2><p class="muted">Ek code banaiye aur WhatsApp par bhejiye. Ya kisi ka code daaliye. Jo roz khelega, woh aage.</p><button class="btn" id="make">Naya family code banao</button><p class="center muted">ya</p><input type="text" class="plain" id="jc" placeholder="6 akshar ka code" maxlength="6" style="text-transform:uppercase"><button class="btn ghost" id="join">Join karo</button>`;
+    $("make").onclick = () => { S.family = Array.from({ length: 6 }, () => "ABCDEFGHJKMNPQRSTUVWXYZ"[Math.floor(Math.random() * 23)]).join(""); save(); syncFamily(); family(); };
+    $("join").onclick = () => { const c = $("jc").value.trim().toUpperCase(); if (c.length === 6) { S.family = c; save(); syncFamily(); family(); } };
     return;
   }
-  set(`<div class="row" style="justify-content:space-between"><h2>Family board</h2><button class="btn ghost" id="leave" style="width:auto;min-height:40px;padding:6px 12px;font-size:14px">Chhodo</button></div><div class="code">${S.family}</div><p class="muted center">Yeh code WhatsApp par bhejiye. Family isse join karegi.</p><div class="board" id="board"><p class="muted">Load ho raha hai...</p></div><p class="muted" id="note"></p><div class="spacer"></div>`, "Family");
-  onNext(() => { S.family = ""; save(); family(); }, "leave");
+  screenEl.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center"><h2>Family board</h2><button class="btn ghost" id="leave" style="width:auto;min-height:36px;padding:4px 12px;font-size:13px">Chhodo</button></div><div class="code">${S.family}</div><p class="muted center">Yeh code WhatsApp par bhejiye.</p><div id="board" style="display:grid;gap:8px"><p class="muted">Load ho raha hai...</p></div><p class="muted" id="note"></p>`;
+  $("leave").onclick = () => { S.family = ""; save(); family(); };
   const render = rows => {
     const wk = weekId(); rows = rows.map(r => ({ ...r, weekPts: r.week === wk ? r.weekPts : 0 })).sort((a, b) => b.weekPts - a.weekPts || b.score - a.score);
     $("board").innerHTML = rows.map((r, i) => `<div class="member ${r.id === S.id ? "me" : ""}"><span class="rank">${i === 0 ? "👑" : i + 1}</span><span class="name">${r.name}<small>${r.streak} din streak · ${r.days} din poore</small></span><span class="pts">${r.weekPts}<small>is hafte</small></span><span class="pts">${r.score}<small>score</small></span></div>`).join("");
     const other = rows.find(r => r.id !== S.id && r.at && Date.now() - r.at < 86400000); $("note").textContent = other ? `${other.name} ne aaj apna session kar liya. Ab aapki baari.` : "";
   };
   render([{ id: S.id, ...myRow() }]);
-  getDb().then(d => {
-    if (!d) { $("note").textContent = "Family ke scores tab dikhenge jab app apni website par hogi. Abhi sirf aapka score."; return; }
-    syncFamily();
-    try { unsub = d.collection(`families/${S.family}/members`).onSnapshot(snap => render(snap.docs.map(x => ({ id: x.id, ...x.data() })))); } catch (e) {}
-  });
+  getDb().then(d => { if (!d) { $("note").textContent = "Family ke scores tab dikhenge jab app apni website par hogi. Abhi sirf aapka score."; return; } syncFamily(); try { unsub = d.collection(`families/${S.family}/members`).onSnapshot(snap => render(snap.docs.map(x => ({ id: x.id, ...x.data() })))); } catch (e) {} });
 }
 
 // ============ BOOT ============
 Promise.all([fetch("content/app.json").then(r => r.json()), fetch("content/day1.json").then(r => r.json())])
-  .then(([a, d]) => { A = a; D = d; S.before == null ? onboard() : home(); })
-  .catch(() => set(`<h1>Lesson load nahi hui.</h1><p class="muted">Internet check karke link phir se kholiye.</p>`));
+  .then(([a, d]) => { A = a; D = d; if (S.name) $("headsub").textContent = `${S.name} ki memory coach`; S.before == null ? onboard() : home(); })
+  .catch(() => { mode("chat"); add("Lesson load nahi hui. Internet check karke link phir se kholiye.", "msg in"); });
 </script>

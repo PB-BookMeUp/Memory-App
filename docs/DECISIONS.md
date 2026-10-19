@@ -31,3 +31,6 @@
 | 2026-10-18 | First full version built: first-open memory test, Day 1 with before-and-after test, home, review, progress, reminder time, family board |
 | 2026-10-18 | Family scores use the artifact's shared database for the prototype. A free database (Supabase or Firebase) replaces it when the app moves to its own site |
 | 2026-10-18 | Priya's voice is Kokoro "hf_alpha" (Indian, Hindi-trained) until the founder picks between the samples |
+| 2026-10-19 | Audio dropped for now. The free voices sound unnatural. The audio tool stays in the repo for later |
+| 2026-10-19 | The session is a chat with Priya, WhatsApp style: one short message at a time, replies by tapping chips, story as picture messages |
+| 2026-10-19 | Two looks to compare, switchable in the header: "Yaad" (indigo and marigold) and "Chat" (WhatsApp-like) |

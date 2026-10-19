@@ -9,61 +9,46 @@
     { "name": "Chawal", "pic": "🍚" }, { "name": "Pyaaz", "pic": "🧅" }, { "name": "Namak", "pic": "🧂" },
     { "name": "Seb", "pic": "🍎" }, { "name": "Aata", "pic": "🌾" }, { "name": "Tamatar", "pic": "🍅" }
   ],
-  "lines": {
-    "intro_0": "Aaj main aapko ek trick sikhaungi. Iske baad shopping list bhoolna mushkil ho jayega.",
-    "lesson_0": "Secret yeh hai. Hamara dimaag list yaad nahi rakh paata. Lekin kahani kabhi nahi bhoolta.",
-    "lesson_1": "Chhe cheezein list mein? Shaam tak gayab.",
-    "lesson_2": "Wahi chhe cheezein ek funny kahani mein? Agle hafte bhi yaad rahengi.",
-    "lesson_3": "Is trick ka naam hai Story Chain.",
-    "lesson_4": "Pehli cheez doosri cheez ke saath kuch karti hai. Doosri, teesri ke saath. Aise hi aage.",
-    "lesson_5": "Jitni pagal kahani, utni pakki yaad. Boring picture nahi tikti.",
-    "lesson_6": "Chaliye, aaj ki list se try karte hain.",
-
-    "story_0": "Aap ek bada glass doodh pee rahe hain.",
-    "story_1": "Achanak, doodh se ek bread ka slice bahar nikalta hai, naav ki tarah tairta hua.",
-    "story_2": "Bread par ek kela baitha hai, aapko dekh kar muskura raha hai.",
-    "story_3": "Kela nahaa raha hai, ek gulabi sabun se.",
-    "story_4": "Sabun se bubbles nikal rahe hain, aur bubbles ke andar chai patti udd rahi hai.",
-    "story_5": "Chai patti neeche girti hai, aur chhe andon par land karti hai. Crack!",
-    "story_6": "Ek baar aur, jaldi se. Doodh. Bread. Kela. Sabun. Chai. Ande.",
-    "story_7": "Aankhein band karke ek baar aur dekhiye. Phir button dabaiye.",
-
-    "order_0": "Ab list chhup gayi hai.",
-    "order_1": "Kahani ke order mein tap kijiye. Doodh se shuru.",
-    "nudge_first": "Yeh nahi. Kahani shuru hui thi, aap kuch pee rahe the.",
-    "nudge_1": "Abhi nahi. Sochiye. Doodh se kya nikla tha?",
-    "nudge_2": "Abhi nahi. Bread par kaun baitha tha?",
-    "nudge_3": "Abhi nahi. Kela kis se nahaa raha tha?",
-    "nudge_4": "Abhi nahi. Bubbles mein kya udd raha tha?",
-    "nudge_5": "Abhi nahi. Chai patti kahan giri thi?",
-    "cheer_0": "Haan.",
-    "cheer_1": "Sahi.",
-    "cheer_2": "Bilkul.",
-    "cheer_3": "Aage badhiye.",
-    "cheer_4": "Bas thoda aur.",
-    "cheer_5": "Shabash! Poori chain yaad hai!",
-
-    "q0": "Kela kya kar raha tha?",
-    "q0_no": "Yeh nahi. Kela gulabi sabun se nahaa raha tha.",
-    "q1": "Kaun si cheez kahani mein nahi thi?",
-    "q1_no": "Yeh nahi. Chawal kahani mein kabhi tha hi nahi.",
-    "q2": "Aakhir mein kitne ande the?",
-    "q2_no": "Yeh nahi. Chhe ande. Chai patti unpar giri thi. Crack!",
-    "correct": "Sahi jawab.",
-
-    "after_intro": "Ab wahi test, jo shuru mein kiya tha. Lekin is baar aapke paas kahani hai. Aaj ki chhe cheezein kaun si thi? Tap kijiye.",
-    "after_better": "Dekha aapne? Pehle wala score aur aaj ka score, dono screen par hain. Kahani ne kaam kiya. Yahi hai Story Chain ki taakat.",
-    "after_same": "Score zyada nahi badla, lekin ab aapke paas ek trick hai. Kal aur behtar hoga.",
-
-    "score_intro": "Din ek poora. Yeh raha aapka brain score.",
-    "score_hi": "Bahut tez memory hai aapki. Chhe cheezon ki kahani banayi, aur kahani tik gayi.",
-    "score_mid": "Achha kaam. Kahani ne aadha kaam khud kar diya.",
-    "score_lo": "Achhi shuruaat. Kal kahani aur pagal banayenge, aur score upar jayega.",
-    "homework": "Aaj raat ek kaam. Kal ki sabzi list ke liye ek pagal si kahani banaiye. Likhna nahi. Bas kahani. Kal milte hain."
+  "chat": {
+    "intro": ["Aaj ek trick sikhaungi. 🎯", "Iske baad shopping list bhoolna mushkil ho jayega."],
+    "lesson": [
+      "Hamara dimaag list yaad nahi rakh paata. 6 cheezein? Shaam tak gayab.",
+      "Lekin kahani? Kahani kabhi nahi bhoolta. Agle hafte bhi yaad rahegi.",
+      "Is trick ka naam hai Story Chain. 🔗",
+      "Pehli cheez, doosri cheez ke saath kuch karti hai.",
+      "Doosri, teesri ke saath. Aise hi aage.",
+      "Jitni pagal kahani, utni pakki yaad. 😄",
+      "Chaliye, aaj ki list se try karte hain."
+    ],
+    "storyIntro": "Ab kahani. Har picture ko dimaag mein dekhiye. 🎬",
+    "story": [
+      "Aap ek bada glass doodh pee rahe hain.",
+      "Achanak, doodh se ek bread ka slice bahar nikalta hai. Naav ki tarah tairta hua! ⛵",
+      "Bread par ek kela baitha hai. Aapko dekh kar muskura raha hai. 😄",
+      "Kela nahaa raha hai, ek gulabi sabun se. 🛁",
+      "Sabun ke bubbles ke andar chai patti udd rahi hai. 🫧",
+      "Chai patti neeche girti hai... aur 6 andon par land karti hai. Crack! 💥",
+      "Ek baar aur, jaldi se:",
+      "Aankhein band karke ek baar aur dekhiye. Phir bataiye."
+    ],
+    "order": ["Ab list chhup gayi hai. 🙈", "Kahani ke order mein tap kijiye. Doodh se shuru."],
+    "nudgeFirst": "Yeh nahi. Kahani shuru hui thi, aap kuch pee rahe the. 🤔",
+    "nudge": ["Abhi nahi. Doodh se kya nikla tha?", "Abhi nahi. Bread par kaun baitha tha?", "Abhi nahi. Kela kis se nahaa raha tha?", "Abhi nahi. Bubbles mein kya udd raha tha?", "Abhi nahi. Chai patti kahan giri thi?"],
+    "cheer": ["Haan! 👍", "Sahi.", "Bilkul! ✨", "Aage badhiye.", "Bas thoda aur.", "Shabash! Poori chain yaad hai! 🎉"],
+    "quizIntro": "3 chhote sawaal. 🙂",
+    "correct": ["Sahi jawab! ✅", "Bilkul sahi. ✅", "Ekdum! ✅"],
+    "afterIntro": ["Ab wahi test, jo shuru mein kiya tha.", "Lekin is baar aapke paas kahani hai. 🔗", "Aaj ki 6 cheezein kaun si thi?"],
+    "afterBetter": "Dekha aapne? Kahani ne kaam kiya. Yahi hai Story Chain ki taakat. 💪",
+    "afterSame": "Score zyada nahi badla, lekin ab aapke paas ek trick hai. Kal aur behtar hoga.",
+    "scoreIntro": "Day 1 poora! Yeh raha aapka brain score. 🧠",
+    "scoreHi": "Bahut tez memory. Kahani banayi, aur kahani tik gayi. 🌟",
+    "scoreMid": "Achha kaam. Kahani ne aadha kaam khud kar diya. 👏",
+    "scoreLo": "Achhi shuruaat. Kal kahani aur pagal banayenge, aur score upar jayega.",
+    "homework": "Aaj raat ek kaam: kal ki sabzi list ke liye ek pagal si kahani banaiye. Likhna nahi. Bas kahani. Kal milte hain! 👋"
   },
   "quiz": [
-    { "id": "q0", "opts": ["So raha tha", "Udd raha tha", "Nahaa raha tha", "Bread kha raha tha"], "a": 2 },
-    { "id": "q1", "opts": ["Chawal", "Ande", "Chai", "Doodh"], "a": 0 },
-    { "id": "q2", "opts": ["Do", "Chaar", "Chhe", "Baarah"], "a": 2 }
+    { "q": "Kela kya kar raha tha?", "opts": ["So raha tha", "Udd raha tha", "Nahaa raha tha", "Bread kha raha tha"], "a": 2, "no": "Yeh nahi. Kela gulabi sabun se nahaa raha tha. 🛁" },
+    { "q": "Kaun si cheez kahani mein nahi thi?", "opts": ["Chawal", "Ande", "Chai", "Doodh"], "a": 0, "no": "Yeh nahi. Chawal kahani mein kabhi tha hi nahi." },
+    { "q": "Aakhir mein kitne ande the?", "opts": ["2", "4", "6", "12"], "a": 2, "no": "Yeh nahi. 6 ande. Chai patti unpar giri thi. Crack! 💥" }
   ]
 }

@@ -6,15 +6,15 @@ How every lesson and quiz is written. Keep to this so Day 30 sounds like Day 1.
 
 Priya. A friendly coach. Warm, encouraging, never talks down. Uses "aap". Think of a kind family doctor who is pleased to see you.
 
-## Audio first
+## It's a chat
 
-The coach speaks every screen. The screen shows only a headline, the list or the answer buttons, and a speaker button to hear it again. Nothing on screen needs reading to follow along.
+Every session is a chat with Priya, like WhatsApp. She sends one short message at a time, with typing dots first. The person replies by tapping a chip. Pictures (emoji scenes) carry the story; the words are backup.
 
-Each screen has two texts: `show` (the headline, under 10 words) and `say` (what the coach speaks, written the way a person talks, not the way they write).
+Rules for a message: one idea, under 15 words, an emoji where a friend would use one. Never two sentences that could be two messages.
 
 ## Language
 
-Indian English with natural Hinglish, the way a Mumbai or Delhi doctor talks to a patient's mother. Short spoken sentences. Hindi words where they come naturally (namaste, aap, theek hai, shabash, sabzi), English for anything technical. Never a full Hindi sentence that needs reading. Captions are exactly what Priya says.
+Indian English with natural Hinglish, the way a Mumbai or Delhi doctor talks to a patient's mother. Short spoken sentences. Hindi words where they come naturally (namaste, aap, theek hai, shabash, sabzi), English for anything technical. Never a full Hindi sentence that needs reading. Written the way she'd type on WhatsApp.
 
 ## Shape of a day
 
@@ -35,4 +35,4 @@ Under 5 minutes total.
 
 ## Where content lives
 
-Each day's words are in `app/content/dayN.json`. Edit the words there, then run `python3 tools/make_audio.py N` to remake the audio. Don't edit `app/index.html` for wording changes.
+Each day's words are in `app/content/dayN.json` under `chat`. Shared lines (first open, review) are in `app/content/app.json`. Edit words there, never in `app/index.html`.
