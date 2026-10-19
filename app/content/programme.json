@@ -1,0 +1,50 @@
+{
+  "chapters": [
+    { "n": 1, "title": "Picture it", "pic": "🎬", "sub": "Dimaag shabd nahi, tasveer yaad rakhta hai",
+      "days": [
+        { "n": 1, "title": "Story Chain", "sub": "Shopping list ki kahani" },
+        { "n": 2, "title": "Picture it", "sub": "Bada, pagal, chalta hua" },
+        { "n": 3, "title": "Association", "sub": "Nayi cheez, purani cheez se jodo" },
+        { "n": 4, "title": "Story Chain, 10 items", "sub": "Lambi list" },
+        { "n": 5, "title": "Kahan rakha tha", "sub": "Chaabi, chashma, kaagaz" },
+        { "n": 6, "title": "Chapter test", "sub": "Teeno games, chhote" }
+      ] },
+    { "n": 2, "title": "Memory Palace", "pic": "🏠", "sub": "Aapka ghar hi aapki almaari hai",
+      "days": [
+        { "n": 7, "title": "Pehla palace", "sub": "Ghar ke 5 spots, hamesha ek order mein" },
+        { "n": 8, "title": "List ko palace mein rakho", "sub": "Har cheez ek spot par" },
+        { "n": 9, "title": "Ulta chalo", "sub": "Palace peeche se" },
+        { "n": 10, "title": "Doosra kamra", "sub": "10 spots" },
+        { "n": 11, "title": "To-do list", "sub": "Kal subah tak yaad" },
+        { "n": 12, "title": "Chapter test", "sub": "10 cheezein, ek palace" }
+      ] },
+    { "n": 3, "title": "Naam aur chehre", "pic": "🙋", "sub": "Chehre ka nishaan, naam ki awaaz, pagal tasveer",
+      "days": [
+        { "n": 13, "title": "Naam kyun phisalte hain", "sub": "Suna hi nahi tha" },
+        { "n": 14, "title": "Naam se tasveer", "sub": "Sharma ji sharmile hain" },
+        { "n": 15, "title": "Chehre ka hook", "sub": "Badi naak par tasveer" },
+        { "n": 16, "title": "Rishtedaar aur padosi", "sub": "Kaun kiska cousin" },
+        { "n": 17, "title": "Function mein naye log", "sub": "8 chehre" },
+        { "n": 18, "title": "Chapter test", "sub": "8 naam, 8 chehre" }
+      ] },
+    { "n": 4, "title": "Numbers", "pic": "🔢", "sub": "Har digit ek shape hai",
+      "days": [
+        { "n": 19, "title": "0 se 9 ki shapes", "sub": "1 mombatti, 2 hans" },
+        { "n": 20, "title": "Do digit, ek scene", "sub": "Mombatti par hans" },
+        { "n": 21, "title": "Phone number", "sub": "10 digit ki kahani" },
+        { "n": 22, "title": "PIN aur tareekhen", "sub": "Birthday game" },
+        { "n": 23, "title": "Numbers palace mein", "sub": "Digits ko spots par" },
+        { "n": 24, "title": "Chapter test", "sub": "Ek number, ek tareekh" }
+      ] },
+    { "n": 5, "title": "Lambi baatein", "pic": "📜", "sub": "Shlok, speech, recipe",
+      "days": [
+        { "n": 25, "title": "Key words", "sub": "Ek shlok, 5 tasveerein" },
+        { "n": 26, "title": "Shlok palace mein", "sub": "Rakho aur bolo" },
+        { "n": 27, "title": "Recipe", "sub": "Ingredients ki chain" },
+        { "n": 28, "title": "Chhoti speech", "sub": "5 points, 5 kamre" },
+        { "n": 29, "title": "Sab ka review", "sub": "Mixed" },
+        { "n": 30, "title": "Final test", "sub": "Certificate" }
+      ] }
+  ],
+  "built": [1, 2, 7]
+}

@@ -18,10 +18,9 @@ Indian English with natural Hinglish, the way a Mumbai or Delhi doctor talks to 
 
 ## Shape of a day
 
-1. Lesson, 3 screens, each under 40 words
-2. Practice, one list or set to memorise using today's technique
-3. Quiz, 5 questions, 4 options each, big buttons
-4. Score screen with one line of praise and one thing to try at home
+A day is a list of steps in `app/content/dayN.json`. Step types: `say` (one or more messages), `ask` (chips), `scene` (an animated card: actors with x, y, size, anim, delay) with a caption, `list`, `chain`, `palace`, `game` (order, pairs, walk, place, recallWalk), `quiz`, `test`, `score`. Four to five minutes a day.
+
+Animations available for scene actors: bob, popup, drop, slidel, spin, shake, floatup, fade, grow, wobble, glow, pulse, bounce, walk. Backgrounds: warm, teal, pink.
 
 Under 5 minutes total.
 
@@ -31,7 +30,7 @@ Under 5 minutes total.
 - Wrong answers get a gentle "not this one" plus the reason, never "wrong"
 - Every quiz tests the technique, not trivia
 - Examples come from daily life in an Indian home: sabzi lists, phone numbers, festival dates, where the keys are
-- Brain score: 40 for finishing, 12 per correct answer, so a perfect day is 100
+- Day score: 10 for finishing plus 90 spread across the day's games. Brain score is the average of the last 5 days
 
 ## Where content lives
 

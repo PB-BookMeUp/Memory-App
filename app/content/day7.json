@@ -1,0 +1,34 @@
+{
+  "day": 7, "title": "Pehla palace", "chapter": 2,
+  "rooms": [
+    { "id": "door", "name": "Darwaza", "pic": "🚪" },
+    { "id": "living", "name": "Baithak", "pic": "🛋️" },
+    { "id": "kitchen", "name": "Rasoi", "pic": "🍳" },
+    { "id": "bedroom", "name": "Sone ka kamra", "pic": "🛏️" },
+    { "id": "balcony", "name": "Balcony", "pic": "🪴" }
+  ],
+  "items": [
+    { "name": "Dahi", "pic": "🥣", "room": "door", "say": "Darwaza kholte hi dahi ki baarish! Poora darwaza safed, chipchipa." },
+    { "name": "Pyaaz", "pic": "🧅", "room": "living", "say": "Sofa par ek bada pyaaz baitha hai, TV dekh raha hai aur ro raha hai. 😢" },
+    { "name": "Dhaniya", "pic": "🌿", "room": "kitchen", "say": "Rasoi mein dhaniya ka jungle ug gaya hai. Chulha bhi nahi dikh raha!" },
+    { "name": "Aata", "pic": "🌾", "room": "bedroom", "say": "Bistar par aate ka gadda. Aap let gaye, aur aata udd gaya. Achhoo!" },
+    { "name": "Chai", "pic": "🍵", "room": "balcony", "say": "Balcony mein chai ka fawwara. Upar tak chai udd rahi hai." }
+  ],
+  "steps": [
+    { "say": ["Aaj se Chapter 2. 🏠", "Memory Palace. Duniya ke sabse bade memory champions ki trick.", "Aur iske liye aapko kuch nahi chahiye. Sirf apna ghar."] },
+    { "ask": ["Apna ghar?"] },
+    { "say": ["Haan. Aapka ghar aap aankhein band karke bhi chal sakte hain. Hai na?", "Toh ghar hi almaari banegi. Har kamra ek daraaz."] },
+    { "palace": { "walk": true }, "say": "Yeh raha ek ghar. 5 spots, hamesha isi order mein: darwaza, baithak, rasoi, sone ka kamra, balcony." },
+    { "ask": ["Dekh liya"] },
+    { "say": "Pehle chalna seekhte hain. Order mein tap kijiye, darwaze se balcony tak. 🚶" },
+    { "game": "walk", "cheer": ["Darwaza. 🚪", "Baithak. 🛋️", "Rasoi. 🍳", "Sone ka kamra. 🛏️", "Balcony! Poora ghar ghoom liya. 🎉"], "no": "Abhi nahi. Order yaad kijiye: darwaza, baithak, rasoi, sone ka kamra, balcony." },
+    { "say": ["Shabash. Ab asli trick. 🪄", "Aaj ki list ki har cheez ko ek spot par rakhenge. Pagal tarike se."] },
+    { "list": true },
+    { "ask": ["Rakho"] },
+    { "game": "place", "prompt": "{item} kahan rakhein? Tap kijiye.", "cheer": "Rakh diya. ✅", "no": "Yeh spot nahi. Tasveer phir se dekhiye." },
+    { "say": ["Ab list chhup gayi hai. 🙈", "Ghar mein chaliye. Har spot par kya tha?"] },
+    { "game": "recallWalk", "cheer": ["Haan!", "Sahi.", "Bilkul.", "Ek aur.", "Poori list! 🎉"], "no": "Yeh nahi. Us spot ki pagal tasveer yaad kijiye." },
+    { "score": true, "hi": "Pehli baar mein poora palace! Aap natural hain. 🌟", "mid": "Achha. Jo spot chhoota, uski tasveer aur pagal banaiye. 👏", "lo": "Palace pehli baar mein mushkil lagta hai. Kal phir chalenge, aur aasaan hoga.",
+      "homework": "Aaj raat sone se pehle, aankhein band karke ghar ke 5 spots par chaliye. Har spot par aaj ki cheez dekhiye. Kal subah poochungi! 👋" }
+  ]
+}

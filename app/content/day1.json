@@ -1,6 +1,5 @@
 {
-  "day": 1,
-  "title": "Story Chain",
+  "day": 1, "title": "Story Chain", "chapter": 1,
   "items": [
     { "name": "Doodh", "pic": "🥛" }, { "name": "Bread", "pic": "🍞" }, { "name": "Kela", "pic": "🍌" },
     { "name": "Sabun", "pic": "🧼" }, { "name": "Chai", "pic": "🍵" }, { "name": "Ande", "pic": "🥚" }
@@ -9,46 +8,48 @@
     { "name": "Chawal", "pic": "🍚" }, { "name": "Pyaaz", "pic": "🧅" }, { "name": "Namak", "pic": "🧂" },
     { "name": "Seb", "pic": "🍎" }, { "name": "Aata", "pic": "🌾" }, { "name": "Tamatar", "pic": "🍅" }
   ],
-  "chat": {
-    "intro": ["Aaj ek trick sikhaungi. 🎯", "Iske baad shopping list bhoolna mushkil ho jayega."],
-    "lesson": [
-      "Hamara dimaag list yaad nahi rakh paata. 6 cheezein? Shaam tak gayab.",
-      "Lekin kahani? Kahani kabhi nahi bhoolta. Agle hafte bhi yaad rahegi.",
-      "Is trick ka naam hai Story Chain. 🔗",
-      "Pehli cheez, doosri cheez ke saath kuch karti hai.",
-      "Doosri, teesri ke saath. Aise hi aage.",
-      "Jitni pagal kahani, utni pakki yaad. 😄",
-      "Chaliye, aaj ki list se try karte hain."
-    ],
-    "storyIntro": "Ab kahani. Har picture ko dimaag mein dekhiye. 🎬",
-    "story": [
-      "Aap ek bada glass doodh pee rahe hain.",
-      "Achanak, doodh se ek bread ka slice bahar nikalta hai. Naav ki tarah tairta hua! ⛵",
-      "Bread par ek kela baitha hai. Aapko dekh kar muskura raha hai. 😄",
-      "Kela nahaa raha hai, ek gulabi sabun se. 🛁",
-      "Sabun ke bubbles ke andar chai patti udd rahi hai. 🫧",
-      "Chai patti neeche girti hai... aur 6 andon par land karti hai. Crack! 💥",
-      "Ek baar aur, jaldi se:",
-      "Aankhein band karke ek baar aur dekhiye. Phir bataiye."
-    ],
-    "order": ["Ab list chhup gayi hai. 🙈", "Kahani ke order mein tap kijiye. Doodh se shuru."],
-    "nudgeFirst": "Yeh nahi. Kahani shuru hui thi, aap kuch pee rahe the. 🤔",
-    "nudge": ["Abhi nahi. Doodh se kya nikla tha?", "Abhi nahi. Bread par kaun baitha tha?", "Abhi nahi. Kela kis se nahaa raha tha?", "Abhi nahi. Bubbles mein kya udd raha tha?", "Abhi nahi. Chai patti kahan giri thi?"],
-    "cheer": ["Haan! 👍", "Sahi.", "Bilkul! ✨", "Aage badhiye.", "Bas thoda aur.", "Shabash! Poori chain yaad hai! 🎉"],
-    "quizIntro": "3 chhote sawaal. 🙂",
-    "correct": ["Sahi jawab! ✅", "Bilkul sahi. ✅", "Ekdum! ✅"],
-    "afterIntro": ["Ab wahi test, jo shuru mein kiya tha.", "Lekin is baar aapke paas kahani hai. 🔗", "Aaj ki 6 cheezein kaun si thi?"],
-    "afterBetter": "Dekha aapne? Kahani ne kaam kiya. Yahi hai Story Chain ki taakat. 💪",
-    "afterSame": "Score zyada nahi badla, lekin ab aapke paas ek trick hai. Kal aur behtar hoga.",
-    "scoreIntro": "Day 1 poora! Yeh raha aapka brain score. 🧠",
-    "scoreHi": "Bahut tez memory. Kahani banayi, aur kahani tik gayi. 🌟",
-    "scoreMid": "Achha kaam. Kahani ne aadha kaam khud kar diya. 👏",
-    "scoreLo": "Achhi shuruaat. Kal kahani aur pagal banayenge, aur score upar jayega.",
-    "homework": "Aaj raat ek kaam: kal ki sabzi list ke liye ek pagal si kahani banaiye. Likhna nahi. Bas kahani. Kal milte hain! 👋"
-  },
-  "quiz": [
-    { "q": "Kela kya kar raha tha?", "opts": ["So raha tha", "Udd raha tha", "Nahaa raha tha", "Bread kha raha tha"], "a": 2, "no": "Yeh nahi. Kela gulabi sabun se nahaa raha tha. 🛁" },
-    { "q": "Kaun si cheez kahani mein nahi thi?", "opts": ["Chawal", "Ande", "Chai", "Doodh"], "a": 0, "no": "Yeh nahi. Chawal kahani mein kabhi tha hi nahi." },
-    { "q": "Aakhir mein kitne ande the?", "opts": ["2", "4", "6", "12"], "a": 2, "no": "Yeh nahi. 6 ande. Chai patti unpar giri thi. Crack! 💥" }
+  "steps": [
+    { "say": ["Aaj ek trick sikhaungi. 🎯", "Iske baad shopping list bhoolna mushkil ho jayega."] },
+    { "ask": ["Kya trick?"] },
+    { "scene": { "bg": "pink", "actors": [ { "pic": "📝", "x": 50, "y": 50, "size": 64, "anim": "fade", "dur": 2.5 }, { "pic": "💨", "x": 72, "y": 40, "size": 36, "anim": "floatup", "delay": 1.2 } ] },
+      "say": "List? Shaam tak gayab. Dimaag shabd yaad nahi rakhta." },
+    { "scene": { "bg": "teal", "actors": [ { "pic": "📖", "x": 36, "y": 52, "size": 60, "anim": "bob" }, { "pic": "🧠", "x": 66, "y": 48, "size": 60, "anim": "glow" }, { "pic": "💛", "x": 51, "y": 28, "size": 26, "anim": "pulse" } ] },
+      "say": "Lekin kahani? Kahani chipak jaati hai. Agle hafte bhi yaad rahegi." },
+    { "scene": { "bg": "warm", "actors": [ { "pic": "🔗", "x": 25, "y": 50, "size": 44, "anim": "slidel" }, { "pic": "🔗", "x": 50, "y": 50, "size": 44, "anim": "slidel", "delay": 0.4 }, { "pic": "🔗", "x": 75, "y": 50, "size": 44, "anim": "slidel", "delay": 0.8 } ] },
+      "say": "Is trick ka naam hai Story Chain. Har cheez agli cheez se judi hui." },
+    { "ask": ["Kaise?"] },
+    { "say": ["Pehli cheez, doosri cheez ke saath kuch karti hai.", "Doosri, teesri ke saath. Aise hi aage.", "Jitni pagal kahani, utni pakki yaad. 😄", "Chaliye, aaj ki list se try karte hain."] },
+    { "ask": ["List dikhao"], "primary": true },
+    { "list": true },
+    { "say": "Ab kahani. Har picture ko dimaag mein dekhiye. 🎬" },
+    { "scene": { "bg": "warm", "actors": [ { "pic": "🥛", "x": 50, "y": 52, "size": 76, "anim": "bob" } ] }, "say": "Aap ek bada glass doodh pee rahe hain." },
+    { "scene": { "bg": "warm", "actors": [ { "pic": "🥛", "x": 50, "y": 62, "size": 72, "anim": "bob" }, { "pic": "🍞", "x": 50, "y": 22, "size": 56, "anim": "popup", "delay": 0.5 }, { "pic": "💦", "x": 70, "y": 40, "size": 28, "anim": "popup", "delay": 0.7 } ] },
+      "say": "Achanak, doodh se ek bread ka slice bahar nikalta hai. Naav ki tarah tairta hua! ⛵" },
+    { "scene": { "bg": "warm", "actors": [ { "pic": "🍞", "x": 50, "y": 64, "size": 70, "anim": "bob" }, { "pic": "🍌", "x": 50, "y": 28, "size": 56, "anim": "drop", "delay": 0.3 }, { "pic": "😄", "x": 70, "y": 22, "size": 26, "anim": "popup", "delay": 1.1 } ] },
+      "say": "Bread par ek kela baitha hai. Aapko dekh kar muskura raha hai." },
+    { "scene": { "bg": "teal", "actors": [ { "pic": "🍌", "x": 42, "y": 55, "size": 66, "anim": "wobble" }, { "pic": "🧼", "x": 66, "y": 48, "size": 50, "anim": "wobble", "delay": 0.2 }, { "pic": "🫧", "x": 30, "y": 70, "size": 26, "anim": "floatup" }, { "pic": "🫧", "x": 58, "y": 72, "size": 20, "anim": "floatup", "delay": 0.6 }, { "pic": "🫧", "x": 78, "y": 68, "size": 24, "anim": "floatup", "delay": 1.1 } ] },
+      "say": "Kela nahaa raha hai, ek gulabi sabun se. 🛁" },
+    { "scene": { "bg": "teal", "actors": [ { "pic": "🧼", "x": 50, "y": 72, "size": 54, "anim": "bob" }, { "pic": "🫧", "x": 34, "y": 50, "size": 40, "anim": "floatup" }, { "pic": "🫧", "x": 64, "y": 46, "size": 46, "anim": "floatup", "delay": 0.5 }, { "pic": "🍵", "x": 50, "y": 30, "size": 44, "anim": "spin" } ] },
+      "say": "Sabun ke bubbles ke andar chai patti udd rahi hai. 🫧" },
+    { "scene": { "bg": "pink", "actors": [ { "pic": "🍵", "x": 50, "y": 20, "size": 46, "anim": "drop" }, { "pic": "🥚", "x": 30, "y": 68, "size": 46, "anim": "shake", "delay": 0.9 }, { "pic": "🥚", "x": 50, "y": 72, "size": 46, "anim": "shake", "delay": 1.0 }, { "pic": "🥚", "x": 70, "y": 68, "size": 46, "anim": "shake", "delay": 1.1 }, { "pic": "💥", "x": 50, "y": 48, "size": 56, "anim": "popup", "delay": 1.2 } ] },
+      "say": "Chai patti neeche girti hai... aur 6 andon par land karti hai. Crack! 💥" },
+    { "chain": true, "say": "Ek baar aur, jaldi se: doodh, bread, kela, sabun, chai, ande." },
+    { "say": "Aankhein band karke ek baar aur dekhiye. Phir bataiye." },
+    { "ask": ["Dikh gaya. Test lo!"], "primary": true },
+    { "say": ["Ab list chhup gayi hai. 🙈", "Kahani ke order mein tap kijiye. Doodh se shuru."] },
+    { "game": "order", "nudgeFirst": "Yeh nahi. Kahani shuru hui thi, aap kuch pee rahe the. 🤔",
+      "nudge": ["Abhi nahi. Doodh se kya nikla tha?", "Abhi nahi. Bread par kaun baitha tha?", "Abhi nahi. Kela kis se nahaa raha tha?", "Abhi nahi. Bubbles mein kya udd raha tha?", "Abhi nahi. Chai patti kahan giri thi?"],
+      "cheer": ["Haan! 👍", "Sahi.", "Bilkul! ✨", "Aage badhiye.", "Bas thoda aur.", "Shabash! Poori chain yaad hai! 🎉"] },
+    { "say": "3 chhote sawaal. 🙂" },
+    { "quiz": [
+      { "q": "Kela kya kar raha tha?", "opts": ["So raha tha", "Udd raha tha", "Nahaa raha tha", "Bread kha raha tha"], "a": 2, "no": "Yeh nahi. Kela gulabi sabun se nahaa raha tha. 🛁" },
+      { "q": "Kaun si cheez kahani mein nahi thi?", "opts": ["Chawal", "Ande", "Chai", "Doodh"], "a": 0, "no": "Yeh nahi. Chawal kahani mein kabhi tha hi nahi." },
+      { "q": "Aakhir mein kitne ande the?", "opts": ["2", "4", "6", "12"], "a": 2, "no": "Yeh nahi. 6 ande. Chai patti unpar giri thi. Crack! 💥" }
+    ] },
+    { "say": ["Ab wahi test, jo shuru mein kiya tha.", "Lekin is baar aapke paas kahani hai. 🔗", "Aaj ki 6 cheezein kaun si thi?"] },
+    { "ask": ["Ready"] },
+    { "test": "after", "better": "Dekha aapne? Kahani ne kaam kiya. Yahi hai Story Chain ki taakat. 💪", "same": "Score zyada nahi badla, lekin ab aapke paas ek trick hai. Kal aur behtar hoga." },
+    { "score": true, "hi": "Bahut tez memory. Kahani banayi, aur kahani tik gayi. 🌟", "mid": "Achha kaam. Kahani ne aadha kaam khud kar diya. 👏", "lo": "Achhi shuruaat. Kal kahani aur pagal banayenge.",
+      "homework": "Aaj raat ek kaam: kal ki sabzi list ke liye ek pagal si kahani banaiye. Likhna nahi. Bas kahani. Kal milte hain! 👋" }
   ]
 }

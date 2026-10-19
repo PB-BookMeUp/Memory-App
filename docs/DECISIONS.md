@@ -36,3 +36,8 @@
 | 2026-10-19 | Two looks to compare, switchable in the header: "Yaad" (indigo and marigold) and "Chat" (WhatsApp-like) |
 | 2026-10-19 | Chat polish after screenshots: messages hug the bottom, one text weight, timestamps, solid indigo reply bubbles, dotted wallpaper on the Chat look, no orphaned emoji |
 | 2026-10-19 | Yaad look goes warm and bright: sunset header, teal and saffron, cream canvas, illustrated Priya, colour behind every picture, confetti on a perfect chain. Replaces "calm clinic" |
+| 2026-10-19 | Lesson engine: a day is a list of steps in JSON, no code per day. Animated scenes (emoji actors with CSS motion) replace static pictures |
+| 2026-10-19 | 30-day programme in 5 chapters (Picture it, Memory Palace, Names and faces, Numbers, Long text). Days 1, 2 and 7 built as proof |
+| 2026-10-19 | Home is a programme map with chapters and day nodes. Tester mode in settings unlocks every built day |
+| 2026-10-19 | One look only (warm). The WhatsApp-like skin is dropped |
+| 2026-10-19 | Voice plan: ElevenLabs free tier on the founder's account, shipped as voice notes in the chat. Not built until the founder has an account |

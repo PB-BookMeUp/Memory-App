@@ -1,0 +1,35 @@
+{
+  "day": 2, "title": "Picture it", "chapter": 1,
+  "pairs": [
+    { "a": { "name": "Chaabi", "pic": "🔑" }, "b": { "name": "Fridge", "pic": "🧊" }, "say": "Fridge kholte hi 100 chaabiyan baraf ki tarah gir rahi hain. Thandi, chhan chhan!",
+      "scene": { "bg": "teal", "actors": [ { "pic": "🧊", "x": 50, "y": 66, "size": 70, "anim": "shake" }, { "pic": "🔑", "x": 36, "y": 20, "size": 34, "anim": "drop", "delay": 0.3 }, { "pic": "🔑", "x": 54, "y": 14, "size": 30, "anim": "drop", "delay": 0.6 }, { "pic": "🔑", "x": 68, "y": 22, "size": 34, "anim": "drop", "delay": 0.9 } ] } },
+    { "a": { "name": "Chashma", "pic": "👓" }, "b": { "name": "Pankha", "pic": "🪭" }, "say": "Pankhe par ek bada chashma ghoom raha hai, aur neeche sab ko dekh raha hai.",
+      "scene": { "bg": "warm", "actors": [ { "pic": "👓", "x": 50, "y": 46, "size": 76, "anim": "spin" }, { "pic": "👀", "x": 50, "y": 78, "size": 30, "anim": "bob" } ] } },
+    { "a": { "name": "Phone", "pic": "📱" }, "b": { "name": "Chappal", "pic": "🩴" }, "say": "Chappal pehen kar phone chal raha hai. Tak tak tak, ghar ke andar!",
+      "scene": { "bg": "pink", "actors": [ { "pic": "📱", "x": 50, "y": 42, "size": 64, "anim": "wobble" }, { "pic": "🩴", "x": 40, "y": 76, "size": 34, "anim": "bob" }, { "pic": "🩴", "x": 60, "y": 76, "size": 34, "anim": "bob", "delay": 0.4 } ] } },
+    { "a": { "name": "Dawai", "pic": "💊" }, "b": { "name": "TV", "pic": "📺" }, "say": "TV ke andar se ek badi goli uchhal kar aapki god mein aa gayi.",
+      "scene": { "bg": "warm", "actors": [ { "pic": "📺", "x": 50, "y": 60, "size": 74, "anim": "bob" }, { "pic": "💊", "x": 50, "y": 24, "size": 50, "anim": "popup", "delay": 0.5 } ] } },
+    { "a": { "name": "Paisa", "pic": "💰" }, "b": { "name": "Takiya", "pic": "🛏️" }, "say": "Takiya phaad kar noton ki baarish ho rahi hai. Poora bistar paisa!",
+      "scene": { "bg": "teal", "actors": [ { "pic": "🛏️", "x": 50, "y": 68, "size": 72, "anim": "shake" }, { "pic": "💵", "x": 30, "y": 20, "size": 30, "anim": "drop", "delay": 0.3 }, { "pic": "💵", "x": 50, "y": 12, "size": 30, "anim": "drop", "delay": 0.6 }, { "pic": "💵", "x": 70, "y": 22, "size": 30, "anim": "drop", "delay": 0.9 } ] } }
+  ],
+  "steps": [
+    { "say": ["Kal aapne kahani banayi. 🔗", "Aaj seekhenge: kahani ki tasveer kaisi ho, jo chipak jaaye."] },
+    { "ask": ["Batao"] },
+    { "scene": { "bg": "pink", "actors": [ { "pic": "🍎", "x": 50, "y": 50, "size": 28, "anim": "none", "dim": true } ] }, "say": "Yeh ek seb hai. Chhota, chup, boring. Shaam tak bhool jayenge." },
+    { "scene": { "bg": "warm", "actors": [ { "pic": "🍎", "x": 50, "y": 52, "size": 96, "anim": "bounce" }, { "pic": "😮", "x": 80, "y": 24, "size": 30, "anim": "popup", "delay": 0.8 } ] }, "say": "Aur yeh? Ek seb jitna bada, uchhalta hua seb. Yeh yaad rahega. 😄" },
+    { "say": "Tasveer ke 3 niyam:" },
+    { "scene": { "bg": "teal", "actors": [ { "pic": "🐘", "x": 50, "y": 52, "size": 40, "anim": "grow" } ] }, "say": "1. BADA. Jitna bada, utna yaad." },
+    { "scene": { "bg": "pink", "actors": [ { "pic": "🐘", "x": 50, "y": 60, "size": 60, "anim": "bob" }, { "pic": "👒", "x": 50, "y": 24, "size": 40, "anim": "drop", "delay": 0.4 }, { "pic": "💃", "x": 76, "y": 60, "size": 36, "anim": "wobble", "delay": 0.8 } ] }, "say": "2. PAGAL. Haathi topi pehen kar naach raha hai? Haan, yahi chahiye." },
+    { "scene": { "bg": "warm", "actors": [ { "pic": "🐘", "x": 30, "y": 55, "size": 60, "anim": "walk" }, { "pic": "💨", "x": 14, "y": 62, "size": 26, "anim": "floatup", "delay": 0.5 } ] }, "say": "3. CHALTA HUA. Rukhi tasveer nahi, chalti hui film." },
+    { "ask": ["Bada, pagal, chalta hua. Samajh gayi!"], "primary": true },
+    { "say": ["Ab game. 🎮", "5 jodiyan dikhaungi. Do cheezein jinka koi rishta nahi.", "Main ek pagal tasveer dungi. Aap use dimaag mein dekhiye.", "Phir main pehli cheez dikhaungi, aap doosri batayenge."] },
+    { "ask": ["Chalo"] },
+    { "game": "pairs", "intro": "Ab test. Pehli cheez dikh rahi hai. Doosri kaun si thi?", "cheer": ["Sahi! ✅", "Bilkul! ✅", "Ekdum! ✅"], "no": "Yeh nahi. Tasveer yaad kijiye:" },
+    { "quiz": [
+      { "q": "Tasveer yaad rehne ke liye kaisi ho?", "opts": ["Chhoti aur saaf", "Badi, pagal, chalti hui", "Kaali safed", "Bilkul asli jaisi"], "a": 1, "no": "Yeh nahi. Badi, pagal, aur chalti hui. Boring tasveer nahi tikti." },
+      { "q": "Fridge ke saath kya tha?", "opts": ["Chashma", "Chaabi", "Phone", "Paisa"], "a": 1, "no": "Yeh nahi. Fridge se 100 chaabiyan gir rahi thi. 🔑" }
+    ] },
+    { "score": true, "hi": "Aapki tasveerein chipak gayi. Yeh skill har trick mein kaam aayegi. 🌟", "mid": "Achha. Jo jodi chhooti, uski tasveer aur pagal banaiye. 👏", "lo": "Theek hai. Kal phir. Tasveer ko bada aur pagal banana practice hai.",
+      "homework": "Aaj jab bhi kuch yaad rakhna ho, ek pagal tasveer banaiye. Jitni ajeeb, utni achhi. Kal milte hain! 👋" }
+  ]
+}
