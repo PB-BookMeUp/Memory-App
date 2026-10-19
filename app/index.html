@@ -5,25 +5,25 @@
 <style>
   /* Layout: a chat with Priya. Header, scrolling messages, quick-reply chips at the bottom. Two skins share one layout: "yaad" (our indigo and marigold) and "wa" (a WhatsApp-like look). */
   :root {
-    --bg: #f4f1ea; --chat: #efece3; --card: #ffffff; --fg: #1d1a2f; --muted: #605c74;
-    --head: #2e2a8f; --head-fg: #ffffff; --in: #ffffff; --out: #2e2a8f; --out-fg: #ffffff;
-    --accent: #2e2a8f; --accent-fg: #ffffff; --warm: #e8a317; --warm-soft: #fbf0d4;
-    --good: #1e8f5a; --bad: #c3412b; --line: #ddd8cc; --tile: #f3f0e8; --chip: #ffffff; --chip-fg: #2e2a8f; --chip-line: #2e2a8f;
+    --bg: #fff6e8; --chat: #fff6e8; --card: #ffffff; --fg: #2a1a3a; --muted: #7a6a86;
+    --head: linear-gradient(120deg, #ff8f3f, #f0486f); --head-ink: #d42a66; --head-fg: #ffffff; --in: #ffffff; --out: #0f8b8d; --out-fg: #ffffff;
+    --accent: #e8407a; --accent-fg: #ffffff; --warm: #ffb02e; --warm-soft: #fff0c7; --teal: #0f8b8d; --teal-soft: #d9f3f1; --pink-soft: #ffe1ea;
+    --good: #1aa36a; --bad: #e0453b; --line: #f0dcc6; --tile: #fff0d6; --chip: #ffffff; --chip-fg: #d42a66; --chip-line: #f5b3c9;
     --display: "Baloo 2", "Noto Sans", system-ui, sans-serif; --body: "Noto Sans", system-ui, sans-serif; --radius: 18px;
   }
   :root[data-skin="wa"] {
     --bg: #efeae2; --chat: #efeae2; --card: #ffffff; --fg: #111b21; --muted: #667781;
     --head: #008069; --head-fg: #ffffff; --in: #ffffff; --out: #d9fdd3; --out-fg: #111b21;
-    --accent: #00a884; --accent-fg: #ffffff; --warm: #ffb02e; --warm-soft: #fff4dc;
+    --accent: #00a884; --accent-fg: #ffffff; --warm: #ffb02e; --warm-soft: #fff4dc; --teal: #008069; --teal-soft: #d9fdd3; --pink-soft: #f0f2f5;
     --good: #1fa855; --bad: #d93025; --line: #d1d7db; --tile: #f0f2f5; --chip: #ffffff; --chip-fg: #008069; --chip-line: #c5d6d2;
     --display: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; --body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; --radius: 10px;
   }
   @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) { --bg: #14122a; --chat: #1a1833; --card: #1e1b3a; --fg: #f3f0ff; --muted: #b5b0cc; --head: #1e1b3a; --head-fg: #f3f0ff; --in: #26234a; --out: #2e2a8f; --out-fg: #ffffff; --accent: #9d99ff; --accent-fg: #14122a; --warm: #ffc247; --warm-soft: #3b3220; --good: #4fd08f; --bad: #ff7a63; --line: #39355e; --tile: #27244a; --chip: #26234a; --chip-fg: #c8c6ff; --chip-line: #5a56a8; color-scheme: dark; }
-    :root:not([data-theme="light"])[data-skin="wa"] { --bg: #0b141a; --chat: #0b141a; --card: #202c33; --fg: #e9edef; --muted: #8696a0; --head: #202c33; --head-fg: #e9edef; --in: #202c33; --out: #005c4b; --out-fg: #e9edef; --accent: #00a884; --accent-fg: #0b141a; --warm: #ffb02e; --warm-soft: #3a2f14; --good: #25d366; --bad: #f15c6d; --line: #2a3942; --tile: #111b21; --chip: #202c33; --chip-fg: #00a884; --chip-line: #2a3942; }
+    :root:not([data-theme="light"]) { --bg: #14122a; --chat: #1a1833; --card: #1e1b3a; --fg: #f3f0ff; --muted: #b5b0cc; --head: linear-gradient(120deg, #c2541f, #a0244a); --head-ink: #a0244a; --head-fg: #fff3e6; --in: #2a2446; --out: #0f8b8d; --out-fg: #ffffff; --accent: #ff6b9d; --accent-fg: #14122a; --warm: #ffc247; --warm-soft: #3b3220; --teal: #39b8ba; --teal-soft: #163a3b; --pink-soft: #4a2238; --good: #4fd08f; --bad: #ff7a63; --line: #39355e; --tile: #27244a; --chip: #26234a; --chip-fg: #c8c6ff; --chip-line: #5a56a8; color-scheme: dark; }
+    :root:not([data-theme="light"])[data-skin="wa"] { --bg: #0b141a; --chat: #0b141a; --card: #202c33; --fg: #e9edef; --muted: #8696a0; --head: #202c33; --head-fg: #e9edef; --in: #202c33; --out: #005c4b; --out-fg: #e9edef; --accent: #00a884; --teal: #00a884; --teal-soft: #0f2f2a; --pink-soft: #2a2230; --accent-fg: #0b141a; --warm: #ffb02e; --warm-soft: #3a2f14; --good: #25d366; --bad: #f15c6d; --line: #2a3942; --tile: #111b21; --chip: #202c33; --chip-fg: #00a884; --chip-line: #2a3942; }
   }
-  :root[data-theme="dark"] { --bg: #14122a; --chat: #1a1833; --card: #1e1b3a; --fg: #f3f0ff; --muted: #b5b0cc; --head: #1e1b3a; --head-fg: #f3f0ff; --in: #26234a; --out: #2e2a8f; --out-fg: #ffffff; --accent: #9d99ff; --accent-fg: #14122a; --warm: #ffc247; --warm-soft: #3b3220; --good: #4fd08f; --bad: #ff7a63; --line: #39355e; --tile: #27244a; --chip: #26234a; --chip-fg: #c8c6ff; --chip-line: #5a56a8; color-scheme: dark; }
-  :root[data-theme="dark"][data-skin="wa"] { --bg: #0b141a; --chat: #0b141a; --card: #202c33; --fg: #e9edef; --muted: #8696a0; --head: #202c33; --head-fg: #e9edef; --in: #202c33; --out: #005c4b; --out-fg: #e9edef; --accent: #00a884; --accent-fg: #0b141a; --warm: #ffb02e; --warm-soft: #3a2f14; --good: #25d366; --bad: #f15c6d; --line: #2a3942; --tile: #111b21; --chip: #202c33; --chip-fg: #00a884; --chip-line: #2a3942; }
+  :root[data-theme="dark"] { --bg: #14122a; --chat: #1a1833; --card: #1e1b3a; --fg: #f3f0ff; --muted: #b5b0cc; --head: linear-gradient(120deg, #c2541f, #a0244a); --head-ink: #a0244a; --head-fg: #fff3e6; --in: #2a2446; --out: #0f8b8d; --out-fg: #ffffff; --accent: #ff6b9d; --accent-fg: #14122a; --warm: #ffc247; --warm-soft: #3b3220; --teal: #39b8ba; --teal-soft: #163a3b; --pink-soft: #4a2238; --good: #4fd08f; --bad: #ff7a63; --line: #39355e; --tile: #27244a; --chip: #26234a; --chip-fg: #c8c6ff; --chip-line: #5a56a8; color-scheme: dark; }
+  :root[data-theme="dark"][data-skin="wa"] { --bg: #0b141a; --chat: #0b141a; --card: #202c33; --fg: #e9edef; --muted: #8696a0; --head: #202c33; --head-fg: #e9edef; --in: #202c33; --out: #005c4b; --out-fg: #e9edef; --accent: #00a884; --teal: #00a884; --teal-soft: #0f2f2a; --pink-soft: #2a2230; --accent-fg: #0b141a; --warm: #ffb02e; --warm-soft: #3a2f14; --good: #25d366; --bad: #f15c6d; --line: #2a3942; --tile: #111b21; --chip: #202c33; --chip-fg: #00a884; --chip-line: #2a3942; }
 
   [hidden] { display: none !important; }
   html, body { height: 100%; }
@@ -34,16 +34,16 @@
   :root[data-skin="wa"] .chat { background-image: radial-gradient(color-mix(in srgb, var(--fg) 7%, transparent) 1px, transparent 1px); background-size: 22px 22px; }
 
   /* Header: Priya's name, like a chat header. Skin switch on the right. */
-  .head { background: var(--head); color: var(--head-fg); padding: 10px max(16px, env(safe-area-inset-right, 0px)) 10px max(16px, env(safe-area-inset-left, 0px)); display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
-  .head .face { width: 42px; height: 42px; }
+  .head { background: var(--head); box-shadow: 0 2px 8px rgba(0,0,0,.12); z-index: 1; color: var(--head-fg); padding: 10px max(16px, env(safe-area-inset-right, 0px)) 10px max(16px, env(safe-area-inset-left, 0px)); display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+  .head .face { width: 46px; height: 46px; background: #fff; box-shadow: 0 0 0 2px rgba(255,255,255,.6); }
   .head .who { flex: 1; min-width: 0; line-height: 1.15; }
   .head .who b { font-family: var(--display); font-size: 19px; display: block; }
   .head .who small { font-size: 13px; opacity: .85; }
   .skin { display: flex; background: rgba(255,255,255,.18); border-radius: 999px; padding: 3px; gap: 2px; }
   .skin button { border: 0; background: transparent; color: inherit; font: inherit; font-size: 12px; font-weight: 700; padding: 5px 10px; border-radius: 999px; cursor: pointer; opacity: .8; }
-  .skin button.on { background: var(--head-fg); color: var(--head); opacity: 1; }
-  .face { border-radius: 50%; background: var(--accent); color: var(--accent-fg); display: grid; place-items: center; flex-shrink: 0; }
-  .face svg { width: 70%; height: 70%; }
+  .skin button.on { background: var(--head-fg); color: var(--head-ink, var(--head)); opacity: 1; }
+  .face { border-radius: 50%; background: #fff; display: grid; place-items: center; flex-shrink: 0; overflow: hidden; }
+  .face svg { width: 100%; height: 100%; }
 
   /* Messages */
   .chat::before { content: ""; flex: 1 0 auto; }
@@ -55,20 +55,20 @@
   .msg.out { background: var(--out); color: var(--out-fg); align-self: flex-end; border-top-right-radius: 4px; }
   .msg.big { font-weight: 600; }
   .msg .pic { font-size: 56px; line-height: 1.1; display: block; text-align: center; padding: 4px 0 6px; }
-  .msg .scene { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 6px 0 8px; font-size: 44px; line-height: 1; }
+  .msg .scene { display: flex; align-items: center; justify-content: center; gap: 8px; margin: -3px -6px 8px; padding: 12px 6px; font-size: 46px; line-height: 1; background: linear-gradient(135deg, var(--warm-soft), var(--pink-soft)); border-radius: 14px; }
   .msg .scene .small { font-size: 26px; opacity: .55; }
-  .msg .scene .arrow { font-size: 18px; color: var(--muted); }
+  .msg .scene .arrow { font-size: 16px; color: var(--accent); }
   .typing { align-self: flex-start; background: var(--in); border-radius: var(--radius); border-top-left-radius: 4px; padding: 14px 16px; box-shadow: 0 1px .5px rgba(0,0,0,.08); display: flex; gap: 5px; }
-  .typing i { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); display: block; animation: blink 1s infinite; }
+  .typing i { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); display: block; animation: blink 1s infinite; }
   .typing i:nth-child(2) { animation-delay: .2s; } .typing i:nth-child(3) { animation-delay: .4s; }
-  .day-chip { align-self: center; background: var(--tile); color: var(--muted); font-size: 13px; font-weight: 700; padding: 5px 12px; border-radius: 999px; margin: 6px 0; }
-  .card { align-self: stretch; background: var(--card); border-radius: var(--radius); padding: 14px; display: grid; gap: 10px; box-shadow: 0 1px 1px rgba(0,0,0,.06); animation: in .18s ease-out; }
-  .card h3 { margin: 0; font-family: var(--display); font-size: 18px; }
+  .day-chip { align-self: center; background: var(--teal-soft); color: var(--teal); font-size: 13px; font-weight: 700; padding: 5px 12px; border-radius: 999px; margin: 6px 0; }
+  .card { align-self: stretch; background: var(--card); border-radius: var(--radius); padding: 14px; border-top: 5px solid var(--warm); display: grid; gap: 10px; box-shadow: 0 1px 1px rgba(0,0,0,.06); animation: in .18s ease-out; }
+  .card h3 { margin: 0; font-family: var(--display); font-size: 19px; color: var(--teal); }
 
   /* Reply area: quick-reply chips, or a text box for her name */
   .reply { flex-shrink: 0; padding: 8px max(14px, env(safe-area-inset-right, 0px)) max(12px, env(safe-area-inset-bottom, 0px)) max(14px, env(safe-area-inset-left, 0px)); display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; min-height: 64px; background: var(--chat); }
   .chip { font: inherit; font-size: 18px; font-weight: 700; border: 2px solid var(--chip-line); background: var(--chip); color: var(--chip-fg); border-radius: 999px; padding: 11px 18px; min-height: 50px; cursor: pointer; animation: in .18s ease-out; }
-  .chip.primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+  .chip.primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); box-shadow: 0 3px 10px color-mix(in srgb, var(--accent) 35%, transparent); }
   .chip.wide { flex: 1; text-align: center; max-width: 100%; }
   .composer { display: flex; gap: 8px; width: 100%; }
   .composer input { flex: 1; font: inherit; font-size: 19px; padding: 12px 16px; border-radius: 999px; border: 2px solid var(--line); background: var(--card); color: var(--fg); min-width: 0; }
@@ -78,15 +78,15 @@
   /* Tiles inside cards */
   .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
   .tiles.four { grid-template-columns: repeat(4, 1fr); }
-  .tile { background: var(--tile); border: 2px solid var(--line); border-radius: 14px; padding: 8px 4px; text-align: center; display: grid; gap: 2px; font-weight: 600; font-size: 14px; color: var(--fg); font-family: var(--body); cursor: default; }
-  .tile .pic { font-size: 32px; line-height: 1; }
+  .tile { background: var(--tile); border: 2px solid transparent; border-radius: 14px; padding: 9px 4px; box-shadow: 0 1px 2px rgba(0,0,0,.06); text-align: center; display: grid; gap: 2px; font-weight: 600; font-size: 14px; color: var(--fg); font-family: var(--body); cursor: default; }
+  .tile .pic { font-size: 36px; line-height: 1; }
   button.tile { cursor: pointer; } button.tile:disabled { opacity: .35; cursor: default; }
-  .tile.sel { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 14%, var(--card)); }
+  .tile.sel { border-color: var(--accent); background: var(--pink-soft); transform: scale(1.04); }
   .tile.good { border-color: var(--good); background: color-mix(in srgb, var(--good) 14%, var(--card)); }
   .tile.miss { border-color: var(--bad); background: color-mix(in srgb, var(--bad) 12%, var(--card)); }
   .tile.shake { animation: shake .4s; border-color: var(--bad); }
   .chain { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
-  .chain .slot { width: 40px; height: 40px; border-radius: 11px; border: 2px dashed var(--line); display: grid; place-items: center; font-size: 22px; }
+  .chain .slot { width: 40px; height: 40px; border-radius: 11px; border: 2px dashed var(--chip-line); background: var(--card); display: grid; place-items: center; font-size: 22px; }
   .chain .slot.filled { border-style: solid; border-color: var(--good); background: color-mix(in srgb, var(--good) 14%, var(--card)); }
   .chain .arrow { color: var(--muted); font-size: 11px; }
   .timer { height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; }
@@ -108,13 +108,13 @@
   .screen { flex: 1; min-height: 0; overflow-y: auto; padding: 14px max(14px, env(safe-area-inset-right, 0px)) 14px max(14px, env(safe-area-inset-left, 0px)); display: flex; flex-direction: column; gap: 12px; }
   h2 { font-family: var(--display); font-weight: 700; font-size: 22px; line-height: 1.15; margin: 0; }
   p { margin: 0; } .muted { color: var(--muted); font-size: 15px; } .center { text-align: center; }
-  .hero { background: var(--head); color: var(--head-fg); border-radius: var(--radius); padding: 16px; display: grid; gap: 8px; }
+  .hero { background: var(--head); color: var(--head-fg); border-radius: var(--radius); padding: 18px; display: grid; gap: 8px; box-shadow: 0 6px 18px rgba(240,72,111,.18); }
   .hero .eyebrow { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; font-weight: 700; opacity: .8; }
   .btn { font: inherit; font-family: var(--display); font-weight: 700; font-size: 19px; border: 0; border-radius: 14px; padding: 12px 16px; min-height: 54px; cursor: pointer; width: 100%; background: var(--warm); color: #1d1a2f; }
   .btn.ghost { background: transparent; color: var(--accent); border: 2px solid var(--accent); }
   .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-  .stat { background: var(--card); border-radius: 14px; padding: 10px 8px; text-align: center; display: grid; gap: 2px; }
-  .stat b { font-family: var(--display); font-weight: 800; font-size: 26px; line-height: 1; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .stat { background: var(--card); border-radius: 14px; padding: 12px 8px; box-shadow: 0 1px 2px rgba(0,0,0,.05); text-align: center; display: grid; gap: 2px; }
+  .stat b { font-family: var(--display); font-weight: 800; font-size: 28px; line-height: 1; color: var(--teal); font-variant-numeric: tabular-nums; }
   .stat span { font-size: 11px; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: .05em; }
   .week { display: flex; gap: 4px; }
   .week div { flex: 1; text-align: center; display: grid; gap: 4px; font-size: 11px; color: var(--muted); font-weight: 700; }
@@ -126,13 +126,14 @@
   .path .day .n { width: 34px; height: 34px; border-radius: 50%; background: var(--tile); border: 2px solid var(--line); display: grid; place-items: center; font-family: var(--display); font-weight: 800; flex-shrink: 0; }
   .path .day.done .n { background: var(--good); border-color: var(--good); color: #fff; }
   .path .day.next .n { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
+  .path .day .n { background: var(--warm-soft); border-color: var(--warm-soft); color: var(--muted); }
   .path .day small { display: block; color: var(--muted); font-size: 12px; }
   .chart { width: 100%; height: auto; aspect-ratio: 2 / 1; max-width: 100%; }
   .chart .axis { stroke: var(--line); stroke-width: 1; } .chart .line { fill: none; stroke: var(--accent); stroke-width: 3; stroke-linejoin: round; }
   .chart .dot { fill: var(--warm); stroke: var(--card); stroke-width: 2; } .chart text { fill: var(--muted); font-size: 11px; font-family: var(--body); }
   .badges { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
   .badge { background: var(--card); border-radius: 14px; padding: 10px 6px; text-align: center; display: grid; gap: 4px; font-size: 12px; font-weight: 600; color: var(--muted); }
-  .badge .pic { font-size: 26px; } .badge.on { background: var(--warm-soft); color: var(--fg); } .badge:not(.on) .pic { filter: grayscale(1); opacity: .5; }
+  .badge .pic { font-size: 26px; } .badge.on { background: var(--warm-soft); color: var(--fg); box-shadow: 0 0 0 2px var(--warm); } .badge:not(.on) .pic { filter: grayscale(1); opacity: .5; }
   .member { display: grid; grid-template-columns: 30px 1fr auto auto; gap: 10px; align-items: center; padding: 10px 12px; border-radius: 14px; background: var(--card); }
   .member.me { outline: 2px solid var(--accent); }
   .member .rank { font-family: var(--display); font-weight: 800; color: var(--muted); font-size: 17px; }
@@ -146,6 +147,9 @@
   .tab { flex: 1; border: 0; background: transparent; color: var(--muted); font: inherit; font-weight: 700; font-size: 12px; padding: 6px 4px; border-radius: 12px; display: grid; gap: 2px; justify-items: center; cursor: pointer; }
   .tab .pic { font-size: 22px; line-height: 1; } .tab.on { color: var(--accent); }
 
+  .confetti { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 5; }
+  .confetti i { position: absolute; top: -12px; width: 10px; height: 14px; border-radius: 2px; animation: fall 1.6s ease-in forwards; }
+  @keyframes fall { to { transform: translateY(110vh) rotate(540deg); opacity: .2; } }
   @media (prefers-reduced-motion: no-preference) {
     @keyframes in { from { opacity: 0; transform: translateY(8px); } }
     @keyframes blink { 50% { opacity: .3; } }
@@ -176,7 +180,19 @@
 let A = null, D = null;
 const $ = id => document.getElementById(id);
 const chatEl = $("chat"), replyEl = $("reply"), screenEl = $("screen"), tabsEl = $("tabs");
-const FACE = `<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="currentColor" opacity=".15"/><circle cx="17" cy="20" r="2.6" fill="currentColor"/><circle cx="31" cy="20" r="2.6" fill="currentColor"/><path d="M15 29c3 4.5 15 4.5 18 0" stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none"/></svg>`;
+const FACE = `<svg viewBox="0 0 64 64" aria-hidden="true">
+  <circle cx="32" cy="32" r="32" fill="#ffd9a6"/>
+  <path d="M12 38c0-14 8-24 20-24s20 10 20 24v10H12z" fill="#2b1a1a"/>
+  <ellipse cx="32" cy="36" rx="13" ry="15" fill="#f1b78a"/>
+  <path d="M19 32c1-9 6-13 13-13s12 4 13 13c-3-3-7-5-13-5s-10 2-13 5z" fill="#2b1a1a"/>
+  <circle cx="32" cy="25.5" r="1.9" fill="#d42a66"/>
+  <circle cx="26.5" cy="35" r="1.7" fill="#2b1a1a"/><circle cx="37.5" cy="35" r="1.7" fill="#2b1a1a"/>
+  <path d="M24 32.5c1.5-1.2 3.5-1.2 5 0M35 32.5c1.5-1.2 3.5-1.2 5 0" stroke="#2b1a1a" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+  <path d="M27 41c2.5 3 7.5 3 10 0" stroke="#b3503a" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <circle cx="18.5" cy="41" r="2.2" fill="#ffb02e"/><circle cx="45.5" cy="41" r="2.2" fill="#ffb02e"/>
+  <path d="M14 64c2-9 9-14 18-14s16 5 18 14z" fill="#0f8b8d"/>
+  <path d="M14 64c2-9 9-14 18-14 0 5-2 9-5 14z" fill="#e8407a"/>
+</svg>`;
 $("headface").innerHTML = FACE;
 
 // ---------- Skin switch (Yaad look or WhatsApp-like look). Remembered on this phone. ----------
@@ -228,6 +244,7 @@ function askText(placeholder) {
     const f = $("cf"); $("ci").focus(); f.onsubmit = e => { e.preventDefault(); const v = $("ci").value.trim(); if (!v) return; replyEl.innerHTML = ""; mine(v); res(v); };
   });
 }
+function confetti() { const c = document.createElement("div"); c.className = "confetti"; const cols = ["#ffb02e", "#e8407a", "#0f8b8d", "#1aa36a", "#ff8f3f"]; for (let i = 0; i < 40; i++) { const p = document.createElement("i"); p.style.left = Math.random() * 100 + "%"; p.style.background = cols[i % cols.length]; p.style.animationDelay = Math.random() * .5 + "s"; p.style.animationDuration = 1.2 + Math.random() + "s"; c.appendChild(p); } document.body.appendChild(c); setTimeout(() => c.remove(), 2600); }
 function tile(it, cls = "", attrs = "") { const t = attrs ? "button" : "div"; return `<${t} class="tile ${cls}" ${attrs}><span class="pic">${it.pic}</span><span>${it.name}</span></${t}>`; }
 function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 
@@ -311,7 +328,7 @@ async function orderGame() {
       if (firstTry) orderScore++; b.disabled = true; b.classList.add("good");
       const s = c.querySelector("#slot" + pos); s.textContent = it.pic; s.classList.add("filled");
       const cheer = D.chat.cheer[pos]; pos++; firstTry = true;
-      if (pos === 6) { await say(cheer); res(); } else if (pos % 2 === 0) say(cheer, { pause: 0 });
+      if (pos === 6) { if (orderScore === 6) confetti(); await say(cheer); res(); } else if (pos % 2 === 0) say(cheer, { pause: 0 });
     } else { firstTry = false; b.classList.remove("shake"); void b.offsetWidth; b.classList.add("shake"); say(pos === 0 ? D.chat.nudgeFirst : D.chat.nudge[pos - 1], { pause: 0 }); }
   }));
   mine(`${orderScore} of 6 pehli baar mein`);
@@ -331,6 +348,7 @@ async function afterTest() {
   const right = await memoryTest(D.items, D.decoys);
   const before = S.before == null ? 0 : S.before;
   card(`<div class="compare"><div class="box"><b>${before}</b><span>bina trick</span></div><div class="muted">➜</div><div class="box after"><b>${right}</b><span>kahani ke saath</span></div></div>`);
+  if (right > before) confetti();
   await say(right > before ? D.chat.afterBetter : D.chat.afterSame);
   const pts = 10 + orderScore * 10 + quizScore * 10;
   S.days[1] = { pts, date: today(), after: right }; S.scoreLog.push({ date: today(), pts, label: "Day 1" }); save(); syncFamily();
@@ -368,7 +386,7 @@ function home() {
   const week = Array.from({ length: 7 }, (_, i) => { const d = new Date(now); d.setDate(now.getDate() - now.getDay() + i); const iso = d.toISOString().slice(0, 10); return `<div><i class="${doneSet.has(iso) ? "on" : ""} ${iso === today() ? "today" : ""}"></i>${wk[i]}</div>`; }).join("");
   const slot = A.slots.find(s => s.id === S.slot) || A.slots[2];
   screenEl.innerHTML = `
-    <h2>Namaste, ${S.name} \uD83D\uDE4F</h2>
+    <div style="display:flex;gap:12px;align-items:center"><div class="face" style="width:56px;height:56px">${FACE}</div><div><h2>Namaste, ${S.name} \uD83D\uDE4F</h2><p class="muted">Priya aapka intezaar kar rahi hai</p></div></div>
     <div class="hero"><div class="eyebrow">${done ? "Aaj ho gaya ✓" : "Aaj ka session"}</div><h2>Day 1 · ${D.title}</h2><p>${done ? "Kal Day 2 khulega. Chahein toh aaj ka phir se kheliye." : "3 minute. Priya ke saath chat."}</p><button class="btn" id="start">${done ? "Phir se kheliye" : "Chat shuru karein"}</button></div>
     ${due ? `<div class="hero" style="background:var(--warm);color:#1d1a2f"><b>1 minute ka review</b><p>Day 1 ki list abhi bhi yaad hai?</p><button class="btn" id="rev" style="background:#1d1a2f;color:#fff">Review karein</button></div>` : ""}
     <div class="stats"><div class="stat"><b>${brainScore()}</b><span>Brain score</span></div><div class="stat"><b>${streak()}</b><span>Din streak</span></div><div class="stat"><b>${Object.keys(S.days).length}</b><span>Din poore</span></div></div>
